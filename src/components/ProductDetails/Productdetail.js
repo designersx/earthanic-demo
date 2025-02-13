@@ -26,11 +26,11 @@ const ProductDetails = ({ data }) => {
                   <h2>{item?.title}</h2>
                 </div>
                 <div className={styles.ProductPrice}>
-                  <p>{`$${item?.price}USD`}</p>
+                  <p>{`$${item?.price}0 USD`}</p>
                 </div>
                 <hr className={styles.hr} />
 
-                <div className={styles.SizeDiv}>
+                {/* <div className={styles.SizeDiv}>
                   <p>Size</p>
                 </div>
                 <div className={styles.Sizes}>
@@ -39,7 +39,7 @@ const ProductDetails = ({ data }) => {
                   <p>L</p>
                   <p>XL</p>
                   <p>XXL</p>
-                </div>
+                </div> */}
                 <div className={styles.description}>
                   <p>{item?.description}</p>
 

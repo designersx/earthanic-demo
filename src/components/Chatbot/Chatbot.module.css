@@ -23,7 +23,7 @@
     height: 100vh;
     /* max-width: 400px; */
     /* height: 600px; */
-    background: #e5ddd5;
+    background: #000000;
     /* border-radius: 10px; */
     display: flex;
     flex-direction: column;
@@ -38,6 +38,7 @@
     display: flex;
     align-items: center;
     padding: 10px;
+    border-bottom: 1px solid gray;
 }
 
 .profileImage {
@@ -73,9 +74,9 @@
 
 /* Message Styling */
 .message {
-    max-width: 80%;
+    /* max-width: 80%; */
     padding: 8px 12px;
-    border-radius: 10px;
+    border-radius: 10px 0px 10px 10px;
     font-size: 14px;
     position: relative;
     margin: 5px 0;
@@ -84,15 +85,50 @@
 
 /* Sent Messages */
 .sent {
-    background: rgb(168, 168, 248);
+    background: rgb(255, 255, 255);
     align-self: flex-end;
     text-align: right;
+    right: 15px;
+}
+.sent::after {
+    content: "";
+    position: absolute;
+    top: -4px;
+    right: -15px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 0 10px 20px;
+    border-color: transparent transparent transparent #ffffff;
+    transform: rotate(-22deg);
+  }
+  
+  .sent::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    right: -15px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 0 8px 16px;
+    border-color: transparent transparent transparent #ffffe0;
+    transform: rotate(-23deg);
+
+  }
+
+
+
+
+.sent p{
+    color: #000000;
 }
 
 /* Received Messages */
 .received {
     background: rgb(0, 0, 0);
     align-self: flex-start;
+    border: 1px solid #939393;
 }
 
 /* Timestamp */
@@ -116,9 +152,9 @@
     border: none;
     padding: 8px;
     font-size: 14px;
-    border-radius: 10px;
     outline: none;
-    background: #f1f1f1;
+    background: #ffffff;
+    border-bottom: 1px solid;
 }
 
 .inputContainer button {
@@ -127,4 +163,8 @@
     font-size: 20px;
     margin-left: 5px;
     cursor: pointer;
+}
+
+.sendIcon{
+    width: 50%;
 }

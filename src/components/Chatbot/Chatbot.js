@@ -10,12 +10,12 @@ const Chatbot = () => {
                     {/* Header */}
                     <div className={styles.header}>
                         <img
-                            src="images/Earthanic-Logo.png"
+                            src="images/favicon.png"
                             alt="Profile"
                             className={styles.profileImage}
                         />
                         <div className={styles.profileInfo}>
-                            <p className={styles.profileName}>AI Chatbot</p>
+                            <p className={styles.profileName}>Product Consultant</p>
                             {/* <p className={styles.status}>Online</p> */}
                         </div>
                     </div>
@@ -49,7 +49,7 @@ const Chatbot = () => {
                     {/* Message Input */}
                     <div className={styles.inputContainer}>
                         <input type="text" placeholder="Type a message..." />
-                        <button><img src='images/send.png'/></button>
+                        <button><img className={styles.sendIcon} src='images/SendI.png'/></button>
                     </div>
                 </div>
 
