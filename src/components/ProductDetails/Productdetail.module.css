@@ -1,0 +1,177 @@
+.ProductDetails {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.ProductImg {
+    width: 60%;
+    /* border: 1px solid; */
+}
+
+.ProductImg img {
+    display: flex;
+    margin: auto;
+    width: 100%;
+    max-height: 400px;
+}
+
+.ProductContent {
+    width: 40%;
+}
+
+.ProductTittle h2 {
+    font-size: 48px;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+}
+
+.ProductPrice {
+    background: blue;
+    padding: 10px 16px;
+    width: max-content;
+    color: white;
+    border-radius: 30px;
+    margin-block: 10px;
+}
+
+.ProductPrice p {
+    font-size: 14px;
+    margin-bottom: 0px;
+}
+
+.hr {
+    width: 80%;
+    margin-block: 20px;
+}
+.Sizes{
+    margin-block:20px ;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.Sizes p{
+    border: 1px solid;
+    width: max-content;
+    padding: 4px 20px;
+    border-radius: 20px;
+    margin-bottom: 0px;
+}
+.description{
+    width: 80%;
+}
+.description p{
+    font-size: 16px;
+    margin-block: 10px;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+
+}
+.cartDiv{
+    background: rgb(17, 0, 255);
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 30px;
+    color: white;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+/* .OffcanvasMain Css start */
+
+.cartContent {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+}
+
+
+.cartProduct{
+    height: 150px;
+}
+
+.cartItem {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.productImage {
+    width: 70px;
+    height: 70px;
+    margin-right: 10px;
+    position: relative;
+    position: static;
+    border-radius: 10px;
+    background: #d3d3d3;
+}
+
+.removeButton {
+    position: absolute;
+    top: 0px;
+    left: -5px;
+    background: gray;
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    /* font-size: 20px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.removeButton p{
+    margin-bottom: 0px;
+}
+
+.details {
+    flex: 1;
+}
+.details p {
+    margin-bottom: 0px;
+}
+.price {
+    font-size: 14px;
+    color: gray;
+    margin-bottom: 0px;
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.quantity button {
+    background: #eee;
+    border: none;
+    padding: 5px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.footer {
+    padding: 15px;
+    border-top: 1px solid #ddd;
+}
+
+.summary p {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+}
+
+.checkoutButton {
+    width: 100%;
+    background: blue;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}

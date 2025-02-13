@@ -1,0 +1,58 @@
+.navsection{
+    /* position: fixed; */
+    /* z-index: 1; */
+}
+.Navbar {
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+    padding:  15px 30px;
+    width: 75%;
+    /* max-width: 1380px; */
+    margin: auto;
+    background-color: #ffffff;
+    position: fixed;
+    /* z-index: 1; */
+    right: 0;
+}
+
+.logo_div {
+    width: 20%;
+}
+
+.logo_div img {
+    width: 100%;
+}
+
+.nav {
+    width: 80%;
+    max-width: 650px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.nav p {
+    font-size: 14px;
+    margin-bottom: 0px;
+    color: gray;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    cursor: pointer;
+    transition: width 0.3s ease-in-out;
+}
+
+.nav p:hover {
+    color: black;
+    text-decoration: underline;
+
+}
+
+.cart_icon {
+    border: 1px solid rgb(229, 229, 229, 1);
+    padding: 10px;
+    border-radius: 10px;
+}
+section.navsection {
+    position: relative;
+    
+}
