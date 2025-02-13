@@ -1,0 +1,10 @@
+.Chatbot_main{
+    /* background-color: rgb(0, 0, 0); */
+    height: 100vh;
+    /* position: fixed; */
+    width: 100%;
+    overflow: auto;
+}
+.title{
+    color: rgb(255, 0, 0);
+}

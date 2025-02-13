@@ -1,0 +1,123 @@
+.Part1 {
+    display: flex;
+    height: 100%;
+}
+
+.Chatbot_div {
+    width: 20%;
+    height: 100vh;
+    background-color: black;
+    /* position: fixed; */
+    overflow: auto;
+
+}
+
+.MainScro{
+    height: 100vh;
+    overflow: auto;
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+
+.Part2 {
+    /* border: 1px solid black; */
+    width: 80%;
+    /* position: fixed; */
+    overflow: auto;
+    background-color: #f7f7f7;
+}
+
+.ProductList_div {
+    display: grid;
+        /* overflow-y: auto; */
+        margin-top: 6rem;
+        grid-template-columns: repeat(3, auto);
+        max-height: 100vh;
+        height: 100%;
+        width: 100%;
+        gap: 20px;
+        padding: 0 20px;
+}
+
+.flex {
+    display: grid;
+    /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
+    /* gap: 20px; */
+    padding-inline: 0px;
+    justify-items: center;
+}
+
+.grid {
+    gap: 10px;
+    display: grid;
+}
+
+.card {
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    transition: 0.3s;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card:hover {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.image {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 5px;
+}
+
+.details {
+    display: flex;
+    align-items: center;
+    margin-top: 0px;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.name {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 1rem;
+}
+
+.price {
+    background: blue;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .flex {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+    }
+
+    .card {
+        padding: 10px;
+    }
+
+    .image {
+        max-width: 150px;
+    }
+
+    .name {
+        font-size: 0.9rem;
+    }
+
+    .price {
+        font-size: 0.8rem;
+    }
+}

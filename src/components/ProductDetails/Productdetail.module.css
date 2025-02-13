@@ -1,0 +1,73 @@
+.ProductDetails {
+    display: flex;
+    align-items: center;
+}
+
+.ProductImg {
+    width: 60%;
+    /* border: 1px solid; */
+}
+
+.ProductImg img {
+    display: flex;
+    margin: auto;
+}
+
+.ProductContent {
+    width: 40%;
+}
+
+.ProductTittle h2 {
+    font-size: 48px;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+}
+
+.ProductPrice {
+    background: blue;
+    padding: 10px 16px;
+    width: max-content;
+    color: white;
+    border-radius: 30px;
+    margin-block: 10px;
+}
+
+.ProductPrice p {
+    font-size: 14px;
+    margin-bottom: 0px;
+}
+
+.hr {
+    width: 80%;
+    margin-block: 20px;
+}
+.Sizes{
+    margin-block:20px ;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.Sizes p{
+    border: 1px solid;
+    width: max-content;
+    padding: 4px 20px;
+    border-radius: 20px;
+    margin-bottom: 0px;
+}
+.description{
+    width: 80%;
+}
+.description p{
+    font-size: 16px;
+    margin-block: 10px;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+
+}
+.cartDiv{
+    background: rgb(17, 0, 255);
+    padding: 15px 20px;
+    text-align: center;
+    border-radius: 30px;
+    color: white;
+    margin-top: 20px;
+    cursor: pointer;
+}

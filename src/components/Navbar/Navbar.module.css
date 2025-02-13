@@ -1,0 +1,32 @@
+.Navbar{
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+    padding: 20px;
+    width: 100%;
+    /* max-width: 1380px; */
+    margin: auto;
+    background-color: #f7f7f7;
+    position: fixed;
+}
+.logo_div {
+    width: 10%;
+}
+.logo_div img{
+    width: 100%;
+}
+.nav{
+    width: 80%;
+    max-width: 650px;
+    display: flex;
+    align-items: center;
+   justify-content: space-evenly;
+}
+.nav p{
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+}
+.cart_icon{
+    border: 1px solid rgb(229, 229, 229, 1);
+    padding: 10px;
+    border-radius: 10px;
+}
