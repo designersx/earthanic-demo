@@ -1,11 +1,272 @@
 [
   {
-    "description": "All the essentials in one place. Bring home everything your bathroom could need with this beige marble bathroom set.",
     "id": "gid://shopify/Product/8083511476394",
+    "external_id": "8083511476394",
+    "title": "Riya Marble Bath Accessory Set",
+    "slug": "Bath Accessory",
+    "description": "All the essentials in one place. Bring home everything your bathroom could need with this beige marble bathroom set.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Riya_Marble_Canister_3_f9234717-49fe-4b18-b7dd-c7e4ca1a23d5.jpg?v=1739333739",
-    "price": "177.0",
-    "title": "Riya Marble Bath Accessory Set"
-}
-
-  ]
-  
+    "price": "177.0"
+  },
+  {
+    "id": "gid://shopify/Product/8083513245866",
+    "external_id": "8083513245866",
+    "title": "Riya Marble Tissue Box",
+    "slug": "Bath Accessory",
+    "description": "Add the perfect finishing touch to any space with the natural veining and soft lines of this marble tissue box.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Riya_Marble_Tissue_Box_Long_2.jpg?v=1739334338",
+    "price": "99.0"
+  },
+  {
+    "id": "gid://shopify/Product/8083514556586",
+    "external_id": "8083514556586",
+    "title": "Beeswax Taper Candles",
+    "slug": "Bath Accessory",
+    "description": "Add a touch of natural charm to any space with the gentle glow of these handmade taper candles.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/holidaycrop2.028.jpg?v=1739334582",
+    "price": "20.0"
+  },
+  {
+    "id": "gid://shopify/Product/8083516457130",
+    "external_id": "8083516457130",
+    "title": "Hansa Vase",
+    "slug": "Bath Accessory",
+    "description": "Rounded edges. Matte finishes. These sculptural ceramic vases are a mix-and-match masterpiece.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Hansa_Vase_Matte_Black_4.jpg?v=1739334817",
+    "price": "69.0"
+  },
+  {
+    "id": "gid://shopify/Product/8083517898922",
+    "external_id": "8083517898922",
+    "title": "Riya Marble Soap Dish",
+    "slug": "Bath Accessory",
+    "description": "Smooth beige marble. Earthy neutrals. This elegant dish is the perfect landing pad for any bar of soap.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Riya_Marble_Soap_Dish_1.jpg?v=1739334969",
+    "price": "49.0"
+  },
+  {
+    "id": "gid://shopify/Product/8083560661162",
+    "external_id": "8083560661162",
+    "title": "Riya Marble Wastebasket",
+    "slug": "Bath Accessory",
+    "description": "Upgrade from trash can to wastebasket with the smooth marble lines and rich natural detail of this beautiful accent.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Riya_Marble_Wastebasket_1.jpg?v=1739344643",
+    "price": "129.0"
+  },
+  {
+    "id": "gid://shopify/Product/8083561349290",
+    "external_id": "8083561349290",
+    "title": "Riya Marble Toothbrush Holder",
+    "slug": "Bath Accessory",
+    "description": "A bathroom staple that you can set and forget, this marble toothbrush holder adds a considered touch to your counter.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Riya_Marble_Toothbrush_Holder_1.jpg?v=1739344812",
+    "price": "59.0"
+  },
+  {
+    "id": "gid://shopify/Product/8083562496170",
+    "external_id": "8083562496170",
+    "title": "Riya Marble Soap Dispenser",
+    "slug": "Bath Accessory",
+    "description": "An elevated essential for any bathroom space, this marble soap dispenser radiates subtle sophistication.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Riya_Marble_Soap_Dispenser_1.jpg?v=1739345153",
+    "price": "70.0"
+  },
+  {
+    "id": "gid://shopify/Product/8083580551338",
+    "external_id": "8083580551338",
+    "title": "Laurel Bed with Low Footboard",
+    "slug": "Furniture",
+    "description": "Elevate your bedroom with this heirloom bed, handcrafted with the finest materials made to stand the test of time.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/0003.jpg?v=1739351502",
+    "price": "2039.0"
+  },
+  {
+    "id": "gid://shopify/Product/8083581042858",
+    "external_id": "8083581042858",
+    "title": "Potomac Two Poster Bed",
+    "slug": "Furniture",
+    "description": "Handcrafted from solid wood from the Appalachian Forest, this custom bed frame combines heirloom craftsmanship with modern style.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/26.jpg?v=1739351600",
+    "price": "2804.0"
+  },
+  {
+    "id": "gid://shopify/Product/8083581534378",
+    "external_id": "8083581534378",
+    "title": "Bower Ottoman - Medium & Large",
+    "slug": "Furniture",
+    "description": "Lightweight, yet sturdy. Upholstered with durable fabrics. These custom ottomans will be a true household staple.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/014.jpg?v=1739351674",
+    "price": "424.0"
+  },
+  {
+    "id": "gid://shopify/Product/8083582025898",
+    "external_id": "8083582025898",
+    "title": "Grove Chair",
+    "slug": "Furniture",
+    "description": "Relax in style with the classic silhouette and plush textures of this understated armchair.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/24.jpg?v=1739351764",
+    "price": "1444.0"
+  },
+  {
+    "id": "gid://shopify/Product/8083582812330",
+    "external_id": "8083582812330",
+    "title": "Ridge Bed",
+    "slug": "Furniture",
+    "description": "Solid maple and walnut. Luxe and detailed upholstery. An heirloom-quality upholstered bed made to last for generations to come.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Ridge_Bed_Caramel_Maple_1_Labeled.jpg?v=1739351921",
+    "price": "2804.0"
+  },
+  {
+    "id": "gid://shopify/Product/8083583729834",
+    "external_id": "8083583729834",
+    "title": "Augusta Bench",
+    "slug": "Furniture",
+    "description": "Upgrade your entryway with the subtle lines and smooth finish of this expertly-crafted bench.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/34.jpg?v=1739352062",
+    "price": "2549.0"
+  },
+  {
+    "id": "gid://shopify/Product/8083584254122",
+    "external_id": "8083584254122",
+    "title": "Augusta Armchair",
+    "slug": "Furniture",
+    "description": "Lounge the day away in the rounded frame and cozy cushions of this expertly-crafted armchair.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/33.jpg?v=1739352162",
+    "price": "3144.0"
+  },
+  {
+    "id": "gid://shopify/Product/8083585695914",
+    "external_id": "8083585695914",
+    "title": "Mercado Storage Baskets - Square",
+    "slug": "Baskets",
+    "description": "Hand-braided palm with leather details. These square storage baskets are as beautiful as they are functional.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Mercado_Storage_Basket_Set_of_3_1.jpg?v=1739352389",
+    "price": "118.15"
+  },
+  {
+    "id": "gid://shopify/Product/8083585761450",
+    "external_id": "8083585761450",
+    "title": "Azad Tall Leather Storage Bins",
+    "slug": "Baskets",
+    "description": "Luxe, ethically sourced leather, hand-stitched to perfection. Storage bins never looked this good.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Citizenry_BoltMarch15_24934_Final.jpg?v=1739352550",
+    "price": "211.65"
+  },
+  {
+    "id": "gid://shopify/Product/8083585958058",
+    "external_id": "8083585958058",
+    "title": "Kawi Wicker Storage Basket",
+    "slug": "Baskets",
+    "description": "Warm up any space with the breezy, laidback look of these wicker storage baskets.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Kawi_Wicker_Storage_Basket_Large_34.jpg?v=1739352653",
+    "price": "169.15"
+  },
+  {
+    "id": "gid://shopify/Product/8083586220202",
+    "external_id": "8083586220202",
+    "title": "Rivi Storage Basket",
+    "slug": "Baskets",
+    "description": "Crafted by hand from mulaza palm leaves, these woven storage baskets with lids are both beautiful and functional.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Rivi_Storage_Basket_Large_3.jpg?v=1739352726",
+    "price": "160.65"
+  },
+  {
+    "id": "gid://shopify/Product/8083586973866",
+    "external_id": "8083586973866",
+    "title": "Padma Square Storage Baskets",
+    "slug": "Baskets",
+    "description": "Add a natural element to your space with square storage baskets woven from durable hogla leaves native to Bangladesh.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Padma_Square_Storage_Baskets_Medium_4.jpg?v=1739352860",
+    "price": "84.15"
+  },
+  {
+    "id": "gid://shopify/Product/8083587825834",
+    "external_id": "8083587825834",
+    "title": "Lomas Wall Hanging",
+    "slug": "Art Work",
+    "description": "The perfect blend of texture, natural materials, and artisanal craftsmanship: A show-stopping wall hanging, handcrafted in Mexico.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Lomas_Wall_Hanging_Large_1.jpg?v=1739352981",
+    "price": "849.15"
+  },
+  {
+    "id": "gid://shopify/Product/8083587989674",
+    "external_id": "8083587989674",
+    "title": "Yakko Wall Hanging - Clay",
+    "slug": "Art Work",
+    "description": "Traditional motifs get a modern update in the striking colors and intricate details of this work of art.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Yakko_Wall_Hanging_Clay_Ash_Frame_1.jpg?v=1739353350",
+    "price": "594.15"
+  },
+  {
+    "id": "gid://shopify/Product/8083588317354",
+    "external_id": "8083588317354",
+    "title": "Bolga Fans - Black & Natural",
+    "slug": "Art Work",
+    "description": "Handwoven by master artisans in Ghana, high-contrast fans that double as fine art.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Bolga_Fan_Black_Natural_Medium_2.jpg?v=1739353475",
+    "price": "142.0"
+  },
+  {
+    "id": "gid://shopify/Product/8083588546730",
+    "external_id": "8083588546730",
+    "title": "Karima Beni Ourain Wall Hanging",
+    "slug": "Art Work",
+    "description": "Earthy neutrals. Traditional patterns. Crafted from all natural sheep‚Äôs wool, this wall hanging is a work of art.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Karima_Beni_Ourain_Wall_Hanging_1.jpg?v=1739353560",
+    "price": "594.15"
+  },
+  {
+    "id": "gid://shopify/Product/8083588743338",
+    "external_id": "8083588743338",
+    "title": "Elena Wall Hanging",
+    "slug": "Art Work",
+    "description": "Solid mahogany beads are brought together to create the elegant draped form of this wall hanging.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Elena_Wall_Hanging_1.jpg?v=1739353652",
+    "price": "509.15"
+  },
+  {
+    "id": "gid://shopify/Product/8083589300394",
+    "external_id": "8083589300394",
+    "title": "Tikal Wood Serving Bowl",
+    "slug": "Kitchen",
+    "description": "So much more than a serving piece, an artisanal wood bowl that takes center stage anywhere it goes.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Tikal_Wood_Serving_Bowl_Mahogany_Medium_3.jpg?v=1739353771",
+    "price": "0.0"
+  },
+  {
+    "id": "gid://shopify/Product/8083591135402",
+    "external_id": "8083591135402",
+    "title": "Tikal Wood Serving Board - Round",
+    "slug": "Kitchen",
+    "description": "Carved by hand in Guatemala, these round wood serving boards are a host’s best friend.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Tikal_Wood_Serving_Board_Round_Granadillo_Large_2.jpg?v=1739353906",
+    "price": "135.15"
+  },
+  {
+    "id": "gid://shopify/Product/8083591921834",
+    "external_id": "8083591921834",
+    "title": "Kareem Salad Servers - Set of 2",
+    "slug": "Kitchen",
+    "description": "Dish out your favorite sides and salads with the help of these walnut serving spoons from Morocco.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Kareem_Salad_Servers_1.jpg?v=1739354019",
+    "price": "89.0"
+  },
+  {
+    "id": "gid://shopify/Product/8083592937642",
+    "external_id": "8083592937642",
+    "title": "Tikal Wood Serving Board - Arch",
+    "slug": "Kitchen",
+    "description": "Carved by hand in Guatemala, these modern wood serving boards are a host’s best friend.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Tikal_Wood_Serving_Board_Arch_Granadillo_Large_2.jpg?v=1739354132",
+    "price": "118.15"
+  },
+  {
+    "id": "gid://shopify/Product/8083593724074",
+    "external_id": "8083593724074",
+    "title": "Tikal Wood Serving Board - With Handle",
+    "slug": "Kitchen",
+    "description": "Crafted by hand from rich manchiche wood, this round serving board is a host’s best friend.",
+    "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Tikal_Wood_Serving_Board_With_Handle_1.jpg?v=1739354240",
+    "price": "118.15"
+  }
+]

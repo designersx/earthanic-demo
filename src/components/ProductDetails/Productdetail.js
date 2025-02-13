@@ -4,70 +4,110 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
-const ProductDetails = () => {
+const ProductDetails = ({ data }) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  console.log("data----", data);
+
   return (
     <section>
       <div className={styles.ProductDetails}>
-        <div className={styles.ProductImg}>
-          <img src="images/image.png" />
-        </div>
-        <div className={styles.ProductContent}>
-          <div className={styles.ProductTittle}>
-            <h2>
-              Acme Slip-On <br /> Shoes
-            </h2>
-          </div>
-          <div className={styles.ProductPrice}>
-            <p>$45.00USD</p>
-          </div>
-          <hr className={styles.hr} />
+        {data.map((item) => {
+          return (
+            <>
+              <div className={styles.ProductImg}>
+                <img src={item?.image} />
+              </div>
+              <div className={styles.ProductContent}>
+                <div className={styles.ProductTittle}>
+                  <h2>{item?.title}</h2>
+                </div>
+                <div className={styles.ProductPrice}>
+                  <p>{`$${item?.price}USD`}</p>
+                </div>
+                <hr className={styles.hr} />
 
-          <div className={styles.SizeDiv}>
-            <p>Size</p>
-          </div>
-          <div className={styles.Sizes}>
-            <p>S</p>
-            <p>M</p>
-            <p>L</p>
-            <p>XL</p>
-            <p>XXL</p>
-          </div>
-          <div className={styles.description}>
-            <p>
-              Step into summer! Every time your head looks down, youl see these
-              beauties, and your mood bounces right back up.
-            </p>
-            <p>
-              Sleek, easy, and effortlessly stylish. Acme Slip-On Shoes are the
-              ultimate get-up-and-go footwear. The low-profile slip-on canvas
-              upper offers unbeatable convenience, while the clean design makes
-              this all-white slip-on the perfect choice for anyone with places
-              to go and things to do. One of the most popular designs, these
-              shoes are the perfect middle ground between style and convenience.
-            </p>
+                <div className={styles.SizeDiv}>
+                  <p>Size</p>
+                </div>
+                <div className={styles.Sizes}>
+                  <p>S</p>
+                  <p>M</p>
+                  <p>L</p>
+                  <p>XL</p>
+                  <p>XXL</p>
+                </div>
+                <div className={styles.description}>
+                  <p>{item?.description}</p>
 
-            <div className={styles.cartDiv} onClick={handleShow}>
-              Add to cart
-            </div>
-          </div>
-        </div>
+                  <div className={styles.cartDiv} onClick={handleShow}>
+                    Add to cart
+                  </div>
+                </div>
+              </div>
 
-        {/* OFFCANVAS */}
+              {/* OFFCANVAS */}
 
-        <Offcanvas show={show} onHide={handleClose} placement="end">
-          <Offcanvas.Header closeButton>
-            <Offcanvas.Title>Offcanvas</Offcanvas.Title>
-          </Offcanvas.Header>
-          <Offcanvas.Body>
-            Some text as placeholder. In real life you can have the elements you
-            have chosen. Like, text, images, lists, etc.
-          </Offcanvas.Body>
-        </Offcanvas>
+              <Offcanvas
+                className={styles.OffcanvasMain}
+                show={show}
+                onHide={handleClose}
+                placement="end"
+              >
+                <Offcanvas.Header closeButton>
+                  <Offcanvas.Title>My Cart</Offcanvas.Title>
+                </Offcanvas.Header>
+                <Offcanvas.Body>
+                  <div className={styles.cartContent}>
+                    {/* Static Product */}
+                    <div className={styles.cartItem}>
+                      <div className={styles.removeButton}>
+                        <p>X</p>
+                      </div>
+                      <img
+                        src={item?.image}
+                        alt="Acme Slip-On Shoes"
+                        className={styles.productImage}
+                      />
+                      <div className={styles.details}>
+                        <p>{item?.title}</p>
+                        <p className={styles.price}>{`$${item?.price}USD`}</p>
+                        <div className={styles.quantity}>
+                          <button>-</button>
+                          <span>4</span>
+                          <button>+</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className={styles.cartProduct}>
+
+                  </div>
+
+                  <div className={styles.footer}>
+                    <div className={styles.summary}>
+                      <p>
+                        Taxes: <span>$0.00 USD</span>
+                      </p>
+                      <p>
+                        Shipping: <span>Calculated at checkout</span>
+                      </p>
+                      <p>
+                        Total: <span>$180.00 USD</span>
+                      </p>
+                    </div>
+                    <button className={styles.checkoutButton}>
+                      Proceed to Checkout
+                    </button>
+                  </div>
+                </Offcanvas.Body>
+              </Offcanvas>
+            </>
+          );
+        })}
       </div>
     </section>
   );

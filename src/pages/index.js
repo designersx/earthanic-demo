@@ -1,24 +1,18 @@
-import { Geist, Geist_Mono } from "next/font/google";
+
 import styles from "@/styles/Home.module.css";
 import ProductList from "@/components/ProductList/ProductList";
+import Navbar from "@/components/Navbar/Navbar";
+import { useState } from "react";
 
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export default function Home() {
+  const [selectedSlug, setSelectedSlug] = useState('All');
   return (
     <>
       <div>
-        <ProductList />
-       
+        {/* <Navbar onSlugChange={setSelectedSlug} /> */}
+        <ProductList selectedSlug={selectedSlug} />
       </div>
     </>
   );

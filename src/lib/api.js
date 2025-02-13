@@ -13,7 +13,7 @@ export async function getAllProduct() {
     let data = JSON.parse(await response.text());
     if (data?.data) {
       let cdata = JSON.parse(data.data);
-      console.log({ cdata });
+      // console.log({ cdata });
       return cdata;
     }
   } catch (error) {
