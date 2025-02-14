@@ -66,7 +66,9 @@ section.navsection {
     cursor: pointer;
     user-select: none;
 }
-
+.CartIcon2{
+    display: none;
+}
 @media (max-width: 768px) {
   
     .Navbar {
@@ -99,8 +101,22 @@ section.navsection {
         margin: 10px 0;
         text-align: center;
     }
+    .CartIcon1{
+        display: none;
+    }
 }
 @media (max-width: 767px) {
+    .CartIcon1{
+        display: none;
+    }
+    .CartIcon2{
+        display: block;
+    }
+    .forCart{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
     .Navbar {
         width: 100%;
     }

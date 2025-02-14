@@ -1,4 +1,7 @@
-let url = "http://localhost:2525/";
+// let url = "http://localhost:2525/";
+
+let url = "https://earthanic.truet.net/";
+
 
 export async function getAllProduct() {
   try {

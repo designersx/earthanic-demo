@@ -200,7 +200,8 @@
     .ProductContent {
         width: 100%;
         overflow: auto;
-        height: 100%;
+        height: auto;
+        max-height: 200px;
     }
     .description {
         width: 100%;
