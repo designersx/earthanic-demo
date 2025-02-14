@@ -75,7 +75,7 @@ section.navsection {
 .CartIcon1 img{
     width: 100%;
 }
-@media (max-width: 767 px) {
+@media (max-width: 767px) {
   
     .Navbar {
         /* width: 100%; */
