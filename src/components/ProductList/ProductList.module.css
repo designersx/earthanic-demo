@@ -32,7 +32,7 @@
 .ProductList_div {
     display: grid;
     /* overflow-y: auto; */
-    margin-top: 7rem;
+    margin-top: 8rem;
     /* grid-template-columns: repeat(3, auto); */
     grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
     max-height: 100vh;
@@ -192,7 +192,7 @@
     .ProductList_div {
         margin-top: 6rem;
         height: auto;
-        max-height: 380px;
+        /* max-height: 700px; */
         overflow: auto;
     }
 
