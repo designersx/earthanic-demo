@@ -6,11 +6,13 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 
 const ProductDetails = ({ data }) => {
   const [show, setShow] = useState(false);
+  const [quantity, setQuantity] = useState(1);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   console.log("data----", data);
+
 
   return (
     <section>
@@ -89,10 +91,25 @@ const ProductDetails = ({ data }) => {
                       <div className={styles.details}>
                         <p>{item?.title}</p>
                         <p className={styles.price}>{`$${item?.price}USD`}</p>
-                        <div className={styles.quantity}>
+                        {/* <div className={styles.quantity}>
                           <button>-</button>
                           <span>4</span>
                           <button>+</button>
+                        </div> */}
+                        <div className={styles.quantity}>
+                          <button
+                            onClick={() =>
+                              setQuantity((prev) => (prev > 1 ? prev - 1 : 1))
+                            }
+                          >
+                            -
+                          </button>
+                          <span>{quantity}</span>
+                          <button
+                            onClick={() => setQuantity((prev) => prev + 1)}
+                          >
+                            +
+                          </button>
                         </div>
                       </div>
                     </div>
