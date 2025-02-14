@@ -6,10 +6,12 @@
     overflow: auto;
     /* padding-top: 20px; */
 }
-.Chatbot_main p{
+
+.Chatbot_main p {
     margin-bottom: 0px;
     color: white;
 }
+
 .title {
     color: rgb(255, 0, 0);
 }
@@ -58,6 +60,10 @@
     font-weight: bold;
 }
 
+.closeButton {
+    display: none;
+}
+
 .status {
     font-size: 12px;
     color: #b2b2b2;
@@ -90,6 +96,7 @@
     text-align: right;
     right: 15px;
 }
+
 .sent::after {
     content: "";
     position: absolute;
@@ -101,9 +108,9 @@
     border-width: 10px 0 10px 20px;
     border-color: transparent transparent transparent #ffffff;
     transform: rotate(-22deg);
-  }
-  
-  .sent::before {
+}
+
+.sent::before {
     content: "";
     position: absolute;
     top: -4px;
@@ -115,12 +122,12 @@
     border-color: transparent transparent transparent #ffffe0;
     transform: rotate(-23deg);
 
-  }
+}
 
 
 
 
-.sent p{
+.sent p {
     color: #000000;
 }
 
@@ -165,6 +172,101 @@
     cursor: pointer;
 }
 
-.sendIcon{
+.sendIcon {
     width: 50%;
+}
+
+.chatIcon {
+    border: 2px solid;
+}
+
+@media (max-width: 767px) {
+    .Chatbot_main {
+        height: auto;
+        overflow: auto;
+        max-height: 440px;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+
+    .Chatbot_main {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+
+    .chatIcon {
+        width: 50px;
+        height: 50px;
+        background-color: #007bff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        left: 85%;
+        position: relative;
+        border: none;
+    }
+
+    .chatIcon img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .chatContainer {
+        position: fixed;
+        bottom: -100%;
+        right: 20px;
+        width: 300px;
+        background: rgb(0, 0, 0);
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        transition: bottom 0.4s ease-in-out;
+    }
+
+    @keyframes slideFadeInLeft {
+        from {
+            opacity: 0;
+            transform: scale(0.5) translateY(50px);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1.9) translateX(10);
+        }
+    }
+
+    .slideUp {
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        animation: slideFadeInLeft 0.3s ease-out;
+        height: auto;
+        max-height: 500px;
+        overflow: auto;
+    }
+
+
+    .slideDown {
+        bottom: -100%;
+    }
+
+    .chatIcon {
+        left: 80%;
+    }
+
+    .closeButton {
+        display: block;
+        border: 1px solid #fff;
+        padding: 4px 13px;
+        border-radius: 10px;
+        cursor: pointer;
+    }
 }

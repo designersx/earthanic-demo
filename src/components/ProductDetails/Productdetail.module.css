@@ -43,29 +43,34 @@
     width: 80%;
     margin-block: 20px;
 }
-.Sizes{
-    margin-block:20px ;
+
+.Sizes {
+    margin-block: 20px;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
 }
-.Sizes p{
+
+.Sizes p {
     border: 1px solid;
     width: max-content;
     padding: 4px 20px;
     border-radius: 20px;
     margin-bottom: 0px;
 }
-.description{
+
+.description {
     width: 80%;
 }
-.description p{
+
+.description p {
     font-size: 16px;
     margin-block: 10px;
     font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
 
 }
-.cartDiv{
+
+.cartDiv {
     background: rgb(17, 0, 255);
     padding: 10px 20px;
     text-align: center;
@@ -84,7 +89,7 @@
 }
 
 
-.cartProduct{
+.cartProduct {
     height: 150px;
 }
 
@@ -124,16 +129,19 @@
     justify-content: center;
     cursor: pointer;
 }
-.removeButton p{
+
+.removeButton p {
     margin-bottom: 0px;
 }
 
 .details {
     flex: 1;
 }
+
 .details p {
     margin-bottom: 0px;
 }
+
 .price {
     font-size: 14px;
     color: gray;
@@ -174,4 +182,28 @@
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+    .ProductTittle h2 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 600px) {
+    .ProductDetails {
+        display: grid;
+    }
+    .ProductImg {
+        width: 100%;
+    }
+    .ProductContent {
+        width: 100%;
+    }
+    .description {
+        width: 100%;
+    }
+    .ProductPrice{
+        margin-block: 20px;
+    }
 }
