@@ -248,6 +248,9 @@
         transform: translate(-50%, -50%);
         width: 90%;
         animation: slideFadeInLeft 0.3s ease-out;
+        height: auto;
+        max-height: 500px;
+        overflow: auto;
     }
 
 
