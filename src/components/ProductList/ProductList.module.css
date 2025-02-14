@@ -139,8 +139,8 @@
         grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
         margin-top: 5rem;
     }
-   
-  
+
+
 }
 
 @media (max-width: 767px) {
@@ -191,14 +191,20 @@
 @media (max-width: 500px) {
     .ProductList_div {
         margin-top: 6rem;
+        height: auto;
+        max-height: 380px;
+        overflow: auto;
     }
-    .details{
+
+    .details {
         width: 90%;
-        
+
     }
 }
+
 @media (max-width: 400px) {
     .ProductList_div {
         margin-top: 5rem;
+
     }
 }
