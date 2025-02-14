@@ -16,7 +16,7 @@ const Navbar = ({ onSlugChange }) => {
           <img src="images/Earthanic-Logo.png" alt="Logo" />
         </div>
         <div className={styles.forCart}>
-        <div className={styles.CartIcon2}> <img src="images/Cart1.png"/></div>
+        <div className={styles.CartIcon2}> <img src="images/cart-plus.svg"/></div>
         <div className={styles.burger} onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <span>&#10006;</span> : <span>&#9776;</span>}
          
@@ -30,7 +30,7 @@ const Navbar = ({ onSlugChange }) => {
           <div onClick={() => handleClick("Art Work")}><p>Art Work</p></div>
           <div onClick={() => handleClick("Kitchen")}><p>Kitchen</p></div>
         </div>
-        <div className={styles.CartIcon1}> <img src="images/Cart1.png"/></div>
+        <div className={styles.CartIcon1}> <img src="images/cart-plus.svg"/></div>
       </div>
     </section>
   );
