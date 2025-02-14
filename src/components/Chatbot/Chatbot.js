@@ -1,62 +1,91 @@
-import React from 'react'
-import styles from "../Chatbot/Chatbot.module.css"
+import React, { useState, useEffect } from "react";
+import styles from "../Chatbot/Chatbot.module.css";
 
 const Chatbot = () => {
+    const [isMobile, setIsMobile] = useState(false);
+    const [isChatOpen, setIsChatOpen] = useState(false);
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const handleResize = () => {
+                const mobileView = window.innerWidth <= 767;
+                setIsMobile(mobileView);
+                if (!mobileView) setIsChatOpen(true);
+                else setIsChatOpen(false);
+            };
+
+            handleResize(); // Initialize state based on current width
+            window.addEventListener("resize", handleResize);
+            return () => window.removeEventListener("resize", handleResize);
+        }
+    }, []);
+
+    const toggleChat = () => {
+        setIsChatOpen(!isChatOpen);
+    };
+
     return (
         <section>
             <div className={styles.Chatbot_main}>
-               
-                <div className={styles.chatContainer}>
-                    {/* Header */}
-                    <div className={styles.header}>
-                        <img
-                            src="images/favicon.png"
-                            alt="Profile"
-                            className={styles.profileImage}
-                        />
-                        <div className={styles.profileInfo}>
-                            <p className={styles.profileName}>Product Consultant</p>
-                            {/* <p className={styles.status}>Online</p> */}
-                        </div>
+                {isMobile && !isChatOpen ? (
+                    <div className={styles.chatIcon} onClick={toggleChat}>
+                        <img src="images/Chat.png" alt="Chat" />
                     </div>
-
-                    {/* Chat Messages */}
-                    <div className={styles.chatBody}>
-                        <div className={`${styles.message} ${styles.sent}`}>
-                            <p>What happened last night Swaibu?</p>
-                            <span className={styles.time}>2:19 PM</span>
+                ) : (
+                    <div className={`${styles.chatContainer} ${isChatOpen ? styles.slideUp : styles.slideDown}`}>
+                        {/* Header */}
+                        <div className={styles.header} >
+                            <img
+                                src="images/favicon.png"
+                                alt="Profile"
+                                className={styles.profileImage}
+                            />
+                            <div className={styles.profileInfo}>
+                                <p className={styles.profileName}>Product Consultant</p>
+                               
+                            </div>
+                            <div className={styles.closeButton} onClick={toggleChat}>
+                                X
+                            </div>
                         </div>
 
-                        <div className={`${styles.message} ${styles.received}`}>
-                            <p>You were drunk.</p>
-                            <span className={styles.time}>2:19 PM</span>
-                        </div>
-
-                        <div className={`${styles.message} ${styles.sent}`}>
-                            <p>No I wasnt.</p>
-                            <span className={styles.time}>2:19 PM</span>
-                        </div>
-
-                        <div className={`${styles.message} ${styles.received}`}>
-                            <p>
-                                Dude, you threw my hamster across the room and said PIKACHU I
-                                CHOOSE YOU
-                            </p>
-                            <span className={styles.time}>2:19 PM</span>
-                        </div>
+                        {/* Chat Messages */}
+                        {isChatOpen && (
+                            <>
+                                <div className={styles.chatBody}>
+                                    <div className={`${styles.message} ${styles.sent}`}>
+                                        <p>What happened last night Swaibu?</p>
+                                        <span className={styles.time}>2:19 PM</span>
+                                    </div>
+                                    <div className={`${styles.message} ${styles.received}`}>
+                                        <p>You were drunk.</p>
+                                        <span className={styles.time}>2:19 PM</span>
+                                    </div>
+                                    <div className={`${styles.message} ${styles.sent}`}>
+                                        <p>No I am</p>
+                                        <span className={styles.time}>2:19 PM</span>
+                                    </div>
+                                    <div className={`${styles.message} ${styles.received}`}>
+                                        <p>
+                                            Dude, you threw my hamster 
+                                        </p>
+                                        <span className={styles.time}>2:19 PM</span>
+                                    </div>
+                                </div>
+                                {/* Message Input */}
+                                <div className={styles.inputContainer}>
+                                    <input type="text" placeholder="Type a message..." />
+                                    <button>
+                                        <img className={styles.sendIcon} src="images/SendI.png" alt="Send" />
+                                    </button>
+                                </div>
+                            </>
+                        )}
                     </div>
-
-                    {/* Message Input */}
-                    <div className={styles.inputContainer}>
-                        <input type="text" placeholder="Type a message..." />
-                        <button><img className={styles.sendIcon} src='images/SendI.png'/></button>
-                    </div>
-                </div>
-
-
+                )}
             </div>
         </section>
-    )
-}
+    );
+};
 
-export default Chatbot
+export default Chatbot;

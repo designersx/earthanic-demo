@@ -1,4 +1,4 @@
-let url = "http://localhost:5000/";
+let url = "http://192.168.0.17:5000/";
 
 export async function getAllProduct() {
   try {
