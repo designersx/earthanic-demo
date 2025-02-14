@@ -16,6 +16,7 @@ const ProductDetails = ({ data }) => {
     <section>
       <div className={styles.ProductDetails}>
         {data.map((item) => {
+          console.log(item);
           return (
             <>
               <div className={styles.ProductImg}>
@@ -40,6 +41,19 @@ const ProductDetails = ({ data }) => {
                   <p>XL</p>
                   <p>XXL</p>
                 </div> */}
+                {item?.size?.length > 0 && (
+                  <>
+                    <div className={styles.SizeDiv}>
+                      <p>Size</p>
+                    </div>
+                    <div className={styles.Sizes}>
+                      {item.size.map((size, index) => (
+                        <p key={index}>{size}</p>
+                      ))}
+                    </div>
+                  </>
+                )}
+
                 <div className={styles.description}>
                   <p>{item?.description}</p>
 
@@ -83,9 +97,7 @@ const ProductDetails = ({ data }) => {
                       </div>
                     </div>
                   </div>
-                  <div className={styles.cartProduct}>
-
-                  </div>
+                  <div className={styles.cartProduct}></div>
 
                   <div className={styles.footer}>
                     <div className={styles.summary}>

@@ -78,7 +78,8 @@
     "slug": "Furniture",
     "description": "Elevate your bedroom with this heirloom bed, handcrafted with the finest materials made to stand the test of time.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/0003.jpg?v=1739351502",
-    "price": "2039.0"
+    "price": "2039.0",
+    "size": ["Small", "Medium", "Large"]
   },
   {
     "id": "gid://shopify/Product/8083581042858",
@@ -87,7 +88,8 @@
     "slug": "Furniture",
     "description": "Handcrafted from solid wood from the Appalachian Forest, this custom bed frame combines heirloom craftsmanship with modern style.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/26.jpg?v=1739351600",
-    "price": "2804.0"
+    "price": "2804.0",
+    "size": ["Small", "Medium", "Large"]
   },
   {
     "id": "gid://shopify/Product/8083581534378",
@@ -96,7 +98,8 @@
     "slug": "Furniture",
     "description": "Lightweight, yet sturdy. Upholstered with durable fabrics. These custom ottomans will be a true household staple.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/014.jpg?v=1739351674",
-    "price": "424.0"
+    "price": "424.0",
+    "size": ["Small", "Medium"]
   },
   {
     "id": "gid://shopify/Product/8083582025898",
@@ -105,7 +108,8 @@
     "slug": "Furniture",
     "description": "Relax in style with the classic silhouette and plush textures of this understated armchair.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/24.jpg?v=1739351764",
-    "price": "1444.0"
+    "price": "1444.0",
+    "size": ["Standard"]
   },
   {
     "id": "gid://shopify/Product/8083582812330",
@@ -114,7 +118,8 @@
     "slug": "Furniture",
     "description": "Solid maple and walnut. Luxe and detailed upholstery. An heirloom-quality upholstered bed made to last for generations to come.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Ridge_Bed_Caramel_Maple_1_Labeled.jpg?v=1739351921",
-    "price": "2804.0"
+    "price": "2804.0",
+    "size": ["Small", "Medium", "Large"]
   },
   {
     "id": "gid://shopify/Product/8083583729834",
@@ -123,7 +128,8 @@
     "slug": "Furniture",
     "description": "Upgrade your entryway with the subtle lines and smooth finish of this expertly-crafted bench.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/34.jpg?v=1739352062",
-    "price": "2549.0"
+    "price": "2549.0",
+    "size": ["Small", "Medium", "Large"]
   },
   {
     "id": "gid://shopify/Product/8083584254122",
@@ -132,7 +138,8 @@
     "slug": "Furniture",
     "description": "Lounge the day away in the rounded frame and cozy cushions of this expertly-crafted armchair.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/33.jpg?v=1739352162",
-    "price": "3144.0"
+    "price": "3144.0",
+    "size": [ "Large"]
   },
   {
     "id": "gid://shopify/Product/8083585695914",
@@ -141,7 +148,8 @@
     "slug": "Baskets",
     "description": "Hand-braided palm with leather details. These square storage baskets are as beautiful as they are functional.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Mercado_Storage_Basket_Set_of_3_1.jpg?v=1739352389",
-    "price": "118.15"
+    "price": "118.15",
+    "size": ["Small", "Medium", "Large"]
   },
   {
     "id": "gid://shopify/Product/8083585761450",
@@ -150,7 +158,8 @@
     "slug": "Baskets",
     "description": "Luxe, ethically sourced leather, hand-stitched to perfection. Storage bins never looked this good.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Citizenry_BoltMarch15_24934_Final.jpg?v=1739352550",
-    "price": "211.65"
+    "price": "211.65",
+    "size": ["Small", "Medium", "Large"]
   },
   {
     "id": "gid://shopify/Product/8083585958058",
@@ -159,7 +168,8 @@
     "slug": "Baskets",
     "description": "Warm up any space with the breezy, laidback look of these wicker storage baskets.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Kawi_Wicker_Storage_Basket_Large_34.jpg?v=1739352653",
-    "price": "169.15"
+    "price": "169.15",
+    "size": ["Standard"]
   },
   {
     "id": "gid://shopify/Product/8083586220202",
@@ -168,7 +178,8 @@
     "slug": "Baskets",
     "description": "Crafted by hand from mulaza palm leaves, these woven storage baskets with lids are both beautiful and functional.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Rivi_Storage_Basket_Large_3.jpg?v=1739352726",
-    "price": "160.65"
+    "price": "160.65",
+    "size": ["Small", "Medium"]
   },
   {
     "id": "gid://shopify/Product/8083586973866",
@@ -177,7 +188,8 @@
     "slug": "Baskets",
     "description": "Add a natural element to your space with square storage baskets woven from durable hogla leaves native to Bangladesh.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Padma_Square_Storage_Baskets_Medium_4.jpg?v=1739352860",
-    "price": "84.15"
+    "price": "84.15",
+    "size": ["Standard"]
   },
   {
     "id": "gid://shopify/Product/8083587825834",
