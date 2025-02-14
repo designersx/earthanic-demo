@@ -84,10 +84,10 @@
 }
 
 
-  
+
 .image:hover {
-    transform: scale(1.04); 
-  }
+    transform: scale(1.04);
+}
 
 .details {
     display: flex;
@@ -126,8 +126,32 @@
     text-align: center;
 }
 
+/* chatToggelCss */
+
+
+
+
+
+
 /* Responsive Styling */
 @media (max-width: 768px) {
+    .ProductList_div {
+        grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+        margin-top: 5rem;
+    }
+   
+  
+}
+
+@media (max-width: 767px) {
+    .ProductList_div {
+        margin-top: 5rem;
+    }
+
+    .Part2 {
+        width: 100%;
+    }
+
     .flex {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
         gap: 15px;
@@ -138,20 +162,43 @@
     }
 
     .image {
-        max-width: 150px;
+        max-width: 350px;
     }
 
     .name {
         font-size: 0.9rem;
+        font-weight: normal;
     }
 
     .price {
         font-size: 0.8rem;
     }
+
+    .Chatbot_div {
+        width: 100%;
+        position: fixed;
+        top: 10%;
+        height: auto;
+    }
 }
 
 
- .Navbar_div{
+.Navbar_div {
     position: relative;
     z-index: 11;
- }
+}
+
+@media (max-width: 500px) {
+    .ProductList_div {
+        margin-top: 6rem;
+    }
+    .details{
+        width: 90%;
+        
+    }
+}
+@media (max-width: 400px) {
+    .ProductList_div {
+        margin-top: 5rem;
+    }
+}
