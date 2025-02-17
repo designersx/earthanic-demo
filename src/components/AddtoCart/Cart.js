@@ -66,7 +66,7 @@ const getProduct = () => {
   // Total price calculation
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => {
-      return total + item.quantity * item.price; // Multiply quantity with price f f
+      return total + item.quantity * item.price; // Multiply quantity with price f 
     }, 0);
   };
 
