@@ -204,8 +204,15 @@
     .flex {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
         gap: 15px;
-    }
 
+    }
+    .flex:last-child {
+        padding-bottom: 4rem;
+    }
+    .card:last-child {
+        bottom: 10%;
+        position: relative;
+    }
     .card {
         padding: 10px;
     }
