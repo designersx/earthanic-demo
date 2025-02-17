@@ -130,7 +130,7 @@ const CartOffcanvas = ({ show, handleClose }) => {
     setTimeout(() => {
       getProduct();
     }, 2000); // Simulating async fetch time
-  }, [show]);
+  }, [cartItems, show]);
 
   const handleRemoveItem = (external_id) => {
     const updatedCartItems = cartItems
@@ -155,10 +155,7 @@ const CartOffcanvas = ({ show, handleClose }) => {
       </Offcanvas.Header>
       <Offcanvas.Body>
         {loading ? (
-          <div className={styles.loader}>
-      
-      
-          </div>
+          <div className={styles.loader}></div>
         ) : (
           <div className={styles.cartContent}>
             {cartItems.length > 0 ? (
@@ -199,7 +196,6 @@ const CartOffcanvas = ({ show, handleClose }) => {
             )}
           </div>
         )}
-             
 
         <div className={styles.footer}>
           <div className={styles.summary}>
