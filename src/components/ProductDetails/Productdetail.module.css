@@ -5,6 +5,25 @@
     justify-content: space-between;
 }
 
+.backButton {
+    cursor: pointer;
+    border-radius: 10px;
+    top: 15%;
+    z-index: 11;
+    left: 90%;
+    position: absolute;
+    font-size: 20px;
+    border: 1px solid #f5f5f5;
+    background-color: #f5f5f5;
+    color: blue;
+    padding: 10px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .ProductImg {
     width: 50%;
     /* border: 1px solid; */
@@ -53,7 +72,8 @@
 }
 
 .Sizes p {
-    border: 1px solid;
+    border: 2px solid rgb(228, 228, 228);
+    background-color: #f7f6f6;
     width: max-content;
     padding: 4px 20px;
     border-radius: 20px;
@@ -61,6 +81,7 @@
 }
 
 .description {
+    cursor: pointer;
     width: 80%;
 }
 
@@ -70,8 +91,13 @@
     font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
 
 }
-
+.readMore{
+    color: #155dfc;
+}
 .cartDiv {
+    /* position: fixed; */
+    bottom: 10%;
+    /* width: 85%; */
     background: rgb(17, 0, 255);
     padding: 10px 20px;
     text-align: center;
@@ -135,6 +161,20 @@
     margin-bottom: 0px;
 }
 
+.sizeOption {
+    padding: 10px 15px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+
+
+.selected {
+    border: 2px solid #155dfc !important;
+
+}
+
 .details {
     flex: 1;
 }
@@ -189,25 +229,52 @@
     .ProductTittle h2 {
         font-size: 24px;
     }
+
+    .backButton {
+        /* left: 85%; */
+        top: 8%;
+    }
+
+    .description p {
+        margin-bottom: 40px;
+    }
 }
 
+
 @media (max-width: 600px) {
+    .backButton {
+        left: 85%;
+        top: 15%;
+    }
+    .cartDiv {
+        position: fixed;
+        width: 85%;
+    }
+
     .ProductDetails {
         display: grid;
+        max-height: 350px;
+        height: auto;
+        overflow: auto;
+        padding-right: 10px;
     }
+
     .ProductImg {
         width: 100%;
     }
+
     .ProductContent {
         width: 100%;
-        overflow: auto;
+        /* overflow: auto;
         height: auto;
-        max-height: 200px;
+        max-height: 200px; */
     }
+
     .description {
         width: 100%;
     }
-    .ProductPrice{
+
+    .ProductPrice {
         margin-block: 20px;
     }
 }
