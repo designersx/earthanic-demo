@@ -71,8 +71,6 @@ const getProduct = () => {
   };
 
   const totalPrice = calculateTotal();
-
-  
   return (
     <Offcanvas
       className={styles.OffcanvasMain}
