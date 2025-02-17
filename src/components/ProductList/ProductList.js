@@ -88,6 +88,7 @@ const ProductList = () => {
                         <div className={styles.details}>
                           <p className={styles.name}>{product.title}</p>
                           <span className={styles.price}>{`$${product.price}0 USD`}</span>
+                          {/* <spna></spna> */}
                         </div>
                       </div>
                     </div>
