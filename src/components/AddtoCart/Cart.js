@@ -7,17 +7,16 @@ const CartOffcanvas = ({ show, handleClose }) => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true); // New loading state
 
-
   // LocalStorage se cart items get karna on page load
-//   let getProduct = () => {
-//     setLoading(true); // Set loading to true when data is being fetched
-//     let savedCartItems = JSON.parse(localStorage.getItem("cartItems"));
-//     if (savedCartItems) {
-//       setCartItems(savedCartItems);
-//     }
-//     setLoading(false); // Once data is set, stop loading
-//   };
-const getProduct = () => {
+  //   let getProduct = () => {
+  //     setLoading(true); // Set loading to true when data is being fetched
+  //     let savedCartItems = JSON.parse(localStorage.getItem("cartItems"));
+  //     if (savedCartItems) {
+  //       setCartItems(savedCartItems);
+  //     }
+  //     setLoading(false); // Once data is set, stop loading
+  //   };
+  const getProduct = () => {
     setLoading(true);
     let savedCartItems = JSON.parse(localStorage.getItem("cartItems"));
     if (savedCartItems) {
@@ -37,7 +36,6 @@ const getProduct = () => {
     }, 2000); // Simulating async fetch time
   }, [cartItems, show]);
 
-
   const handleRemoveItem = (external_id) => {
     const updatedCartItems = cartItems
       .flat()
@@ -48,7 +46,6 @@ const getProduct = () => {
     setCartItems(updatedCartItems);
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
   };
-
 
   const handleQuantityChange = (index, change) => {
     const updatedCartItems = cartItems.map((item, idx) =>
@@ -66,7 +63,7 @@ const getProduct = () => {
   // Total price calculation
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => {
-      return total + item.quantity * item.price; // Multiply quantity with price f 
+      return total + item.quantity * item.price; // Multiply quantity with price f
     }, 0);
   };
 
@@ -104,15 +101,11 @@ const getProduct = () => {
                     <p>{item?.title}</p>
                     <p className={styles.price}>{`$${item?.price} USD`}</p>
                     <div className={styles.quantity}>
-                      <button
-                        onClick={() => handleQuantityChange(index, -1)}
-                      >
+                      <button onClick={() => handleQuantityChange(index, -1)}>
                         -
                       </button>
                       <span>{item.quantity}</span>
-                      <button
-                        onClick={() => handleQuantityChange(index, 1)}
-                      >
+                      <button onClick={() => handleQuantityChange(index, 1)}>
                         +
                       </button>
                     </div>
@@ -134,7 +127,7 @@ const getProduct = () => {
               Shipping: <span>Calculated at checkout</span>
             </p>
             <p>
-            Total: <span>${totalPrice.toFixed(2)} USD</span>
+              Total: <span>${totalPrice.toFixed(2)} USD</span>
             </p>
           </div>
           <button className={styles.checkoutButton}>Proceed to Checkout</button>
