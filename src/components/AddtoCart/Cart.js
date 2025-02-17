@@ -68,7 +68,6 @@ const CartOffcanvas = ({ show, handleClose }) => {
   };
 
   const totalPrice = calculateTotal();
-
   return (
     <Offcanvas
       className={styles.OffcanvasMain}
