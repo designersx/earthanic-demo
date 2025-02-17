@@ -6,7 +6,7 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import Modal from "../Modal/Modal";
 import CartOffcanvas from "../AddtoCart/Cart";
 
-const ProductDetails = ({ data }) => {
+const ProductDetails = ({ data, onBack  }) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [showCart, setShowCart] = useState(false);
@@ -23,13 +23,12 @@ const ProductDetails = ({ data }) => {
     setShowCart(true);
   };
 
-
   // Disable scrolling when modal is open
   React.useEffect(() => {
     if (isModalOpen) {
-      document.body.style.overflow = "hidden";  // Prevent scrolling
+      document.body.style.overflow = "hidden"; // Prevent scrolling
     } else {
-      document.body.style.overflow = "auto";  // Re-enable scrolling
+      document.body.style.overflow = "auto"; // Re-enable scrolling
     }
     return () => {
       document.body.style.overflow = "auto"; // Cleanup on unmount
@@ -37,18 +36,19 @@ const ProductDetails = ({ data }) => {
   }, [isModalOpen]);
 
   const handleDescriptionClick = (description) => {
-    setSelectedDescription(description);  // Set the full description when clicked
-    setModalOpen(true);  // Open the modal
+    setSelectedDescription(description); // Set the full description when clicked
+    setModalOpen(true); // Open the modal
   };
 
   return (
     <section>
-      <div className={styles.backButton}>X</div>
+      <div className={styles.backButton} onClick={onBack} >X</div>
       <div className={styles.ProductDetails}>
         {data.map((item) => {
           const descriptionWords = item?.description.split(" ");
           const isLongDescription = descriptionWords.length > 10;
-          const truncatedDescription = descriptionWords.slice(0, 10).join(" "); "..."
+          const truncatedDescription = descriptionWords.slice(0, 10).join(" ");
+          ("...");
 
           return (
             <>
@@ -72,8 +72,9 @@ const ProductDetails = ({ data }) => {
                       {item.size.map((size, index) => (
                         <p
                           key={index}
-                          className={`${styles.sizeOption} ${selectedSize === size ? styles.selected : ""
-                            }`}
+                          className={`${styles.sizeOption} ${
+                            selectedSize === size ? styles.selected : ""
+                          }`}
                           onClick={() => setSelectedSize(size)}
                         >
                           {size}
@@ -83,8 +84,15 @@ const ProductDetails = ({ data }) => {
                   </>
                 )}
 
-                <div className={styles.description} >
-                  <p onClick={() => handleDescriptionClick(item?.description)}>{isLongDescription ? truncatedDescription : item?.description}  {isLongDescription && <span className={styles.readMore}>Read More</span>}</p>
+                <div className={styles.description}>
+                  <p onClick={() => handleDescriptionClick(item?.description)}>
+                    {isLongDescription
+                      ? truncatedDescription
+                      : item?.description}{" "}
+                    {isLongDescription && (
+                      <span className={styles.readMore}>Read More</span>
+                    )}
+                  </p>
                   <div className={styles.cartDiv} onClick={handleShow}>
                     Add to cart
                   </div>
@@ -98,13 +106,12 @@ const ProductDetails = ({ data }) => {
                 handleClose={handleClose}
                 // cartItems={cartItems}
               />
-            
-           
 
               {/* Modal to show full description */}
               <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
                 <h2 className={styles.Pcontent}>Item Details</h2>
-                <p>{selectedDescription}</p> {/* Display selected description */}
+                <p>{selectedDescription}</p>{" "}
+                {/* Display selected description */}
               </Modal>
             </>
           );
