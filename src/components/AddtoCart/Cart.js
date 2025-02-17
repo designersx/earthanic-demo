@@ -66,12 +66,13 @@ const getProduct = () => {
   // Total price calculation
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => {
-      return total + item.quantity * item.price; // Multiply quantity with price f 
+      return total + item.quantity * item.price; // Multiply quantity with price f f
     }, 0);
   };
 
   const totalPrice = calculateTotal();
 
+  
   return (
     <Offcanvas
       className={styles.OffcanvasMain}
