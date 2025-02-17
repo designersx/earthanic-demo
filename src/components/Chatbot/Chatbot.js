@@ -29,7 +29,18 @@ const Chatbot = () => {
             <div className={styles.Chatbot_main}>
                 {isMobile && !isChatOpen ? (
                     <div className={styles.chatIcon} onClick={toggleChat}>
-                        <img src="images/Chat.png" alt="Chat" />
+                        {/* <img src="images/Chat.png" alt="Chat" /> */}
+                        <div className={styles.header} >
+                            <img
+                                src="images/favicon.png"
+                                alt="Profile"
+                                className={styles.profileImage}
+                            />
+                            <div className={styles.profileInfo}>
+                                <p className={styles.profileName}>Product Consultant</p>
+                            </div>
+                           
+                        </div>
                     </div>
                 ) : (
                     <div className={`${styles.chatContainer} ${isChatOpen ? styles.slideUp : styles.slideDown}`}>

@@ -117,3 +117,74 @@ const ProductList = () => {
 };
 
 export default ProductList;
+
+
+
+
+// <Offcanvas
+// className={styles.OffcanvasMain}
+// show={show}
+// onHide={handleClose}
+// placement="end"
+// >
+// <Offcanvas.Header closeButton>
+//   <Offcanvas.Title>My Cart</Offcanvas.Title>
+// </Offcanvas.Header>
+// <Offcanvas.Body>
+//   <div className={styles.cartContent}>
+//     {/* Static Product */}
+//     <div className={styles.cartItem}>
+//       <div className={styles.removeButton}>
+//         <p>X</p>
+//       </div>
+//       <img
+//         src={item?.image}
+//         alt="Acme Slip-On Shoes"
+//         className={styles.productImage}
+//       />
+//       <div className={styles.details}>
+//         <p>{item?.title}</p>
+//         <p className={styles.price}>{`$${item?.price}USD`}</p>
+//         {/* <div className={styles.quantity}>
+//           <button>-</button>
+//           <span>4</span>
+//           <button>+</button>
+//         </div> */}
+//         <div className={styles.quantity}>
+//           <button
+//             onClick={() =>
+//               setQuantity((prev) => (prev > 1 ? prev - 1 : 1))
+//             }
+//           >
+//             -
+//           </button>
+//           <span>{quantity}</span>
+//           <button
+//             onClick={() => setQuantity((prev) => prev + 1)}
+//           >
+//             +
+//           </button>
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+//   <div className={styles.cartProduct}></div>
+
+//   <div className={styles.footer}>
+//     <div className={styles.summary}>
+//       <p>
+//         Taxes: <span>$0.00 USD</span>
+//       </p>
+//       <p>
+//         Shipping: <span>Calculated at checkout</span>
+//       </p>
+//       <p>
+//         Total: <span>$180.00 USD</span>
+//       </p>
+//     </div>
+//     <button className={styles.checkoutButton}>
+//       Proceed to Checkout
+//     </button>
+//   </div>
+// </Offcanvas.Body>
+// </Offcanvas>

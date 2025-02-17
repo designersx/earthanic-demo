@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import styles from "../Navbar/Navbar.module.css";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import CartOffcanvas from "../AddtoCart/Cart";
 
 const Navbar = ({ onSlugChange }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [show, setShow] = useState(false);
   const [quantity, setQuantity] = useState(1);
+    const [showCart, setShowCart] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   const handleClick = (slug) => {
     onSlugChange(slug);
     setMenuOpen(false); // Close menu on selection
   };
+  const handleClose = () => setShowCart(false);
+  const handleShow= () => setShowCart(true);
 
   return (
     <section className={styles.navsection}>
@@ -55,79 +57,9 @@ const Navbar = ({ onSlugChange }) => {
           <img src="images/cart-plus.svg" />
         </div>
 
-        {/* OFFCANVAS */}
-
-        <Offcanvas
-          className={styles.OffcanvasMain}
-          show={show}
-          onHide={handleClose}
-          placement="end"
-        >
-          <Offcanvas.Header closeButton>
-            <Offcanvas.Title>My Cart</Offcanvas.Title>
-          </Offcanvas.Header>
-          <Offcanvas.Body>
-            <div className={styles.cartContent}>
-              {/* Static Product */}
-              <div className={styles.cartItem}>
-                <div className={styles.removeButton}>
-                  <p>X</p>
-                </div>
-                <img
-                  src="https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Riya_Marble_Tissue_Box_Long_2.jpg?v=1739334338"
-                  alt="Acme Slip-On Shoes"
-                  className={styles.productImage}
-                />
-                <div className={styles.details}>
-                  <p>
-                    {/* {item?.title}  */}
-                    Riya Marble Tissue Box
-                  </p>
-                  <p className={styles.price}>
-                    {/* {`$${item?.price}USD`} */}
-                    $99.00 USD
-                  </p>
-                  {/* <div className={styles.quantity}>
-                          <button>-</button>
-                          <span>4</span>
-                          <button>+</button>
-                        </div> */}
-                  <div className={styles.quantity}>
-                    <button
-                      onClick={() =>
-                        setQuantity((prev) => (prev > 1 ? prev - 1 : 1))
-                      }
-                    >
-                      -
-                    </button>
-                    <span>{quantity}</span>
-                    <button onClick={() => setQuantity((prev) => prev + 1)}>
-                      +
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className={styles.cartProduct}></div>
-
-            <div className={styles.footer}>
-              <div className={styles.summary}>
-                <p>
-                  Taxes: <span>$0.00 USD</span>
-                </p>
-                <p>
-                  Shipping: <span>Calculated at checkout</span>
-                </p>
-                <p>
-                  Total: <span>$180.00 USD</span>
-                </p>
-              </div>
-              <button className={styles.checkoutButton}>
-                Proceed to Checkout
-              </button>
-            </div>
-          </Offcanvas.Body>
-        </Offcanvas>
+   
+          {/* OFFCANVAS  */}
+          <CartOffcanvas show={showCart} handleClose={handleClose} />
       </div>
     </section>
   );
