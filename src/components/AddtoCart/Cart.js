@@ -108,7 +108,7 @@
 import React, { useEffect, useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import styles from "./Cart.module.css";
-import { Circles, Oval } from "react-loader-spinner";
+
 
 const CartOffcanvas = ({ show, handleClose }) => {
   const [quantity, setQuantity] = useState(1);
