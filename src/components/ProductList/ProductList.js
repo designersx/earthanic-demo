@@ -78,7 +78,7 @@ const ProductList = () => {
 
           <div className={styles.ProductList_div}>
             {detailProducts ? (
-              <ProductDetails data={detailProducts} />
+              <ProductDetails data={detailProducts} onBack={() => setdetailProducts(undefined)}  />
             ) : (
               filteredProducts?.map((product) => {
                 return (
