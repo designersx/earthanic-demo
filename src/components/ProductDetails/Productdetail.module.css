@@ -253,9 +253,9 @@
 
     .ProductDetails {
         display: grid;
-        max-height: 350px;
+        /* max-height: 350px;
         height: auto;
-        overflow: auto;
+        overflow: auto; */
         padding-right: 10px;
     }
 
@@ -276,5 +276,12 @@
 
     .ProductPrice {
         margin-block: 20px;
+    }
+}
+
+@media (max-width: 400px) {
+    .backButton {
+
+        top: 11%;
     }
 }
