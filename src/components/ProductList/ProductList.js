@@ -12,7 +12,7 @@ const ProductList = () => {
   const [filteredProducts, setfilteredProducts] = useState();
   const [selectedSlug, setSelectedSlug] = useState("All");
   const [detailProducts, setdetailProducts] = useState();
-    const [showCart, setShowCart] = useState(false);
+  const [showCart, setShowCart] = useState(false);
 
   useEffect(() => {
     getproduct();
@@ -58,7 +58,7 @@ const ProductList = () => {
     }
   };
   const handleClose = () => setShowCart(false);
-  const handleShow= () => setShowCart(true);
+  const handleShow = () => setShowCart(true);
 
   return (
     <section className={styles.MainScro}>
@@ -84,12 +84,12 @@ const ProductList = () => {
                 return (
                   <div className={styles.flex} key={product.external_id}>
                     <div className={styles.grid}>
-                      <div
-                        className={styles.card}
-                        onClick={() => handleclick(product.external_id)}
-                      >
+                      <div className={styles.card}>
                         <img src={product.image} className={styles.image} />
-                        <div className={styles.details}>
+                        <div
+                          className={styles.details}
+                          onClick={() => handleclick(product.external_id)}
+                        >
                           <p className={styles.name}>{product.title}</p>
                           <span
                             className={styles.price}
@@ -102,8 +102,6 @@ const ProductList = () => {
               })
             )}
           </div>
-
-
         </div>
       </div>
     </section>

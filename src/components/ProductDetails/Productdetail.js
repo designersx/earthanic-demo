@@ -23,8 +23,6 @@ const ProductDetails = ({ data }) => {
     setShowCart(true);
   };
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   // Disable scrolling when modal is open
   React.useEffect(() => {
@@ -101,68 +99,7 @@ const ProductDetails = ({ data }) => {
                 // cartItems={cartItems}
               />
             
-              <Offcanvas
-                className={styles.OffcanvasMain}
-                show={show}
-                onHide={handleClose}
-                placement="end"
-              >
-                <Offcanvas.Header closeButton>
-                  <Offcanvas.Title>My Cart</Offcanvas.Title>
-                </Offcanvas.Header>
-                <Offcanvas.Body>
-                  <div className={styles.cartContent}>
-                    {/* Static Product */}
-                    <div className={styles.cartItem}>
-                      <div className={styles.removeButton}>
-                        <p>X</p>
-                      </div>
-                      <img
-                        src={item?.image}
-                        alt="Acme Slip-On Shoes"
-                        className={styles.productImage}
-                      />
-                      <div className={styles.details}>
-                        <p>{item?.title}</p>
-                        <p className={styles.price}>{`$${item?.price}USD`}</p>
-                        <div className={styles.quantity}>
-                          <button
-                            onClick={() =>
-                              setQuantity((prev) => (prev > 1 ? prev - 1 : 1))
-                            }
-                          >
-                            -
-                          </button>
-                          <span>{quantity}</span>
-                          <button
-                            onClick={() => setQuantity((prev) => prev + 1)}
-                          >
-                            +
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className={styles.cartProduct}></div>
-
-                  <div className={styles.footer}>
-                    <div className={styles.summary}>
-                      <p>
-                        Taxes: <span>$0.00 USD</span>
-                      </p>
-                      <p>
-                        Shipping: <span>Calculated at checkout</span>
-                      </p>
-                      <p>
-                        Total: <span>$180.00 USD</span>
-                      </p>
-                    </div>
-                    <button className={styles.checkoutButton}>
-                      Proceed to Checkout
-                    </button>
-                  </div>
-                </Offcanvas.Body>
-              </Offcanvas>
+           
 
               {/* Modal to show full description */}
               <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
