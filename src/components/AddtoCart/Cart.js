@@ -7,7 +7,6 @@ const CartOffcanvas = ({ show, handleClose, checkoutUrl, cartId }) => {
   const [quantity, setQuantity] = useState(1);
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true); // New loading state
-
   const getProduct = () => {
     setLoading(true);
     let savedCartItems = JSON.parse(localStorage.getItem("cartItems"));
@@ -39,7 +38,6 @@ const CartOffcanvas = ({ show, handleClose, checkoutUrl, cartId }) => {
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
     localStorage.removeItem("reqbody");
   };
-
   const handleQuantityChange = async (index, change) => {
     const updatedCartItems = cartItems.map((item, idx) =>
       idx === index
@@ -72,7 +70,6 @@ const CartOffcanvas = ({ show, handleClose, checkoutUrl, cartId }) => {
     localStorage.removeItem("reqbody");
     localStorage.removeItem("cartItems");
   };
-
   return (
     <Offcanvas
       className={styles.OffcanvasMain}
