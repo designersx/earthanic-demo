@@ -93,7 +93,7 @@
 }
 
 .description {
-    cursor: pointer;
+   
     width: 80%;
 }
 
@@ -104,6 +104,7 @@
 
 }
 .readMore{
+    cursor: pointer;
     color: #155dfc;
 }
 .cartDiv {
@@ -243,7 +244,7 @@
     }
 
     .backButton {
-        top: 8%;
+        top: 9%;
     }
 
     .description p {

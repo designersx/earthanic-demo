@@ -95,12 +95,12 @@ const ProductDetails = ({ data, onBack }) => {
                 )}
 
                 <div className={styles.description}>
-                  <p onClick={() => handleDescriptionClick(item?.description)}>
+                  <p >
                     {isLongDescription
                       ? truncatedDescription
                       : item?.description}{" "}
                     {isLongDescription && (
-                      <span className={styles.readMore}>Read More</span>
+                      <span onClick={() => handleDescriptionClick(item?.description)} className={styles.readMore}>Read More</span>
                     )}
                   </p>
                   <div className={styles.cartDiv} onClick={handleShow}>

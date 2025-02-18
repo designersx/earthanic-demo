@@ -92,14 +92,19 @@
 
 .quantity {
     display: flex;
-    align-items: center;
-    justify-content: end;
+        align-items: center;
+        justify-content: end;
+        width: max-content;
+        float: right;
+        padding: 2px 16px;
+        border: 1px solid rgb(211, 211, 211);
+        border-radius: 30px;
 }
 
 .quantity button {
-    background: #eee;
+    background: #ffffff;
     border: none;
-    padding: 5px;
+    padding: 2px;
     margin: 0 5px;
     cursor: pointer;
 }
@@ -111,9 +116,10 @@
     bottom: 0px;
     /* width: 100%;
     max-width: 370px; */
-    min-width: 370px;
+    min-width: 381px;
     background-color: white;
 }
+
 
 .summary p {
     display: flex;
