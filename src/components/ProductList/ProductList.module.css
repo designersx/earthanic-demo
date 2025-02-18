@@ -301,13 +301,12 @@
 
     .details {
         width: 90%;
-
     }
 }
 
 @media (max-width: 400px) {
     .ProductList_div {
-        margin-top: 7rem;
+        margin-top: 8rem;
 
     }
 }
