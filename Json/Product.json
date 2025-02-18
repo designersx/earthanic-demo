@@ -1,6 +1,7 @@
 [
   {
     "id": "gid://shopify/Product/8083511476394",
+    "variantId":"gid://shopify/ProductVariant/46548933705898",
     "external_id": "8083511476394",
     "title": "Riya Marble Bath Accessory Set",
     "slug": "Bath Accessory",
@@ -10,6 +11,7 @@
   },
   {
     "id": "gid://shopify/Product/8083513245866",
+    "variantId":"gid://shopify/ProductVariant/46548942323882",
     "external_id": "8083513245866",
     "title": "Riya Marble Tissue Box",
     "slug": "Bath Accessory",
@@ -19,6 +21,7 @@
   },
   {
     "id": "gid://shopify/Product/8083514556586",
+    "variantId":"gid://shopify/ProductVariant/46548952088746",
     "external_id": "8083514556586",
     "title": "Beeswax Taper Candles",
     "slug": "Bath Accessory",
@@ -37,6 +40,8 @@
   },
   {
     "id": "gid://shopify/Product/8083517898922",
+    "variantId":"gid://shopify/ProductVariant/46548999536810",
+
     "external_id": "8083517898922",
     "title": "Riya Marble Soap Dish",
     "slug": "Bath Accessory",
@@ -46,6 +51,8 @@
   },
   {
     "id": "gid://shopify/Product/8083560661162",
+    "variantId":"gid://shopify/ProductVariant/46549318729898",
+
     "external_id": "8083560661162",
     "title": "Riya Marble Wastebasket",
     "slug": "Bath Accessory",
@@ -55,6 +62,8 @@
   },
   {
     "id": "gid://shopify/Product/8083561349290",
+    "variantId":"gid://shopify/ProductVariant/46549323055274",
+
     "external_id": "8083561349290",
     "title": "Riya Marble Toothbrush Holder",
     "slug": "Bath Accessory",
@@ -64,6 +73,8 @@
   },
   {
     "id": "gid://shopify/Product/8083562496170",
+    "variantId":"gid://shopify/ProductVariant/46549338325162",
+
     "external_id": "8083562496170",
     "title": "Riya Marble Soap Dispenser",
     "slug": "Bath Accessory",
@@ -73,6 +84,8 @@
   },
   {
     "id": "gid://shopify/Product/8083580551338",
+    "variantId":"gid://shopify/ProductVariant/46549451014314",
+
     "external_id": "8083580551338",
     "title": "Laurel Bed with Low Footboard",
     "slug": "Furniture",
@@ -83,6 +96,8 @@
   },
   {
     "id": "gid://shopify/Product/8083581042858",
+    "variantId":"gid://shopify/ProductVariant/46549454127274",
+
     "external_id": "8083581042858",
     "title": "Potomac Two Poster Bed",
     "slug": "Furniture",
@@ -93,6 +108,7 @@
   },
   {
     "id": "gid://shopify/Product/8083581534378",
+    "variantId":"gid://shopify/ProductVariant/46549456126122",
     "external_id": "8083581534378",
     "title": "Bower Ottoman - Medium & Large",
     "slug": "Furniture",
@@ -103,6 +119,7 @@
   },
   {
     "id": "gid://shopify/Product/8083582025898",
+    "variantId":"gid://shopify/ProductVariant/46549458321578",
     "external_id": "8083582025898",
     "title": "Grove Chair",
     "slug": "Furniture",
@@ -113,6 +130,7 @@
   },
   {
     "id": "gid://shopify/Product/8083582812330",
+    "variantId":"gid://shopify/ProductVariant/46549463498922",
     "external_id": "8083582812330",
     "title": "Ridge Bed",
     "slug": "Furniture",
@@ -123,6 +141,7 @@
   },
   {
     "id": "gid://shopify/Product/8083583729834",
+    "variantId":"gid://shopify/ProductVariant/46549469724842",
     "external_id": "8083583729834",
     "title": "Augusta Bench",
     "slug": "Furniture",
@@ -133,6 +152,8 @@
   },
   {
     "id": "gid://shopify/Product/8083584254122",
+    "variantId":"gid://shopify/ProductVariant/46549472542890",
+
     "external_id": "8083584254122",
     "title": "Augusta Armchair",
     "slug": "Furniture",
@@ -143,6 +164,8 @@
   },
   {
     "id": "gid://shopify/Product/8083585695914",
+    "variantId":"gid://shopify/ProductVariant/46549478342826",
+
     "external_id": "8083585695914",
     "title": "Mercado Storage Baskets - Square",
     "slug": "Baskets",
@@ -153,6 +176,8 @@
   },
   {
     "id": "gid://shopify/Product/8083585761450",
+    "variantId":"gid://shopify/ProductVariant/46549478539434",
+
     "external_id": "8083585761450",
     "title": "Azad Tall Leather Storage Bins",
     "slug": "Baskets",
@@ -163,6 +188,8 @@
   },
   {
     "id": "gid://shopify/Product/8083585958058",
+    "variantId":"gid://shopify/ProductVariant/46549479162026",
+
     "external_id": "8083585958058",
     "title": "Kawi Wicker Storage Basket",
     "slug": "Baskets",
@@ -173,6 +200,8 @@
   },
   {
     "id": "gid://shopify/Product/8083586220202",
+    "variantId":"gid://shopify/ProductVariant/46549479784618",
+
     "external_id": "8083586220202",
     "title": "Rivi Storage Basket",
     "slug": "Baskets",
@@ -183,6 +212,8 @@
   },
   {
     "id": "gid://shopify/Product/8083586973866",
+    "variantId":"gid://shopify/ProductVariant/46549484535978",
+
     "external_id": "8083586973866",
     "title": "Padma Square Storage Baskets",
     "slug": "Baskets",
@@ -193,6 +224,8 @@
   },
   {
     "id": "gid://shopify/Product/8083587825834",
+    "variantId":"gid://shopify/ProductVariant/46549487616170",
+
     "external_id": "8083587825834",
     "title": "Lomas Wall Hanging",
     "slug": "Art Work",
@@ -202,6 +235,8 @@
   },
   {
     "id": "gid://shopify/Product/8083587989674",
+    "variantId":"gid://shopify/ProductVariant/46549488205994",
+
     "external_id": "8083587989674",
     "title": "Yakko Wall Hanging - Clay",
     "slug": "Art Work",
@@ -211,6 +246,8 @@
   },
   {
     "id": "gid://shopify/Product/8083588317354",
+    "variantId":"gid://shopify/ProductVariant/46549489713322",
+
     "external_id": "8083588317354",
     "title": "Bolga Fans - Black & Natural",
     "slug": "Art Work",
@@ -220,6 +257,8 @@
   },
   {
     "id": "gid://shopify/Product/8083588546730",
+    "variantId": "gid://shopify/ProductVariant/46549490139306",
+
     "external_id": "8083588546730",
     "title": "Karima Beni Ourain Wall Hanging",
     "slug": "Art Work",
@@ -229,6 +268,8 @@
   },
   {
     "id": "gid://shopify/Product/8083588743338",
+    "variantId":"gid://shopify/ProductVariant/46549490434218",
+
     "external_id": "8083588743338",
     "title": "Elena Wall Hanging",
     "slug": "Art Work",
@@ -238,15 +279,19 @@
   },
   {
     "id": "gid://shopify/Product/8083589300394",
+    "variantId":"gid://shopify/ProductVariant/46549492170922",
+
     "external_id": "8083589300394",
     "title": "Tikal Wood Serving Bowl",
     "slug": "Kitchen",
     "description": "So much more than a serving piece, an artisanal wood bowl that takes center stage anywhere it goes.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Tikal_Wood_Serving_Bowl_Mahogany_Medium_3.jpg?v=1739353771",
-    "price": "0.0"
+    "price": "90.0"
   },
   {
     "id": "gid://shopify/Product/8083591135402",
+    "variantId":"gid://shopify/ProductVariant/46549499478186",
+
     "external_id": "8083591135402",
     "title": "Tikal Wood Serving Board - Round",
     "slug": "Kitchen",
@@ -256,6 +301,8 @@
   },
   {
     "id": "gid://shopify/Product/8083591921834",
+    "variantId":"gid://shopify/ProductVariant/46549504622762",
+
     "external_id": "8083591921834",
     "title": "Kareem Salad Servers - Set of 2",
     "slug": "Kitchen",
@@ -265,6 +312,8 @@
   },
   {
     "id": "gid://shopify/Product/8083592937642",
+    "variantId":"gid://shopify/ProductVariant/46549509177514",
+
     "external_id": "8083592937642",
     "title": "Tikal Wood Serving Board - Arch",
     "slug": "Kitchen",
@@ -274,6 +323,8 @@
   },
   {
     "id": "gid://shopify/Product/8083593724074",
+    "variantId":"gid://shopify/ProductVariant/46549512552618",
+
     "external_id": "8083593724074",
     "title": "Tikal Wood Serving Board - With Handle",
     "slug": "Kitchen",
