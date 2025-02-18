@@ -14,7 +14,7 @@ const Chatbot = () => {
                 else setIsChatOpen(false);
             };
 
-            handleResize(); // Initialize state based on current width
+            handleResize(); 
             window.addEventListener("resize", handleResize);
             return () => window.removeEventListener("resize", handleResize);
         }
@@ -24,13 +24,19 @@ const Chatbot = () => {
         setIsChatOpen(!isChatOpen);
     };
 
+    const handleInputFocus = () => {
+        // Prevent the chat from closing when typing in the input
+        if (isMobile && !isChatOpen) {
+            setIsChatOpen(true);
+        }
+    };
+
     return (
         <section>
             <div className={styles.Chatbot_main}>
                 {isMobile && !isChatOpen ? (
                     <div className={styles.chatIcon} onClick={toggleChat}>
-                        {/* <img src="images/Chat.png" alt="Chat" /> */}
-                        <div className={styles.header} >
+                        <div className={styles.header}>
                             <img
                                 src="images/favicon.png"
                                 alt="Profile"
@@ -39,13 +45,12 @@ const Chatbot = () => {
                             <div className={styles.profileInfo}>
                                 <p className={styles.profileName}>Product Consultant</p>
                             </div>
-                           
                         </div>
                     </div>
                 ) : (
                     <div className={`${styles.chatContainer} ${isChatOpen ? styles.slideUp : styles.slideDown}`}>
                         {/* Header */}
-                        <div className={styles.header} >
+                        <div className={styles.header}>
                             <img
                                 src="images/favicon.png"
                                 alt="Profile"
@@ -53,7 +58,6 @@ const Chatbot = () => {
                             />
                             <div className={styles.profileInfo}>
                                 <p className={styles.profileName}>Product Consultant</p>
-                               
                             </div>
                             <div className={styles.closeButton} onClick={toggleChat}>
                                 X
@@ -78,14 +82,18 @@ const Chatbot = () => {
                                     </div>
                                     <div className={`${styles.message} ${styles.received}`}>
                                         <p>
-                                            Dude, you threw my hamster 
+                                            Dude, you threw my hamster
                                         </p>
                                         <span className={styles.time}>2:19 PM</span>
                                     </div>
                                 </div>
                                 {/* Message Input */}
                                 <div className={styles.inputContainer}>
-                                    <input type="text" placeholder="Type a message..." />
+                                    <input
+                                        type="text"
+                                        placeholder="Type a message..."
+                                        onFocus={handleInputFocus}
+                                    />
                                     <button>
                                         <img className={styles.sendIcon} src="images/SendI.png" alt="Send" />
                                     </button>

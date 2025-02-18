@@ -179,7 +179,11 @@
 .chatIcon {
     border: 2px solid;
 }
-
+@media (min-width: 768px) and (max-width: 1000px) {
+    .inputContainer input {
+        width: 120px;
+    }
+}
 @media (max-width: 767px) {
     .Chatbot_main {
         height: auto;
@@ -233,11 +237,11 @@
 
     @keyframes slideUpFromBottom {
         from {
-          transform: translateY(100%); /* Start from below the screen */
+          transform: translateY(100%); 
         }
       
         to {
-          transform: translateY(0); /* End at its normal position */
+          transform: translateY(0); 
         }
       }
 
