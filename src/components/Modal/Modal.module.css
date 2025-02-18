@@ -5,7 +5,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    background: rgba(231, 231, 231, 0.226); /* Semi-transparent background */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,12 +13,14 @@
   }
   
   .modalContent {
-    background-color: white;
+    backdrop-filter: blur(15px);
     padding: 20px;
     border-radius: 8px;
+    border: 1px solid #ffffff;
     width: 90%;
     max-width: 500px;
     position: relative;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
   
   .closeButton {
