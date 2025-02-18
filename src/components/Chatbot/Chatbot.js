@@ -9,12 +9,19 @@ const Chatbot = () => {
         if (typeof window !== "undefined") {
             const handleResize = () => {
                 const mobileView = window.innerWidth <= 767;
+                const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+                const keyboardOpen = viewportHeight < window.innerHeight * 0.8; // Detect keyboard open
+
                 setIsMobile(mobileView);
-                if (!mobileView) setIsChatOpen(true);
-                else setIsChatOpen(false);
+
+                if (!mobileView) {
+                    setIsChatOpen(true);
+                } else if (!keyboardOpen) {
+                    setIsChatOpen(false);
+                }
             };
 
-            handleResize(); 
+            handleResize();
             window.addEventListener("resize", handleResize);
             return () => window.removeEventListener("resize", handleResize);
         }
@@ -25,10 +32,7 @@ const Chatbot = () => {
     };
 
     const handleInputFocus = () => {
-        // Prevent the chat from closing when typing in the input
-        if (isMobile && !isChatOpen) {
-            setIsChatOpen(true);
-        }
+        setIsChatOpen(true); // Ensure chat stays open on input focus
     };
 
     return (
@@ -81,9 +85,7 @@ const Chatbot = () => {
                                         <span className={styles.time}>2:19 PM</span>
                                     </div>
                                     <div className={`${styles.message} ${styles.received}`}>
-                                        <p>
-                                            Dude, you threw my hamster
-                                        </p>
+                                        <p>Dude, you threw my hamster</p>
                                         <span className={styles.time}>2:19 PM</span>
                                     </div>
                                 </div>
