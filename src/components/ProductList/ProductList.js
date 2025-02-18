@@ -60,6 +60,21 @@ const ProductList = () => {
   const handleClose = () => setShowCart(false);
   const handleShow = () => setShowCart(true);
 
+
+
+  // Lens function start //
+  const [lensPosition, setLensPosition] = useState({ x: 0, y: 0 });
+  const [hoveredImage, setHoveredImage] = useState(null); // Track hovered image
+
+  const handleMouseMove = (e, productId) => {
+    const { left, top } = e.target.getBoundingClientRect();
+    const x = e.clientX - left;
+    const y = e.clientY - top;
+
+    setHoveredImage(productId); // Set hovered image ID
+    setLensPosition({ x, y });
+  };
+
   return (
     <section className={styles.MainScro}>
       <div className={styles.Part1}>
@@ -78,24 +93,42 @@ const ProductList = () => {
 
           <div className={styles.ProductList_div}>
             {detailProducts ? (
-              <ProductDetails data={detailProducts} onBack={() => setdetailProducts(undefined)}  />
+              <ProductDetails data={detailProducts} onBack={() => setdetailProducts(undefined)} />
             ) : (
               filteredProducts?.map((product) => {
                 return (
                   <div className={styles.flex} key={product.external_id}>
                     <div className={styles.grid}>
-                      <div className={styles.card}>
+                      <div className={styles.card}
+                        onMouseEnter={() => setHoveredImage(product.id)} // Hover start
+                        onMouseLeave={() => setHoveredImage(null)} // Hover end
+                        onMouseMove={(e) => handleMouseMove(e, product.id)}
+                      >
                         <img src={product.image} className={styles.image} />
+
+                        {hoveredImage === product.id && (
+                          <div
+                            className={styles.lens}
+                            style={{
+                              left: `${lensPosition.x}px`,
+                              top: `${lensPosition.y}px`,
+                              display: "block",
+                            }}
+                          />
+                        )}
+
+                        {/* 👇 Jab details par cursor aaye, toh lens hatao */}
                         <div
                           className={styles.details}
+                          onMouseEnter={() => setHoveredImage(null)} // Details par enter kare toh lens hide ho
+                          onMouseLeave={() => setHoveredImage(product.id)} // Details se nikle toh wapas show ho
                           onClick={() => handleclick(product.external_id)}
                         >
                           <p className={styles.name}>{product.title}</p>
-                          <span
-                            className={styles.price}
-                          >{`$${product.price}0 USD`}</span>
+                          <span className={styles.price}>{`$${product.price}0 `}</span>
                         </div>
                       </div>
+
                     </div>
                   </div>
                 );
