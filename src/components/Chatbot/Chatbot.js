@@ -9,12 +9,19 @@ const Chatbot = () => {
         if (typeof window !== "undefined") {
             const handleResize = () => {
                 const mobileView = window.innerWidth <= 767;
+                const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+                const keyboardOpen = viewportHeight < window.innerHeight * 0.8; // Detect keyboard open
+
                 setIsMobile(mobileView);
-                if (!mobileView) setIsChatOpen(true);
-                else setIsChatOpen(false);
+
+                if (!mobileView) {
+                    setIsChatOpen(true);
+                } else if (!keyboardOpen) {
+                    setIsChatOpen(false);
+                }
             };
 
-            handleResize(); // Initialize state based on current width
+            handleResize();
             window.addEventListener("resize", handleResize);
             return () => window.removeEventListener("resize", handleResize);
         }
@@ -24,13 +31,16 @@ const Chatbot = () => {
         setIsChatOpen(!isChatOpen);
     };
 
+    const handleInputFocus = () => {
+        setIsChatOpen(true); // Ensure chat stays open on input focus
+    };
+
     return (
         <section>
             <div className={styles.Chatbot_main}>
                 {isMobile && !isChatOpen ? (
                     <div className={styles.chatIcon} onClick={toggleChat}>
-                        {/* <img src="images/Chat.png" alt="Chat" /> */}
-                        <div className={styles.header} >
+                        <div className={styles.header}>
                             <img
                                 src="images/favicon.png"
                                 alt="Profile"
@@ -39,13 +49,12 @@ const Chatbot = () => {
                             <div className={styles.profileInfo}>
                                 <p className={styles.profileName}>Product Consultant</p>
                             </div>
-                           
                         </div>
                     </div>
                 ) : (
                     <div className={`${styles.chatContainer} ${isChatOpen ? styles.slideUp : styles.slideDown}`}>
                         {/* Header */}
-                        <div className={styles.header} >
+                        <div className={styles.header}>
                             <img
                                 src="images/favicon.png"
                                 alt="Profile"
@@ -53,7 +62,6 @@ const Chatbot = () => {
                             />
                             <div className={styles.profileInfo}>
                                 <p className={styles.profileName}>Product Consultant</p>
-                               
                             </div>
                             <div className={styles.closeButton} onClick={toggleChat}>
                                 X
@@ -77,15 +85,17 @@ const Chatbot = () => {
                                         <span className={styles.time}>2:19 PM</span>
                                     </div>
                                     <div className={`${styles.message} ${styles.received}`}>
-                                        <p>
-                                            Dude, you threw my hamster 
-                                        </p>
+                                        <p>Dude, you threw my hamster</p>
                                         <span className={styles.time}>2:19 PM</span>
                                     </div>
                                 </div>
                                 {/* Message Input */}
                                 <div className={styles.inputContainer}>
-                                    <input type="text" placeholder="Type a message..." />
+                                    <input
+                                        type="text"
+                                        placeholder="Type a message..."
+                                        onFocus={handleInputFocus}
+                                    />
                                     <button>
                                         <img className={styles.sendIcon} src="images/SendI.png" alt="Send" />
                                     </button>

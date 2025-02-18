@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Productdetail.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
@@ -7,6 +8,7 @@ import Modal from "../Modal/Modal";
 import CartOffcanvas from "../AddtoCart/Cart";
 import { addToCart, createCart } from "@/lib/api";
 
+const ProductDetails = ({ data, onBack }) => {
 const ProductDetails = ({ data, onBack }) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
@@ -25,21 +27,30 @@ const ProductDetails = ({ data, onBack }) => {
   };
 
   // Disable scrolling when modal is open
-  React.useEffect(() => {
+  useEffect(() => {
     if (isModalOpen) {
-      document.body.style.overflow = "hidden"; // Prevent scrolling
+      document.body.style.overflow = "hidden"; 
     } else {
-      document.body.style.overflow = "auto"; // Re-enable scrolling
+      document.body.style.overflow = "auto"; 
     }
     return () => {
-      document.body.style.overflow = "auto"; // Cleanup on unmount
+      document.body.style.overflow = "auto"; 
     };
   }, [isModalOpen]);
 
   const handleDescriptionClick = (description) => {
-    setSelectedDescription(description); // Set the full description when clicked
-    setModalOpen(true); // Open the modal
+    setSelectedDescription(description);
+    setModalOpen(true);
   };
+   // Set default selected size to the first size///
+   useEffect(() => {
+    if (data?.length > 0) {
+      const firstItem = data[0];
+      if (firstItem?.size?.length > 0 && selectedSize === null) {
+        setSelectedSize(firstItem.size[0]);
+      }
+    }
+  }, [data, selectedSize]);
 
   // shopify cart
   const [cartId, setCartId] = useState(null);
@@ -178,25 +189,26 @@ const ProductDetails = ({ data, onBack }) => {
                       {item.size.map((size, index) => (
                         <p
                           key={index}
-                          className={`${styles.sizeOption} ${
-                            selectedSize === size ? styles.selected : ""
-                          }`}
+                          className={`${styles.sizeOption} ${selectedSize === size ? styles.selected : ""
+                            }`}
                           onClick={() => setSelectedSize(size)}
                         >
                           {size}
                         </p>
                       ))}
                     </div>
+
+                    
                   </>
                 )}
 
                 <div className={styles.description}>
-                  <p onClick={() => handleDescriptionClick(item?.description)}>
+                  <p >
                     {isLongDescription
                       ? truncatedDescription
                       : item?.description}{" "}
                     {isLongDescription && (
-                      <span className={styles.readMore}>Read More</span>
+                      <span onClick={() => handleDescriptionClick(item?.description)} className={styles.readMore}>Read More</span>
                     )}
                   </p>
                   <div
@@ -217,6 +229,7 @@ const ProductDetails = ({ data, onBack }) => {
                 cartId={cartId}
                 checkoutUrl={checkoutUrl}
                 // cartItems={cartItems}
+              // cartItems={cartItems}
               />
 
               {/* Modal to show full description */}
