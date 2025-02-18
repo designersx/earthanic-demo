@@ -293,7 +293,7 @@
 
 @media (max-width: 500px) {
     .ProductList_div {
-        margin-top: 6rem;
+        margin-top: 8rem;
         height: auto;
         /* max-height: 700px; */
         /* overflow: auto; */
@@ -307,7 +307,7 @@
 
 @media (max-width: 400px) {
     .ProductList_div {
-        margin-top: 5rem;
+        margin-top: 7rem;
 
     }
 }
