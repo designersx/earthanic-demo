@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import React, { useState, useEffect } from "react";
+
 import styles from "./Productdetail.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
@@ -8,7 +8,7 @@ import Modal from "../Modal/Modal";
 import CartOffcanvas from "../AddtoCart/Cart";
 import { addToCart, createCart } from "@/lib/api";
 
-const ProductDetails = ({ data, onBack }) => {
+
 const ProductDetails = ({ data, onBack }) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
@@ -154,10 +154,15 @@ const ProductDetails = ({ data, onBack }) => {
     }
   };
 
+  const getremoveitem = () => {
+    localStorage.removeItem("reqbody");
+    onBack();
+  }
+
   // console.log("data----", data);
   return (
     <section>
-      <div className={styles.backButton} onClick={onBack}>
+      <div className={styles.backButton} onClick={getremoveitem}>
         X
       </div>
       <div className={styles.ProductDetails}>
