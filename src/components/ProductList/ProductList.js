@@ -100,13 +100,13 @@ const ProductList = () => {
                   <div className={styles.flex} key={product.external_id}>
                     <div className={styles.grid}>
                       <div className={styles.card}
-                        onMouseEnter={() => setHoveredImage(product.id)} // Hover start
-                        onMouseLeave={() => setHoveredImage(null)} // Hover end
-                        onMouseMove={(e) => handleMouseMove(e, product.id)}
+                        // onMouseEnter={() => setHoveredImage(product.id)} 
+                        // onMouseLeave={() => setHoveredImage(null)} 
+                        // onMouseMove={(e) => handleMouseMove(e, product.id)}
                       >
                         <img src={product.image} className={styles.image} />
 
-                        {hoveredImage === product.id && (
+                        {/* {hoveredImage === product.id && (
                           <div
                             className={styles.lens}
                             style={{
@@ -115,13 +115,12 @@ const ProductList = () => {
                               display: "block",
                             }}
                           />
-                        )}
+                        )} */}
 
-                        {/* 👇 Jab details par cursor aaye, toh lens hatao */}
                         <div
                           className={styles.details}
-                          onMouseEnter={() => setHoveredImage(null)} // Details par enter kare toh lens hide ho
-                          onMouseLeave={() => setHoveredImage(product.id)} // Details se nikle toh wapas show ho
+                          // onMouseEnter={() => setHoveredImage(null)} 
+                          // onMouseLeave={() => setHoveredImage(product.id)} 
                           onClick={() => handleclick(product.external_id)}
                         >
                           <p className={styles.name}>{product.title}</p>
