@@ -1,21 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import styles from "./Cart.module.css";
+import { createCart } from "@/lib/api";
 
-const CartOffcanvas = ({ show, handleClose }) => {
+const CartOffcanvas = ({ show, handleClose, checkoutUrl, cartId }) => {
   const [quantity, setQuantity] = useState(1);
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true); // New loading state
-
-  // LocalStorage se cart items get karna on page load
-  //   let getProduct = () => {
-  //     setLoading(true); // Set loading to true when data is being fetched
-  //     let savedCartItems = JSON.parse(localStorage.getItem("cartItems"));
-  //     if (savedCartItems) {
-  //       setCartItems(savedCartItems);
-  //     }
-  //     setLoading(false); // Once data is set, stop loading
-  //   };
   const getProduct = () => {
     setLoading(true);
     let savedCartItems = JSON.parse(localStorage.getItem("cartItems"));
@@ -33,7 +24,7 @@ const CartOffcanvas = ({ show, handleClose }) => {
   useEffect(() => {
     setTimeout(() => {
       getProduct();
-    }, 2000); // Simulating async fetch time
+    }, 1000); // Simulating async fetch time
   }, [cartItems, show]);
 
   const handleRemoveItem = (external_id) => {
@@ -45,9 +36,9 @@ const CartOffcanvas = ({ show, handleClose }) => {
     // Update state and localStorage
     setCartItems(updatedCartItems);
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+    localStorage.removeItem("reqbody");
   };
-
-  const handleQuantityChange = (index, change) => {
+  const handleQuantityChange = async (index, change) => {
     const updatedCartItems = cartItems.map((item, idx) =>
       idx === index
         ? {
@@ -57,6 +48,7 @@ const CartOffcanvas = ({ show, handleClose }) => {
         : item
     );
     setCartItems(updatedCartItems);
+    console.log("updatedCartItems", updatedCartItems);
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
   };
 
@@ -66,8 +58,18 @@ const CartOffcanvas = ({ show, handleClose }) => {
       return total + item.quantity * item.price; // Multiply quantity with price f
     }, 0);
   };
-
   const totalPrice = calculateTotal();
+
+  // const cartItem = await addToCart({
+  //   cartId,
+  //   variantId: "gid://shopify/ProductVariant/46548933705898",
+  //   quantity: 1,
+  // });
+
+  const handlelocalstorageremove = () => {
+    localStorage.removeItem("reqbody");
+    localStorage.removeItem("cartItems");
+  };
   return (
     <Offcanvas
       className={styles.OffcanvasMain}
@@ -118,6 +120,18 @@ const CartOffcanvas = ({ show, handleClose }) => {
           </div>
         )}
 
+        {/* <div className="mt-4">
+          <p>Cart ID: {cartId}</p>
+          <a
+            href={checkoutUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-700 underline"
+          >
+            Go to Checkout
+          </a>
+        </div> */}
+
         <div className={styles.footer}>
           <div className={styles.summary}>
             <p>
@@ -130,7 +144,20 @@ const CartOffcanvas = ({ show, handleClose }) => {
               Total: <span>${totalPrice.toFixed(2)} USD</span>
             </p>
           </div>
-          <button className={styles.checkoutButton}>Proceed to Checkout</button>
+          <a
+            href={checkoutUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-700 underline"
+          >
+            <button
+              className={styles.checkoutButton}
+              onClick={handlelocalstorageremove}
+            >
+              {" "}
+              Proceed to Checkout
+            </button>
+          </a>
         </div>
       </Offcanvas.Body>
     </Offcanvas>
