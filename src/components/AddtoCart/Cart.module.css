@@ -179,6 +179,11 @@
 
 @media (max-width:360px){
     .footer{
+        min-width: 330px;
+    }
+}
+@media (max-width:320px){
+    .footer{
         min-width: 310px;
     }
 }
