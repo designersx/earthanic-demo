@@ -12,6 +12,7 @@ import { QrCode } from "lucide-react";
 
 const CartOffcanvas = ({ show, handleClose, cartItemsdet, addToCartData }) => {
   const [quantity, setQuantity] = useState(1);
+
   const [loading, setLoading] = useState(false); // New loading state
   const [cartItemss, setCartItemss] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
@@ -121,7 +122,6 @@ const CartOffcanvas = ({ show, handleClose, cartItemsdet, addToCartData }) => {
     localStorage.removeItem("cartItems");
     localStorage.removeItem("cartId");
   };
-
   return (
     <Offcanvas
       className={styles.OffcanvasMain}
