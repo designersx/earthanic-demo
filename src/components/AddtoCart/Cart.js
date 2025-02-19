@@ -15,7 +15,7 @@ const CartOffcanvas = ({ show, handleClose, checkoutUrl, cartId }) => {
       // Agar quantity nahi hai to usko 1 set karenge
       const itemsWithQuantity = savedCartItems.flat().map((item) => ({
         ...item,
-        quantity: item.quantity || 1,
+        quantity: item?.quantity || 1,
       }));
       setCartItems(itemsWithQuantity);
     }

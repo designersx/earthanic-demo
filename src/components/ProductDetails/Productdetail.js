@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import styles from "./Productdetail.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
@@ -7,7 +6,7 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import Modal from "../Modal/Modal";
 import CartOffcanvas from "../AddtoCart/Cart";
 import { addToCart, createCart } from "@/lib/api";
-
+import Loader from "../Loader/Loader";
 
 const ProductDetails = ({ data, onBack }) => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -15,6 +14,7 @@ const ProductDetails = ({ data, onBack }) => {
   const [showCart, setShowCart] = useState(false);
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedDescription, setSelectedDescription] = useState(""); // New state for storing description
+  const [loading, setLoading] = useState(false);
 
   const handleClose = () => setShowCart(false);
   const handleShow = () => {
@@ -29,12 +29,12 @@ const ProductDetails = ({ data, onBack }) => {
   // Disable scrolling when modal is open
   useEffect(() => {
     if (isModalOpen) {
-      document.body.style.overflow = "hidden"; 
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "auto"; 
+      document.body.style.overflow = "auto";
     }
     return () => {
-      document.body.style.overflow = "auto"; 
+      document.body.style.overflow = "auto";
     };
   }, [isModalOpen]);
 
@@ -42,8 +42,8 @@ const ProductDetails = ({ data, onBack }) => {
     setSelectedDescription(description);
     setModalOpen(true);
   };
-   // Set default selected size to the first size///
-   useEffect(() => {
+  // Set default selected size to the first size///
+  useEffect(() => {
     if (data?.length > 0) {
       const firstItem = data[0];
       if (firstItem?.size?.length > 0 && selectedSize === null) {
@@ -138,26 +138,34 @@ const ProductDetails = ({ data, onBack }) => {
   console.log({ cartbodyitem });
 
   const handleCreateCart = async () => {
-    const cartItem = await addToCart({
-      cartId,
-      products: cartbodyitem,
-    });
+    setLoading(true); // Start loader
 
-    if (cartItem) {
-      const existingCartItems =
-        JSON.parse(localStorage.getItem("cartItems")) || [];
-      const updatedCartItems = [...existingCartItems, data];
-      localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
-      setCartItems(updatedCartItems);
-      setCheckoutUrl(cartItem[0]?.checkoutUrl);
-      setShowCart(true);
+    try {
+      const cartItem = await addToCart({
+        cartId,
+        products: cartbodyitem,
+      });
+
+      if (cartItem) {
+        const existingCartItems =
+          JSON.parse(localStorage.getItem("cartItems")) || [];
+        const updatedCartItems = [...existingCartItems, data];
+        localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+        setCartItems(updatedCartItems);
+        setCheckoutUrl(cartItem[0]?.checkoutUrl);
+        setShowCart(true);
+      }
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+    } finally {
+      setLoading(false); // Stop loader
     }
   };
 
   const getremoveitem = () => {
     localStorage.removeItem("reqbody");
     onBack();
-  }
+  };
 
   // console.log("data----", data);
   return (
@@ -194,26 +202,32 @@ const ProductDetails = ({ data, onBack }) => {
                       {item.size.map((size, index) => (
                         <p
                           key={index}
-                          className={`${styles.sizeOption} ${selectedSize === size ? styles.selected : ""
-                            }`}
+                          className={`${styles.sizeOption} ${
+                            selectedSize === size ? styles.selected : ""
+                          }`}
                           onClick={() => setSelectedSize(size)}
                         >
                           {size}
                         </p>
                       ))}
                     </div>
-
-                    
                   </>
                 )}
 
                 <div className={styles.description}>
-                  <p >
+                  <p>
                     {isLongDescription
                       ? truncatedDescription
                       : item?.description}{" "}
                     {isLongDescription && (
-                      <span onClick={() => handleDescriptionClick(item?.description)} className={styles.readMore}>Read More</span>
+                      <span
+                        onClick={() =>
+                          handleDescriptionClick(item?.description)
+                        }
+                        className={styles.readMore}
+                      >
+                        Read More
+                      </span>
                     )}
                   </p>
                   <div
@@ -221,7 +235,12 @@ const ProductDetails = ({ data, onBack }) => {
                     // onClick={handleShow}
                     onClick={handleCreateCart}
                   >
-                    Add to cart
+                    {loading ? (
+                      // <div className={styles.loader}></div>
+                      <Loader />
+                    ) : (
+                      "Add to Cart"
+                    )}
                   </div>
                 </div>
               </div>
@@ -234,7 +253,7 @@ const ProductDetails = ({ data, onBack }) => {
                 cartId={cartId}
                 checkoutUrl={checkoutUrl}
                 // cartItems={cartItems}
-              // cartItems={cartItems}
+                // cartItems={cartItems}
               />
 
               {/* Modal to show full description */}

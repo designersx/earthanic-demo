@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import styles from "../ProductList/ProductList.module.css";
 import Chatbot from "../Chatbot/Chatbot";
 import Navbar from "../Navbar/Navbar";
-import { getAllProduct } from "@/lib/api";
+import { addToCart, createCart, getAllProduct } from "@/lib/api";
 import ProductDetails from "../ProductDetails/Productdetail";
 import ProductData from "../../../Json/Product.json";
 import CartOffcanvas from "../AddtoCart/Cart";
 import Modal from "../Modal/Modal";
+import Loader from "../Loader/Loader";
 
 const ProductList = () => {
   const [Products, setProducts] = useState();
@@ -17,6 +18,9 @@ const ProductList = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [selectedSize, setSelectedSize] = useState("");
   const [isModalOpen, setModalOpen] = useState(false);
+  const [checkoutUrl, setCheckoutUrl] = useState(null);
+  const [cartId, setCartId] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getproduct();
@@ -43,9 +47,15 @@ const ProductList = () => {
     setdetailProducts(filteredProducts);
   };
 
-  const handleProductClick = (product) => {
+  const handleProductClick = async (product) => {
     if (product.size) {
+      const cart = await createCart();
+      console.log("CART---", cart);
+      if (cart) {
+        setCartId(cart.id); // Set the cartId
+      }
       setSelectedProduct(product); // Modal open karne ke liye product store karo
+
       setModalOpen(true);
     } else {
       handleclick(product.external_id); // Agar size nahi hai toh direct call
@@ -71,29 +81,45 @@ const ProductList = () => {
       setdetailProducts(undefined);
     }
   };
-  const handleClose = () => setShowCart(false);
-  const handleShow = () => setShowCart(true);
 
-  // Lens function start //
-  const [lensPosition, setLensPosition] = useState({ x: 0, y: 0 });
-  const [hoveredImage, setHoveredImage] = useState(null); // Track hovered image
+  const handleSubmitAndCreateCart = async () => {
+    if (!selectedSize) {
+      alert("Please select a size before proceeding!");
+      return;
+    }
+    setLoading(true);
+    const cartbodyitem = [
+      {
+        variantId: selectedProduct.variantId,
+        quantity: 1,
+      },
+    ];
 
-  const handleMouseMove = (e, productId) => {
-    const { left, top } = e.target.getBoundingClientRect();
-    const x = e.clientX - left;
-    const y = e.clientY - top;
+    try {
+      const cartItem = await addToCart({
+        cartId,
+        products: cartbodyitem,
+      });
 
-    setHoveredImage(productId); // Set hovered image ID
-    setLensPosition({ x, y });
-  };
+      if (cartItem) {
+        const existingCartItems =
+          JSON.parse(localStorage.getItem("cartItems")) || [];
+        const updatedCartItems = [...existingCartItems, selectedProduct];
+        localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
 
-  const handleSubmit = () => {
-    if (selectedSize) {
-      handleclick(selectedProduct.external_id);
-      setSelectedProduct(null); // Modal close
-      setSelectedSize(""); // Size reset
+        setCheckoutUrl(cartItem[0]?.checkoutUrl);
+        setShowCart(true);
+        setSelectedProduct(null); // Modal close
+        setSelectedSize(""); // Reset selected size
+      }
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+    } finally {
+      setLoading(false); // Stop loader
     }
   };
+
+  const handleClose = () => setShowCart(false);
 
   return (
     <section className={styles.MainScro}>
@@ -165,8 +191,11 @@ const ProductList = () => {
                     ))}
                   </div>
 
-                  <button onClick={handleSubmit} disabled={!selectedSize}>
-                    Submit
+                  <button
+                    onClick={handleSubmitAndCreateCart}
+                    disabled={!selectedSize}
+                  >
+                    {loading ? <Loader /> : "Submit"}
                   </button>
                   <button onClick={() => setSelectedProduct(null)}>
                     Cancel
@@ -175,6 +204,15 @@ const ProductList = () => {
               </div>
             </Modal>
           )}
+
+          <CartOffcanvas
+            show={showCart}
+            handleClose={handleClose}
+            cartId={cartId}
+            checkoutUrl={checkoutUrl}
+            // cartItems={cartItems}
+            // cartItems={cartItems}
+          />
         </div>
       </div>
     </section>
