@@ -1,8 +1,8 @@
 import axios from "axios";
 
-let url = "http://localhost:2525/";
+// let url = "http://localhost:2525/";
 
-// let url = "https://earthanic.truet.net/";
+let url = "https://earthanic.truet.net/";
 
 // get products
 export async function getAllProduct() {
