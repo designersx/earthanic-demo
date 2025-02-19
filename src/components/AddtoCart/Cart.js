@@ -1,74 +1,126 @@
 import React, { useEffect, useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import styles from "./Cart.module.css";
-import { createCart } from "@/lib/api";
+import {
+  addToCart,
+  createCart,
+  getCartList,
+  removeCartItem,
+  updateCartItem,
+} from "@/lib/api";
+import { QrCode } from "lucide-react";
 
-const CartOffcanvas = ({ show, handleClose, checkoutUrl, cartId }) => {
+const CartOffcanvas = ({ show, handleClose, cartItemsdet, addToCartData }) => {
   const [quantity, setQuantity] = useState(1);
-  const [cartItems, setCartItems] = useState([]);
-  const [loading, setLoading] = useState(true); // New loading state
-  const getProduct = () => {
-    setLoading(true);
-    let savedCartItems = JSON.parse(localStorage.getItem("cartItems"));
-    if (savedCartItems) {
-      // Agar quantity nahi hai to usko 1 set karenge
-      const itemsWithQuantity = savedCartItems.flat().map((item) => ({
-        ...item,
-        quantity: item.quantity || 1,
-      }));
-      setCartItems(itemsWithQuantity);
-    }
-    setLoading(false);
-  };
+
+  const [loading, setLoading] = useState(false); // New loading state
+  const [cartItemss, setCartItemss] = useState([]);
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [checkoutUrl, setCheckoutUrl] = useState("");
+  const [quantities, setQuantities] = useState({});
+  const [loadingStates, setLoadingStates] = useState({});
+
+  console.log("cartItemss-----", cartItemss);
 
   useEffect(() => {
-    setTimeout(() => {
-      getProduct();
-    }, 1000); // Simulating async fetch time
-  }, [cartItems, show]);
+    getCartDetails();
+  }, [cartItemsdet, addToCartData]);
 
-  const handleRemoveItem = (external_id) => {
-    const updatedCartItems = cartItems
-      .flat()
-      .filter((item) => item.external_id !== external_id);
-    console.log("updatedCartItems____", updatedCartItems);
+  useEffect(() => {
+    getCartDetails();
+  }, []);
 
-    // Update state and localStorage
-    setCartItems(updatedCartItems);
-    localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
-    localStorage.removeItem("reqbody");
+  // get cartlist
+  const getCartDetails = async () => {
+    const cartId = localStorage.getItem("cartId");
+    if (!cartId) return console.error("No Cart ID found!");
+
+    try {
+      const cartResponse = await getCartList(cartId);
+      const res = JSON.parse(cartResponse?.data);
+
+      const checkoutLink = res?.data?.cart?.checkoutUrl || "";
+      setCheckoutUrl(checkoutLink);
+      // console.log(
+      //   "res?.data?.cart?.lines---",
+      //   res?.data?.cart?.lines?.edges.map((ite) => ite?.node.id)
+      // );
+      const items =
+        res?.data?.cart?.lines?.edges?.map((item) => ({
+          title: item?.node?.merchandise?.product?.title || "No Title",
+          imageUrl: item?.node?.merchandise?.image?.url || "",
+          amount: item?.node?.merchandise?.price?.amount || "0",
+          quantity: item?.node?.quantity || 1,
+          id: item?.node?.id,
+        })) || [];
+
+      setCartItemss(items);
+
+      // Initialize individual quantities
+      const initialQuantities = {};
+      items.forEach((item) => {
+        initialQuantities[item.id] = item.quantity;
+      });
+      setQuantities(initialQuantities);
+
+      const total = res?.data?.cart?.cost?.totalAmount?.amount || "0";
+      setTotalAmount(total);
+    } catch (error) {
+      console.error("Error fetching cart details:", error);
+    }
   };
-  const handleQuantityChange = async (index, change) => {
-    const updatedCartItems = cartItems.map((item, idx) =>
-      idx === index
-        ? {
-            ...item,
-            quantity: Math.max(1, item.quantity + change), // Minimum 1 quantity
-          }
-        : item
-    );
-    setCartItems(updatedCartItems);
-    console.log("updatedCartItems", updatedCartItems);
-    localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+
+  // remove cartitem
+  const removeCartitem = async (id) => {
+    const cartId = localStorage.getItem("cartId");
+    const lineId = id;
+    setLoading(true);
+    try {
+      const response = await removeCartItem(cartId, lineId);
+      console.log(" remove response--->", response);
+      await getCartDetails();
+    } catch (error) {
+      console.error("Error fetching cart details:", error);
+    } finally {
+      setLoading(false); // Loader stop
+    }
   };
 
-  // Total price calculation
-  const calculateTotal = () => {
-    return cartItems.reduce((total, item) => {
-      return total + item.quantity * item.price; // Multiply quantity with price f
-    }, 0);
+  // Increment Quantity
+  const handleIncrement = (id) => {
+    setQuantities((prev) => {
+      const newQuantity = (prev[id] || 1) + 1;
+      updateCartQuantity(id, newQuantity);
+      return { ...prev, [id]: newQuantity };
+    });
   };
-  const totalPrice = calculateTotal();
 
-  // const cartItem = await addToCart({
-  //   cartId,
-  //   variantId: "gid://shopify/ProductVariant/46548933705898",
-  //   quantity: 1,
-  // });
+  // Decrement Quantity
+  const handleDecrement = (id) => {
+    setQuantities((prev) => {
+      if (prev[id] > 1) {
+        const newQuantity = prev[id] - 1;
+        updateCartQuantity(id, newQuantity);
+        return { ...prev, [id]: newQuantity };
+      }
+      return prev;
+    });
+  };
 
+
+
+  // Update API with latest quantity
+  const updateCartQuantity = async (id, quantity) => {
+    const cartId = localStorage.getItem("cartId");
+    await updateCartItem(cartId, [{ id, quantity }]); // Call API
+    getCartDetails(); // Refresh cart details
+  };
+
+ 
   const handlelocalstorageremove = () => {
     localStorage.removeItem("reqbody");
     localStorage.removeItem("cartItems");
+    localStorage.removeItem("cartId");
   };
   return (
     <Offcanvas
@@ -85,32 +137,34 @@ const CartOffcanvas = ({ show, handleClose, checkoutUrl, cartId }) => {
           <div className={styles.loader}></div>
         ) : (
           <div className={styles.cartContent}>
-            {cartItems.length > 0 ? (
-              cartItems.flat().map((item, index) => (
+            {cartItemss.length > 0 ? (
+              cartItemss?.map((item, index) => (
                 <div key={index} className={styles.cartItem}>
                   <div
                     className={styles.removeButton}
-                    onClick={() => handleRemoveItem(item.external_id)}
+                    onClick={() => removeCartitem(item.id)}
                   >
                     <p>X</p>
                   </div>
                   <img
-                    src={item?.image}
+                    src={item?.imageUrl}
                     alt={item?.title}
                     className={styles.productImage}
                   />
                   <div className={styles.details}>
                     <p>{item?.title}</p>
-                    <p className={styles.price}>{`$${item?.price} USD`}</p>
+                    <p className={styles.price}>{`$${item?.amount} USD`}</p>
                     <div className={styles.quantity}>
-                      <button onClick={() => handleQuantityChange(index, -1)}>
+                      <button onClick={() => handleDecrement(item.id)}>
                         -
                       </button>
-                      <span>{item.quantity}</span>
-                      <button onClick={() => handleQuantityChange(index, 1)}>
+                      <span>{quantities[item.id]}</span>
+                      <button onClick={() => handleIncrement(item.id)}>
                         +
                       </button>
                     </div>
+
+                    
                   </div>
                 </div>
               ))
@@ -119,18 +173,6 @@ const CartOffcanvas = ({ show, handleClose, checkoutUrl, cartId }) => {
             )}
           </div>
         )}
-
-        {/* <div className="mt-4">
-          <p>Cart ID: {cartId}</p>
-          <a
-            href={checkoutUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-700 underline"
-          >
-            Go to Checkout
-          </a>
-        </div> */}
 
         <div className={styles.footer}>
           <div className={styles.summary}>
@@ -141,7 +183,7 @@ const CartOffcanvas = ({ show, handleClose, checkoutUrl, cartId }) => {
               Shipping: <span>Calculated at checkout</span>
             </p>
             <p>
-              Total: <span>${totalPrice.toFixed(2)} USD</span>
+              Total: <span>${totalAmount} USD</span>
             </p>
           </div>
           <a

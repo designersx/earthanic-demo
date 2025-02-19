@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import styles from "../ProductList/ProductList.module.css";
 import Chatbot from "../Chatbot/Chatbot";
 import Navbar from "../Navbar/Navbar";
-import { getAllProduct } from "@/lib/api";
+import { addToCart, createCart, getAllProduct, getCartList } from "@/lib/api";
 import ProductDetails from "../ProductDetails/Productdetail";
 import ProductData from "../../../Json/Product.json";
 import CartOffcanvas from "../AddtoCart/Cart";
+import Modal from "../Modal/Modal";
+import Loader from "../Loader/Loader";
 
 const ProductList = () => {
   const [Products, setProducts] = useState();
@@ -13,6 +15,13 @@ const ProductList = () => {
   const [selectedSlug, setSelectedSlug] = useState("All");
   const [detailProducts, setdetailProducts] = useState();
   const [showCart, setShowCart] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedSize, setSelectedSize] = useState("");
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [checkoutUrl, setCheckoutUrl] = useState(null);
+  const [cartId, setCartId] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [addToCartData, setAddToCartData] = useState();
 
   useEffect(() => {
     getproduct();
@@ -32,10 +41,21 @@ const ProductList = () => {
   };
 
   const handleclick = (external_id) => {
+    console.log("external_id", external_id);
     const filteredProducts = ProductData.filter(
       (product) => product.external_id === external_id
     );
     setdetailProducts(filteredProducts);
+  };
+
+  const handleProductClick = async (product) => {
+    if (product.size) {
+      setSelectedProduct(product); // Modal open karne ke liye product store karo
+      setSelectedSize(product?.size[0]);
+      setModalOpen(true);
+    } else {
+      handleclick(product.external_id); // Agar size nahi hai toh direct call
+    }
   };
 
   useEffect(() => {
@@ -57,23 +77,120 @@ const ProductList = () => {
       setdetailProducts(undefined);
     }
   };
-  const handleClose = () => setShowCart(false);
-  const handleShow = () => setShowCart(true);
 
+  // const handleSubmitAndCreateCart = async () => {
+  //   if (!selectedSize) {
+  //     alert("Please select a size before proceeding!");
+  //     return;
+  //   }
 
+  //   setLoading(true);
 
-  // Lens function start //
-  const [lensPosition, setLensPosition] = useState({ x: 0, y: 0 });
-  const [hoveredImage, setHoveredImage] = useState(null); // Track hovered image
+  //   const cartbodyitem = [
+  //     {
+  //       variantId: selectedProduct.variantId,
+  //       quantity: 1,
+  //     },
+  //   ];
 
-  const handleMouseMove = (e, productId) => {
-    const { left, top } = e.target.getBoundingClientRect();
-    const x = e.clientX - left;
-    const y = e.clientY - top;
+  //   let cartId = localStorage.getItem("cartId");
+  //   if (!cartId) {
+  //     const cart = await createCart();
+  //     if (cart) {
+  //       cartId = cart.id;
+  //       localStorage.setItem("cartId", cartId); // ✅ New cart ID store karo
+  //     }
+  //   }
 
-    setHoveredImage(productId); // Set hovered image ID
-    setLensPosition({ x, y });
+  //   try {
+  //     const cartItem = await addToCart({
+  //       cartId:cartId || "" ,
+  //       products: cartbodyitem,
+  //     });
+
+  //     if (cartItem) {
+  //       const existingCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  //       const updatedCartItems = [...existingCartItems, selectedProduct];
+  //       localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+
+  //       setCheckoutUrl(cartItem[0]?.checkoutUrl);
+
+  //       setShowCart(true);
+  //       setSelectedProduct(null); // Modal close
+  //       setSelectedSize(""); // Reset selected size
+  //     }
+  //   } catch (error) {
+  //     console.error("Error adding to cart:", error);
+  //   } finally {
+  //     setLoading(false); // Stop loader
+  //   }
+  // };
+
+  const handleSubmitAndCreateCart = async () => {
+    if (!selectedSize) {
+      alert("Please select a size before proceeding!");
+      return;
+    }
+
+    setLoading(true);
+
+    // ✅ Pehle se store cart items fetch karo
+    const existingCartItems =
+      JSON.parse(localStorage.getItem("cartItems")) || [];
+
+    // ✅ API ke liye sirf variantId aur quantity prepare karo
+    let cartbodyitem = [
+      ...existingCartItems.map((item) => ({
+        variantId: item.variantId,
+        quantity: 1,
+      })),
+      {
+        variantId: selectedProduct.variantId,
+        quantity: 1,
+      },
+    ];
+
+    let cartId = localStorage.getItem("cartId");
+    if (!cartId) {
+      const cart = await createCart();
+      if (cart) {
+        cartId = cart.id;
+        localStorage.setItem("cartId", cartId); // ✅ New cart ID store karo
+        setCartId(cartId);
+      }
+    }
+
+    try {
+      const cartItem = await addToCart({
+        cartId: cartId || "",
+        products: cartbodyitem, // ✅ API me sirf variantId aur quantity jayega
+      });
+
+      if (cartItem) {
+        // ✅ LocalStorage me pura product object store karna hai
+        const updatedCartItems = [...existingCartItems, selectedProduct];
+        localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+
+        setCheckoutUrl(cartItem[0]?.checkoutUrl);
+        setShowCart(true);
+        setAddToCartData(cartItem);
+        setSelectedProduct(null); // Modal close
+        setSelectedSize(""); // Reset selected size
+      }
+      console.log({ addToCartData });
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+    } finally {
+      setLoading(false); // Stop loader
+    }
   };
+  useEffect(() => {
+    if (addToCartData) {
+      getCartList(cartId);
+    }
+  }, [addToCartData]);
+
+  const handleClose = () => setShowCart(false);
 
   return (
     <section className={styles.MainScro}>
@@ -93,47 +210,82 @@ const ProductList = () => {
 
           <div className={styles.ProductList_div}>
             {detailProducts ? (
-              <ProductDetails data={detailProducts} onBack={() => setdetailProducts(undefined)} />
+              <ProductDetails
+                data={detailProducts}
+                onBack={() => setdetailProducts(undefined)}
+              />
             ) : (
               filteredProducts?.map((product) => {
                 return (
                   <div className={styles.flex} key={product.external_id}>
                     <div className={styles.grid}>
-                      <div className={styles.card}
-                        // onMouseEnter={() => setHoveredImage(product.id)} 
-                        // onMouseLeave={() => setHoveredImage(null)} 
-                        // onMouseMove={(e) => handleMouseMove(e, product.id)}
-                      >
-                        <img src={product.image} className={styles.image} />
-
-                        {/* {hoveredImage === product.id && (
-                          <div
-                            className={styles.lens}
-                            style={{
-                              left: `${lensPosition.x}px`,
-                              top: `${lensPosition.y}px`,
-                              display: "block",
-                            }}
-                          />
-                        )} */}
-
-                        <div
-                          className={styles.details}
-                          // onMouseEnter={() => setHoveredImage(null)} 
-                          // onMouseLeave={() => setHoveredImage(product.id)} 
+                      <div className={styles.card}>
+                        <img
+                          src={product.image}
+                          className={styles.image}
                           onClick={() => handleclick(product.external_id)}
-                        >
+                        />
+                        <div className={styles.details}>
                           <p className={styles.name}>{product.title}</p>
-                          <span className={styles.price}>{`$${product.price}0 `}</span>
+                          <span
+                            className={styles.price}
+                            onClick={() => handleProductClick(product)}
+                          >
+                            {`$${product.price}0 `}{" "}
+                          </span>
                         </div>
                       </div>
-
                     </div>
                   </div>
                 );
               })
             )}
           </div>
+
+          {/* Modal for Size Selection */}
+          {selectedProduct && (
+            <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
+              <div className={styles.modal}>
+                <div className={styles.modalContent}>
+                  <h3>Select Size for {selectedProduct.title}</h3>
+                  <div className={styles.Sizes}>
+                    {selectedProduct.size?.map((size, index) => (
+                      <p
+                        key={index}
+                        className={`${styles.sizeOption} ${
+                          selectedSize === size ? styles.selected : ""
+                        }`}
+                        onClick={() => setSelectedSize(size)}
+                      >
+                        {size}
+                      </p>
+                    ))}
+                  </div>
+                  <div className={styles.btnDiv}>
+                    <button
+                      onClick={handleSubmitAndCreateCart}
+                      disabled={!selectedSize}
+                      className={styles.subBtn}
+                    >
+                      {loading ? <Loader /> : "Submit"}
+                    </button>
+                    <button
+                      className={styles.cancelBtn}
+                      onClick={() => setSelectedProduct(null)}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </Modal>
+          )}
+
+          <CartOffcanvas
+            show={showCart}
+            handleClose={handleClose}
+            addToCartData={addToCartData}
+          />
         </div>
       </div>
     </section>

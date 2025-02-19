@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
-
 import styles from "./Productdetail.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Modal from "../Modal/Modal";
 import CartOffcanvas from "../AddtoCart/Cart";
-import { addToCart, createCart } from "@/lib/api";
+import { addToCart, createCart, getCartList } from "@/lib/api";
+import Loader from "../Loader/Loader";
 
-
-const ProductDetails = ({ data, onBack }) => {
+const ProductDetails = ({ data, onBack, cartbodyiteem }) => {
+  // console.log("cartbodyiteem------->>", cartbodyiteem)
   const [isModalOpen, setModalOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [showCart, setShowCart] = useState(false);
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedDescription, setSelectedDescription] = useState(""); // New state for storing description
-
+  const [loading, setLoading] = useState(false);
+  const [cartId, setCartId] = useState(localStorage.getItem("cartId") || null);
+  const [addToCartData, setAddToCartData] = useState();
   const handleClose = () => setShowCart(false);
   const handleShow = () => {
     const existingCartItems =
@@ -29,12 +31,12 @@ const ProductDetails = ({ data, onBack }) => {
   // Disable scrolling when modal is open
   useEffect(() => {
     if (isModalOpen) {
-      document.body.style.overflow = "hidden"; 
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "auto"; 
+      document.body.style.overflow = "auto";
     }
     return () => {
-      document.body.style.overflow = "auto"; 
+      document.body.style.overflow = "auto";
     };
   }, [isModalOpen]);
 
@@ -42,8 +44,8 @@ const ProductDetails = ({ data, onBack }) => {
     setSelectedDescription(description);
     setModalOpen(true);
   };
-   // Set default selected size to the first size///
-   useEffect(() => {
+  // Set default selected size to the first size///
+  useEffect(() => {
     if (data?.length > 0) {
       const firstItem = data[0];
       if (firstItem?.size?.length > 0 && selectedSize === null) {
@@ -53,25 +55,25 @@ const ProductDetails = ({ data, onBack }) => {
   }, [data, selectedSize]);
 
   // shopify cart
-  const [cartId, setCartId] = useState(null);
+  // const [cartId, setCartId] = useState(null);
   const [checkoutUrl, setCheckoutUrl] = useState(null);
   const [cartbodyitem, setcartbodyitem] = useState([]);
 
-  console.log("checkoutUrl---", checkoutUrl);
+  // console.log("checkoutUrl---", checkoutUrl);
 
   // console.log(cartId,"cartId-----");
 
-  useEffect(() => {
-    getCartId(); // Call getCartId which will call reqbodyitem once cartId is set
-  }, []);
+  // useEffect(() => {
+  //   getCartId(); // Call getCartId which will call reqbodyitem once cartId is set
+  // }, []);
 
-  const getCartId = async () => {
-    const cart = await createCart();
-    // console.log("CART---", cart);
-    if (cart) {
-      setCartId(cart.id); // Set the cartId
-    }
-  };
+  // const getCartId = async () => {
+  //   const cart = await createCart();
+  //   // console.log("CART---", cart);
+  //   if (cart) {
+  //     setCartId(cart.id); // Set the cartId
+  //   }
+  // };
 
   let arr = [];
   let allProducts = new Set();
@@ -123,7 +125,7 @@ const ProductDetails = ({ data, onBack }) => {
 
     arr.push(uniqueProducts);
     setcartbodyitem(arr[0]);
-    console.log({ cartbodyitem });
+    // console.log({ cartbodyitem });
 
     return arr[0];
   };
@@ -135,29 +137,102 @@ const ProductDetails = ({ data, onBack }) => {
     }
   }, [cartId]);
 
-  console.log({ cartbodyitem });
+  // console.log({ cartbodyitem });
+
+  // const handleCreateCart = async () => {
+  //   setLoading(true); // Start loader
+
+  //   let cartId = localStorage.getItem("cartId");
+
+  //   if (!cartId) {
+  //     cartId = await createCart();
+  //     localStorage.setItem("cartId", cartId?.id); // ✅ New cart ID store karo
+  //     setCartId(cartId?.id);
+
+  //   }
+
+  //   try {
+  //     const cartItem = await addToCart({
+  //       cartId:cartId ,
+  //       products: cartbodyitem,
+  //     });
+
+  //     if (cartItem) {
+  //       const existingCartItems =
+  //         JSON.parse(localStorage.getItem("cartItems")) || [];
+  //       const updatedCartItems = [...existingCartItems, ...data]
+
+  //       localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+  //       setCartItems(updatedCartItems);
+  //       setCheckoutUrl(cartItem[0]?.checkoutUrl);
+  //       setShowCart(true);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error adding to cart:", error);
+  //   } finally {
+  //     setLoading(false); // Stop loader
+  //   }
+  // };
 
   const handleCreateCart = async () => {
-    const cartItem = await addToCart({
-      cartId,
-      products: cartbodyitem,
-    });
+    setLoading(true); // Start loader
 
-    if (cartItem) {
-      const existingCartItems =
-        JSON.parse(localStorage.getItem("cartItems")) || [];
-      const updatedCartItems = [...existingCartItems, data];
-      localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
-      setCartItems(updatedCartItems);
-      setCheckoutUrl(cartItem[0]?.checkoutUrl);
-      setShowCart(true);
+    let cartId = localStorage.getItem("cartId");
+
+    if (!cartId) {
+      const cart = await createCart();
+      if (cart) {
+        cartId = cart.id;
+        localStorage.setItem("cartId", cartId); // ✅ New cart ID store karo
+        setCartId(cartId);
+      }
+    }
+
+    // ✅ Get existing cart items from localStorage
+    const existingCartItems =
+      JSON.parse(localStorage.getItem("cartItems")) || [];
+
+    // ✅ API ke liye sirf variantId aur quantity bhejna hai
+    let cartbodyitem = [
+      ...existingCartItems.map((item) => ({
+        variantId: item.variantId,
+        quantity: 1, // Assuming each stored item has quantity 1
+      })),
+      ...data.map((item) => ({
+        variantId: item.variantId,
+        quantity: 1,
+      })),
+    ];
+
+    try {
+      const cartItem = await addToCart({
+        cartId: cartId,
+        products: cartbodyitem, // ✅ Ab sirf variantId aur quantity jayega API me
+      });
+
+      if (cartItem) {
+        const updatedCartItems = [...existingCartItems, ...data];
+        localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+        setCartItems(updatedCartItems);
+        setCheckoutUrl(cartItem[0]?.checkoutUrl);
+        setShowCart(true);
+        setAddToCartData(cartItem);
+      }
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+    } finally {
+      setLoading(false); // Stop loader
     }
   };
-
+  useEffect(() => {
+    if (addToCartData) {
+      getCartList(cartId);
+    }
+  }, [addToCartData]);
   const getremoveitem = () => {
     localStorage.removeItem("reqbody");
     onBack();
-  }
+  };
 
   // console.log("data----", data);
   return (
@@ -194,26 +269,32 @@ const ProductDetails = ({ data, onBack }) => {
                       {item.size.map((size, index) => (
                         <p
                           key={index}
-                          className={`${styles.sizeOption} ${selectedSize === size ? styles.selected : ""
-                            }`}
+                          className={`${styles.sizeOption} ${
+                            selectedSize === size ? styles.selected : ""
+                          }`}
                           onClick={() => setSelectedSize(size)}
                         >
                           {size}
                         </p>
                       ))}
                     </div>
-
-                    
                   </>
                 )}
 
                 <div className={styles.description}>
-                  <p >
+                  <p>
                     {isLongDescription
                       ? truncatedDescription
                       : item?.description}{" "}
                     {isLongDescription && (
-                      <span onClick={() => handleDescriptionClick(item?.description)} className={styles.readMore}>Read More</span>
+                      <span
+                        onClick={() =>
+                          handleDescriptionClick(item?.description)
+                        }
+                        className={styles.readMore}
+                      >
+                        Read More
+                      </span>
                     )}
                   </p>
                   <div
@@ -221,7 +302,12 @@ const ProductDetails = ({ data, onBack }) => {
                     // onClick={handleShow}
                     onClick={handleCreateCart}
                   >
-                    Add to cart
+                    {loading ? (
+                      // <div className={styles.loader}></div>
+                      <Loader />
+                    ) : (
+                      "Add to Cart"
+                    )}
                   </div>
                 </div>
               </div>
@@ -231,10 +317,8 @@ const ProductDetails = ({ data, onBack }) => {
               <CartOffcanvas
                 show={showCart}
                 handleClose={handleClose}
-                cartId={cartId}
                 checkoutUrl={checkoutUrl}
-                // cartItems={cartItems}
-              // cartItems={cartItems}
+                cartItemsdet={addToCartData}
               />
 
               {/* Modal to show full description */}
