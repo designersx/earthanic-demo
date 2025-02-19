@@ -46,6 +46,7 @@ const Chatbot = () => {
                                 alt="Profile"
                                 className={styles.profileImage}
                             />
+                            
                             <div className={styles.profileInfo}>
                                 <p className={styles.profileName}>Product Consultant</p>
                             </div>
