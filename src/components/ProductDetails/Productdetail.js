@@ -16,6 +16,7 @@ const ProductDetails = ({ data, onBack }) => {
   const [selectedDescription, setSelectedDescription] = useState(""); // New state for storing description
   const [loading, setLoading] = useState(false);
 
+
   const handleClose = () => setShowCart(false);
   const handleShow = () => {
     const existingCartItems =

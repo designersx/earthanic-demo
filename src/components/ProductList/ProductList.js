@@ -57,6 +57,7 @@ const ProductList = () => {
       setSelectedProduct(product); // Modal open karne ke liye product store karo
 
       setModalOpen(true);
+      setSelectedSize(product.size[0]);
     } else {
       handleclick(product.external_id); // Agar size nahi hai toh direct call
     }
@@ -176,14 +177,13 @@ const ProductList = () => {
             <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
               <div className={styles.modal}>
                 <div className={styles.modalContent}>
-                  <h3>Select Size for {selectedProduct.title}</h3>
+                  <h2>Select Size for {selectedProduct.title}</h2>
                   <div className={styles.Sizes}>
                     {selectedProduct.size?.map((size, index) => (
                       <p
                         key={index}
-                        className={`${styles.sizeOption} ${
-                          selectedSize === size ? styles.selected : ""
-                        }`}
+                        className={`${styles.sizeOption} ${selectedSize === size ? styles.selected : ""
+                          }`}
                         onClick={() => setSelectedSize(size)}
                       >
                         {size}
@@ -191,15 +191,14 @@ const ProductList = () => {
                     ))}
                   </div>
 
-                  <button
-                    onClick={handleSubmitAndCreateCart}
-                    disabled={!selectedSize}
-                  >
-                    {loading ? <Loader /> : "Submit"}
-                  </button>
-                  <button onClick={() => setSelectedProduct(null)}>
-                    Cancel
-                  </button>
+                  <div className={styles.btnDiv}>
+                    <button className={styles.subBtn} onClick={handleSubmit} disabled={!selectedSize}>
+                      Submit
+                    </button>
+                    <button className={styles.cancelBtn} onClick={() => setSelectedProduct(null)}>
+                      Cancel
+                    </button>
+                  </div>
                 </div>
               </div>
             </Modal>
