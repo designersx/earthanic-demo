@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import styles from "./Cart.module.css";
-import { createCart } from "@/lib/api";
+import { addToCart, createCart } from "@/lib/api";
 
-const CartOffcanvas = ({ show, handleClose, checkoutUrl, cartId }) => {
+const CartOffcanvas = ({ show, handleClose, checkoutUrl }) => {
   const [quantity, setQuantity] = useState(1);
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true); // New loading state
+  const [Url, setUrl] = useState();
 
   const getProduct = () => {
     setLoading(true);
@@ -71,7 +72,39 @@ const CartOffcanvas = ({ show, handleClose, checkoutUrl, cartId }) => {
   const handlelocalstorageremove = () => {
     localStorage.removeItem("reqbody");
     localStorage.removeItem("cartItems");
+    localStorage.removeItem("cartId");
   };
+
+  // useEffect(() => {
+  //   GetCartItems();
+  // }, []);
+
+  // const GetCartItems = async () => {
+  //   let savedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  //   let cartId = localStorage.getItem("cartId");
+  //   const cartbodyitem = savedCartItems?.flat()?.map((item) => ({
+  //     variantId: item.variantId, // Extract variant ID
+  //     quantity: 1, // Custom quantity
+  //   }));
+
+  //   console.log("cartbodyitem---...>>", cartbodyitem); // Debugging ke liye
+  //   console.log("cartid---...>>", cartId);
+  //   try {
+  //     const cartItem = await addToCart({
+  //       cartId,
+  //       products: cartbodyitem, // API call me pass karna
+  //     });
+  //     cartItem.map((ite) => {
+  //       setUrl(ite?.checkoutUrl);
+  //     });
+
+  //     console.log("Cart updated:", cartItem);
+  //   } catch (error) {
+  //     console.error("Error adding to cart:", error);
+  //   }
+  // };
+
+  // const  checkout = localStorage.getItem("checkoutUrl") || "";
 
   return (
     <Offcanvas

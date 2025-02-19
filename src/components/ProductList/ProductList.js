@@ -7,7 +7,6 @@ import ProductDetails from "../ProductDetails/Productdetail";
 import ProductData from "../../../Json/Product.json";
 import CartOffcanvas from "../AddtoCart/Cart";
 import Modal from "../Modal/Modal";
-import Loader from "../Loader/Loader";
 
 const ProductList = () => {
   const [Products, setProducts] = useState();
@@ -49,15 +48,9 @@ const ProductList = () => {
 
   const handleProductClick = async (product) => {
     if (product.size) {
-      const cart = await createCart();
-      console.log("CART---", cart);
-      if (cart) {
-        setCartId(cart.id); // Set the cartId
-      }
       setSelectedProduct(product); // Modal open karne ke liye product store karo
 
       setModalOpen(true);
-      setSelectedSize(product.size[0]);
     } else {
       handleclick(product.external_id); // Agar size nahi hai toh direct call
     }
@@ -83,28 +76,126 @@ const ProductList = () => {
     }
   };
 
+  // const handleSubmit = () => {
+  //   if (selectedSize) {
+  //     setSelectedProduct(null); // Modal close
+  //     setSelectedSize(""); // Size reset
+  //   }
+  // };
+
+  // const cartbodyitem = [
+  //   {
+  //     variantId: selectedProduct?.variantId,
+  //     quantity: 1,
+  //   },
+  // ];
+
+  // const handleCreateCart = async () => {
+  //   const cartItem = await addToCart({
+  //     cartId,
+  //     products: cartbodyitem,
+  //   });
+
+  //   if (cartItem) {
+  //     const existingCartItems =
+  //       JSON.parse(localStorage.getItem("cartItems")) || [];
+  //     const updatedCartItems = [...existingCartItems, data];
+  //     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+  //     // setCartItems(updatedCartItems);
+  //     setCheckoutUrl(cartItem[0]?.checkoutUrl);
+  //     setShowCart(true);
+  //   }
+  // };
+
+  // const handleSubmitAndCreateCart = async () => {
+  //   if (!selectedSize) {
+  //     alert("Please select a size before proceeding!");
+  //     return;
+  //   }
+
+  //   setLoading(true);
+
+  //   const cartbodyitem = [
+  //     {
+  //       variantId: selectedProduct.variantId,
+  //       quantity: 1,
+  //     },
+  //   ];
+
+  //   let cartId = localStorage.getItem("cartId");
+  //   if (!cartId) {
+  //     const cart = await createCart();
+  //     if (cart) {
+  //       cartId = cart.id;
+  //       localStorage.setItem("cartId", cartId); // ✅ New cart ID store karo
+  //     }
+  //   }
+
+  //   try {
+  //     const cartItem = await addToCart({
+  //       cartId:cartId || "" ,
+  //       products: cartbodyitem,
+  //     });
+
+  //     if (cartItem) {
+  //       const existingCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  //       const updatedCartItems = [...existingCartItems, selectedProduct];
+  //       localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+
+  //       setCheckoutUrl(cartItem[0]?.checkoutUrl);
+
+  //       setShowCart(true);
+  //       setSelectedProduct(null); // Modal close
+  //       setSelectedSize(""); // Reset selected size
+  //     }
+  //   } catch (error) {
+  //     console.error("Error adding to cart:", error);
+  //   } finally {
+  //     setLoading(false); // Stop loader
+  //   }
+  // };
+
   const handleSubmitAndCreateCart = async () => {
     if (!selectedSize) {
       alert("Please select a size before proceeding!");
       return;
     }
+
     setLoading(true);
-    const cartbodyitem = [
+
+    // ✅ Pehle se store cart items fetch karo
+    const existingCartItems =
+      JSON.parse(localStorage.getItem("cartItems")) || [];
+
+    // ✅ API ke liye sirf variantId aur quantity prepare karo
+    let cartbodyitem = [
+      ...existingCartItems.map((item) => ({
+        variantId: item.variantId,
+        quantity: 1,
+      })),
       {
         variantId: selectedProduct.variantId,
         quantity: 1,
       },
     ];
 
+    let cartId = localStorage.getItem("cartId");
+    if (!cartId) {
+      const cart = await createCart();
+      if (cart) {
+        cartId = cart.id;
+        localStorage.setItem("cartId", cartId); // ✅ New cart ID store karo
+      }
+    }
+
     try {
       const cartItem = await addToCart({
-        cartId,
-        products: cartbodyitem,
+        cartId: cartId || "",
+        products: cartbodyitem, // ✅ API me sirf variantId aur quantity jayega
       });
 
       if (cartItem) {
-        const existingCartItems =
-          JSON.parse(localStorage.getItem("cartItems")) || [];
+        // ✅ LocalStorage me pura product object store karna hai
         const updatedCartItems = [...existingCartItems, selectedProduct];
         localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
 
@@ -177,13 +268,14 @@ const ProductList = () => {
             <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
               <div className={styles.modal}>
                 <div className={styles.modalContent}>
-                  <h2>Select Size for {selectedProduct.title}</h2>
+                  <h3>Select Size for {selectedProduct.title}</h3>
                   <div className={styles.Sizes}>
                     {selectedProduct.size?.map((size, index) => (
                       <p
                         key={index}
-                        className={`${styles.sizeOption} ${selectedSize === size ? styles.selected : ""
-                          }`}
+                        className={`${styles.sizeOption} ${
+                          selectedSize === size ? styles.selected : ""
+                        }`}
                         onClick={() => setSelectedSize(size)}
                       >
                         {size}
@@ -191,14 +283,15 @@ const ProductList = () => {
                     ))}
                   </div>
 
-                  <div className={styles.btnDiv}>
-                    <button className={styles.subBtn} onClick={handleSubmit} disabled={!selectedSize}>
-                      Submit
-                    </button>
-                    <button className={styles.cancelBtn} onClick={() => setSelectedProduct(null)}>
-                      Cancel
-                    </button>
-                  </div>
+                  <button
+                    onClick={handleSubmitAndCreateCart}
+                    disabled={!selectedSize}
+                  >
+                    Submit
+                  </button>
+                  <button onClick={() => setSelectedProduct(null)}>
+                    Cancel
+                  </button>
                 </div>
               </div>
             </Modal>

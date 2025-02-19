@@ -8,14 +8,15 @@ import CartOffcanvas from "../AddtoCart/Cart";
 import { addToCart, createCart } from "@/lib/api";
 import Loader from "../Loader/Loader";
 
-const ProductDetails = ({ data, onBack }) => {
+const ProductDetails = ({ data, onBack, cartbodyiteem }) => {
+  // console.log("cartbodyiteem------->>", cartbodyiteem)
   const [isModalOpen, setModalOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [showCart, setShowCart] = useState(false);
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedDescription, setSelectedDescription] = useState(""); // New state for storing description
   const [loading, setLoading] = useState(false);
-
+  const [cartId, setCartId] = useState(localStorage.getItem("cartId") || null);
 
   const handleClose = () => setShowCart(false);
   const handleShow = () => {
@@ -54,25 +55,25 @@ const ProductDetails = ({ data, onBack }) => {
   }, [data, selectedSize]);
 
   // shopify cart
-  const [cartId, setCartId] = useState(null);
+  // const [cartId, setCartId] = useState(null);
   const [checkoutUrl, setCheckoutUrl] = useState(null);
   const [cartbodyitem, setcartbodyitem] = useState([]);
 
-  console.log("checkoutUrl---", checkoutUrl);
+  // console.log("checkoutUrl---", checkoutUrl);
 
   // console.log(cartId,"cartId-----");
 
-  useEffect(() => {
-    getCartId(); // Call getCartId which will call reqbodyitem once cartId is set
-  }, []);
+  // useEffect(() => {
+  //   getCartId(); // Call getCartId which will call reqbodyitem once cartId is set
+  // }, []);
 
-  const getCartId = async () => {
-    const cart = await createCart();
-    // console.log("CART---", cart);
-    if (cart) {
-      setCartId(cart.id); // Set the cartId
-    }
-  };
+  // const getCartId = async () => {
+  //   const cart = await createCart();
+  //   // console.log("CART---", cart);
+  //   if (cart) {
+  //     setCartId(cart.id); // Set the cartId
+  //   }
+  // };
 
   let arr = [];
   let allProducts = new Set();
@@ -124,7 +125,7 @@ const ProductDetails = ({ data, onBack }) => {
 
     arr.push(uniqueProducts);
     setcartbodyitem(arr[0]);
-    console.log({ cartbodyitem });
+    // console.log({ cartbodyitem });
 
     return arr[0];
   };
@@ -136,21 +137,83 @@ const ProductDetails = ({ data, onBack }) => {
     }
   }, [cartId]);
 
-  console.log({ cartbodyitem });
+  // console.log({ cartbodyitem });
+
+  // const handleCreateCart = async () => {
+  //   setLoading(true); // Start loader
+
+  //   let cartId = localStorage.getItem("cartId");
+
+
+  //   if (!cartId) {
+  //     cartId = await createCart();
+  //     localStorage.setItem("cartId", cartId?.id); // ✅ New cart ID store karo
+  //     setCartId(cartId?.id);
+   
+  //   }
+
+  //   try {
+  //     const cartItem = await addToCart({
+  //       cartId:cartId ,
+  //       products: cartbodyitem,
+  //     });
+
+  //     if (cartItem) {
+  //       const existingCartItems =
+  //         JSON.parse(localStorage.getItem("cartItems")) || [];
+  //       const updatedCartItems = [...existingCartItems, ...data]
+
+  //       localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+  //       setCartItems(updatedCartItems);
+  //       setCheckoutUrl(cartItem[0]?.checkoutUrl);
+  //       setShowCart(true);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error adding to cart:", error);
+  //   } finally {
+  //     setLoading(false); // Stop loader
+  //   }
+  // };
+
+
 
   const handleCreateCart = async () => {
     setLoading(true); // Start loader
-
+  
+    let cartId = localStorage.getItem("cartId");
+  
+    if (!cartId) {
+      const cart = await createCart();
+      if (cart) {
+        cartId = cart.id;
+        localStorage.setItem("cartId", cartId); // ✅ New cart ID store karo
+        setCartId(cartId);
+      }
+    }
+  
+    // ✅ Get existing cart items from localStorage
+    const existingCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  
+    // ✅ API ke liye sirf variantId aur quantity bhejna hai
+    let cartbodyitem = [
+      ...existingCartItems.map((item) => ({
+        variantId: item.variantId,
+        quantity: 1, // Assuming each stored item has quantity 1
+      })),
+      ...data.map((item) => ({
+        variantId: item.variantId,
+        quantity: 1,
+      })),
+    ];
+  
     try {
       const cartItem = await addToCart({
-        cartId,
-        products: cartbodyitem,
+        cartId: cartId,
+        products: cartbodyitem, // ✅ Ab sirf variantId aur quantity jayega API me
       });
-
+  
       if (cartItem) {
-        const existingCartItems =
-          JSON.parse(localStorage.getItem("cartItems")) || [];
-        const updatedCartItems = [...existingCartItems, data];
+        const updatedCartItems = [...existingCartItems, ...data];
         localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
         setCartItems(updatedCartItems);
         setCheckoutUrl(cartItem[0]?.checkoutUrl);
@@ -162,6 +225,9 @@ const ProductDetails = ({ data, onBack }) => {
       setLoading(false); // Stop loader
     }
   };
+  
+
+
 
   const getremoveitem = () => {
     localStorage.removeItem("reqbody");
@@ -251,7 +317,7 @@ const ProductDetails = ({ data, onBack }) => {
               <CartOffcanvas
                 show={showCart}
                 handleClose={handleClose}
-                cartId={cartId}
+                // cartId={cartId}
                 checkoutUrl={checkoutUrl}
                 // cartItems={cartItems}
                 // cartItems={cartItems}

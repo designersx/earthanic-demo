@@ -6,6 +6,7 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import Modal from "../Modal/Modal";
 import CartOffcanvas from "../AddtoCart/Cart";
 import { addToCart, createCart } from "@/lib/api";
+import Loader from "../Loader/Loader";
 
 const ProductDetails = ({ data, onBack }) => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -13,6 +14,8 @@ const ProductDetails = ({ data, onBack }) => {
   const [showCart, setShowCart] = useState(false);
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedDescription, setSelectedDescription] = useState(""); // New state for storing description
+  const [loading, setLoading] = useState(false);
+
 
   const handleClose = () => setShowCart(false);
   const handleShow = () => {
@@ -25,21 +28,30 @@ const ProductDetails = ({ data, onBack }) => {
   };
 
   // Disable scrolling when modal is open
-  React.useEffect(() => {
+  useEffect(() => {
     if (isModalOpen) {
-      document.body.style.overflow = "hidden"; // Prevent scrolling
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "auto"; // Re-enable scrolling
+      document.body.style.overflow = "auto";
     }
     return () => {
-      document.body.style.overflow = "auto"; // Cleanup on unmount
+      document.body.style.overflow = "auto";
     };
   }, [isModalOpen]);
 
   const handleDescriptionClick = (description) => {
-    setSelectedDescription(description); // Set the full description when clicked
-    setModalOpen(true); // Open the modal
+    setSelectedDescription(description);
+    setModalOpen(true);
   };
+  // Set default selected size to the first size///
+  useEffect(() => {
+    if (data?.length > 0) {
+      const firstItem = data[0];
+      if (firstItem?.size?.length > 0 && selectedSize === null) {
+        setSelectedSize(firstItem.size[0]);
+      }
+    }
+  }, [data, selectedSize]);
 
   // shopify cart
   const [cartId, setCartId] = useState(null);
@@ -79,7 +91,7 @@ const ProductDetails = ({ data, onBack }) => {
     }));
 
     // Get existing products from localStorage
-    const existingProducts = JSON.parse(localStorage.getItem("ll")) || [];
+    const existingProducts = JSON.parse(localStorage.getItem("reqbody")) || [];
 
     // Check if the new product already exists in the list (to avoid duplicates)
     const combinedProducts = [...existingProducts];
@@ -100,7 +112,7 @@ const ProductDetails = ({ data, onBack }) => {
     ).map((product) => JSON.parse(product));
 
     // Save the unique products back to localStorage
-    localStorage.setItem("ll", JSON.stringify(uniqueProducts));
+    localStorage.setItem("reqbody", JSON.stringify(uniqueProducts));
 
     // Update allProducts set with unique products
     newProduct.forEach((product) => allProducts.add(JSON.stringify(product)));
@@ -127,27 +139,39 @@ const ProductDetails = ({ data, onBack }) => {
   console.log({ cartbodyitem });
 
   const handleCreateCart = async () => {
-    const cartItem = await addToCart({
-      cartId,
-      products: cartbodyitem,
-    });
+    setLoading(true); // Start loader
 
-    console.log("cartItem", cartItem);
-    if (cartItem) {
-      const existingCartItems =
-        JSON.parse(localStorage.getItem("cartItems")) || [];
-      const updatedCartItems = [...existingCartItems, data];
-      localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
-      setCartItems(updatedCartItems);
-      setCheckoutUrl(cartItem[0]?.checkoutUrl);
-      setShowCart(true);
+    try {
+      const cartItem = await addToCart({
+        cartId,
+        products: cartbodyitem,
+      });
+
+      if (cartItem) {
+        const existingCartItems =
+          JSON.parse(localStorage.getItem("cartItems")) || [];
+        const updatedCartItems = [...existingCartItems, data];
+        localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+        setCartItems(updatedCartItems);
+        setCheckoutUrl(cartItem[0]?.checkoutUrl);
+        setShowCart(true);
+      }
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+    } finally {
+      setLoading(false); // Stop loader
     }
+  };
+
+  const getremoveitem = () => {
+    localStorage.removeItem("reqbody");
+    onBack();
   };
 
   // console.log("data----", data);
   return (
     <section>
-      <div className={styles.backButton} onClick={onBack}>
+      <div className={styles.backButton} onClick={getremoveitem}>
         X
       </div>
       <div className={styles.ProductDetails}>
@@ -192,12 +216,19 @@ const ProductDetails = ({ data, onBack }) => {
                 )}
 
                 <div className={styles.description}>
-                  <p onClick={() => handleDescriptionClick(item?.description)}>
+                  <p>
                     {isLongDescription
                       ? truncatedDescription
                       : item?.description}{" "}
                     {isLongDescription && (
-                      <span className={styles.readMore}>Read More</span>
+                      <span
+                        onClick={() =>
+                          handleDescriptionClick(item?.description)
+                        }
+                        className={styles.readMore}
+                      >
+                        Read More
+                      </span>
                     )}
                   </p>
                   <div
@@ -205,7 +236,12 @@ const ProductDetails = ({ data, onBack }) => {
                     // onClick={handleShow}
                     onClick={handleCreateCart}
                   >
-                    Add to cart
+                    {loading ? (
+                      // <div className={styles.loader}></div>
+                      <Loader />
+                    ) : (
+                      "Add to Cart"
+                    )}
                   </div>
                 </div>
               </div>
@@ -217,6 +253,7 @@ const ProductDetails = ({ data, onBack }) => {
                 handleClose={handleClose}
                 cartId={cartId}
                 checkoutUrl={checkoutUrl}
+                // cartItems={cartItems}
                 // cartItems={cartItems}
               />
 
