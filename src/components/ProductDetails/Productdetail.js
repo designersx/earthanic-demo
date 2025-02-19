@@ -14,7 +14,7 @@ const ProductDetails = ({ data, onBack }) => {
   const [cartItems, setCartItems] = useState([]);
   const [showCart, setShowCart] = useState(false);
   const [selectedSize, setSelectedSize] = useState(null);
-  const [selectedDescription, setSelectedDescription] = useState(""); // New state for storing description
+  const [selectedDescription, setSelectedDescription] = useState(""); 
 
   const handleClose = () => setShowCart(false);
   const handleShow = () => {
