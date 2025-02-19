@@ -38,11 +38,11 @@ export const createCart = async () => {
 };
 
 // add to cart
-export const addToCart = async ({cartId,products
-}) => {
+export const addToCart = async ({ cartId, products }) => {
   try {
     const response = await axios.post(`${url}add-to-cart`, {
-      cartId,products
+      cartId,
+      products,
     });
 
     return response.data;

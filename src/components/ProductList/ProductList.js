@@ -6,6 +6,7 @@ import { getAllProduct } from "@/lib/api";
 import ProductDetails from "../ProductDetails/Productdetail";
 import ProductData from "../../../Json/Product.json";
 import CartOffcanvas from "../AddtoCart/Cart";
+import Modal from "../Modal/Modal";
 
 const ProductList = () => {
   const [Products, setProducts] = useState();
@@ -13,6 +14,9 @@ const ProductList = () => {
   const [selectedSlug, setSelectedSlug] = useState("All");
   const [detailProducts, setdetailProducts] = useState();
   const [showCart, setShowCart] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedSize, setSelectedSize] = useState("");
+  const [isModalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     getproduct();
@@ -32,10 +36,20 @@ const ProductList = () => {
   };
 
   const handleclick = (external_id) => {
+    console.log("external_id", external_id);
     const filteredProducts = ProductData.filter(
       (product) => product.external_id === external_id
     );
     setdetailProducts(filteredProducts);
+  };
+
+  const handleProductClick = (product) => {
+    if (product.size) {
+      setSelectedProduct(product); // Modal open karne ke liye product store karo
+      setModalOpen(true);
+    } else {
+      handleclick(product.external_id); // Agar size nahi hai toh direct call
+    }
   };
 
   useEffect(() => {
@@ -60,8 +74,6 @@ const ProductList = () => {
   const handleClose = () => setShowCart(false);
   const handleShow = () => setShowCart(true);
 
-
-
   // Lens function start //
   const [lensPosition, setLensPosition] = useState({ x: 0, y: 0 });
   const [hoveredImage, setHoveredImage] = useState(null); // Track hovered image
@@ -73,6 +85,14 @@ const ProductList = () => {
 
     setHoveredImage(productId); // Set hovered image ID
     setLensPosition({ x, y });
+  };
+
+  const handleSubmit = () => {
+    if (selectedSize) {
+      handleclick(selectedProduct.external_id);
+      setSelectedProduct(null); // Modal close
+      setSelectedSize(""); // Size reset
+    }
   };
 
   return (
@@ -93,47 +113,68 @@ const ProductList = () => {
 
           <div className={styles.ProductList_div}>
             {detailProducts ? (
-              <ProductDetails data={detailProducts} onBack={() => setdetailProducts(undefined)} />
+              <ProductDetails
+                data={detailProducts}
+                onBack={() => setdetailProducts(undefined)}
+              />
             ) : (
               filteredProducts?.map((product) => {
                 return (
                   <div className={styles.flex} key={product.external_id}>
                     <div className={styles.grid}>
-                      <div className={styles.card}
-                        // onMouseEnter={() => setHoveredImage(product.id)} 
-                        // onMouseLeave={() => setHoveredImage(null)} 
-                        // onMouseMove={(e) => handleMouseMove(e, product.id)}
-                      >
-                        <img src={product.image} className={styles.image} />
-
-                        {/* {hoveredImage === product.id && (
-                          <div
-                            className={styles.lens}
-                            style={{
-                              left: `${lensPosition.x}px`,
-                              top: `${lensPosition.y}px`,
-                              display: "block",
-                            }}
-                          />
-                        )} */}
-
-                        <div
-                          className={styles.details}
-                          // onMouseEnter={() => setHoveredImage(null)} 
-                          // onMouseLeave={() => setHoveredImage(product.id)} 
+                      <div className={styles.card}>
+                        <img
+                          src={product.image}
+                          className={styles.image}
                           onClick={() => handleclick(product.external_id)}
-                        >
+                        />
+                        <div className={styles.details}>
                           <p className={styles.name}>{product.title}</p>
-                          <span className={styles.price}>{`$${product.price}0 `}</span>
+                          <span
+                            className={styles.price}
+                            onClick={() => handleProductClick(product)}
+                          >
+                            {`$${product.price}0 `}{" "}
+                          </span>
                         </div>
                       </div>
-
                     </div>
                   </div>
                 );
               })
             )}
           </div>
+
+          {/* Modal for Size Selection */}
+          {selectedProduct && (
+            <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
+              <div className={styles.modal}>
+                <div className={styles.modalContent}>
+                  <h3>Select Size for {selectedProduct.title}</h3>
+                  <div className={styles.Sizes}>
+                    {selectedProduct.size?.map((size, index) => (
+                      <p
+                        key={index}
+                        className={`${styles.sizeOption} ${
+                          selectedSize === size ? styles.selected : ""
+                        }`}
+                        onClick={() => setSelectedSize(size)}
+                      >
+                        {size}
+                      </p>
+                    ))}
+                  </div>
+
+                  <button onClick={handleSubmit} disabled={!selectedSize}>
+                    Submit
+                  </button>
+                  <button onClick={() => setSelectedProduct(null)}>
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </Modal>
+          )}
         </div>
       </div>
     </section>

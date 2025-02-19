@@ -2,6 +2,28 @@
     display: flex;
     height: 100%;
 }
+.sizeOption {
+    padding: 10px 15px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+}
+.Sizes {
+    margin-block: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.Sizes p {
+    border: 2px solid rgb(228, 228, 228);
+    background-color: #f7f6f6;
+    width: max-content;
+    padding: 4px 20px;
+    border-radius: 20px;
+    margin-bottom: 0px;
+}
+
 
 .Chatbot_div {
     width: 25%;
