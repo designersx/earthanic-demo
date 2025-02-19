@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import styles from "../ProductList/ProductList.module.css";
 import Chatbot from "../Chatbot/Chatbot";
 import Navbar from "../Navbar/Navbar";
-import { addToCart, createCart, getAllProduct } from "@/lib/api";
+import { addToCart, createCart, getAllProduct, getCartList } from "@/lib/api";
 import ProductDetails from "../ProductDetails/Productdetail";
 import ProductData from "../../../Json/Product.json";
 import CartOffcanvas from "../AddtoCart/Cart";
 import Modal from "../Modal/Modal";
+import Loader from "../Loader/Loader";
 
 const ProductList = () => {
   const [Products, setProducts] = useState();
@@ -20,6 +21,7 @@ const ProductList = () => {
   const [checkoutUrl, setCheckoutUrl] = useState(null);
   const [cartId, setCartId] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [addToCartData, setAddToCartData] = useState();
 
   useEffect(() => {
     getproduct();
@@ -49,7 +51,7 @@ const ProductList = () => {
   const handleProductClick = async (product) => {
     if (product.size) {
       setSelectedProduct(product); // Modal open karne ke liye product store karo
-
+      setSelectedSize(product?.size[0]);
       setModalOpen(true);
     } else {
       handleclick(product.external_id); // Agar size nahi hai toh direct call
@@ -75,37 +77,6 @@ const ProductList = () => {
       setdetailProducts(undefined);
     }
   };
-
-  // const handleSubmit = () => {
-  //   if (selectedSize) {
-  //     setSelectedProduct(null); // Modal close
-  //     setSelectedSize(""); // Size reset
-  //   }
-  // };
-
-  // const cartbodyitem = [
-  //   {
-  //     variantId: selectedProduct?.variantId,
-  //     quantity: 1,
-  //   },
-  // ];
-
-  // const handleCreateCart = async () => {
-  //   const cartItem = await addToCart({
-  //     cartId,
-  //     products: cartbodyitem,
-  //   });
-
-  //   if (cartItem) {
-  //     const existingCartItems =
-  //       JSON.parse(localStorage.getItem("cartItems")) || [];
-  //     const updatedCartItems = [...existingCartItems, data];
-  //     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
-  //     // setCartItems(updatedCartItems);
-  //     setCheckoutUrl(cartItem[0]?.checkoutUrl);
-  //     setShowCart(true);
-  //   }
-  // };
 
   // const handleSubmitAndCreateCart = async () => {
   //   if (!selectedSize) {
@@ -185,6 +156,7 @@ const ProductList = () => {
       if (cart) {
         cartId = cart.id;
         localStorage.setItem("cartId", cartId); // ✅ New cart ID store karo
+        setCartId(cartId);
       }
     }
 
@@ -201,15 +173,22 @@ const ProductList = () => {
 
         setCheckoutUrl(cartItem[0]?.checkoutUrl);
         setShowCart(true);
+        setAddToCartData(cartItem);
         setSelectedProduct(null); // Modal close
         setSelectedSize(""); // Reset selected size
       }
+      console.log({ addToCartData });
     } catch (error) {
       console.error("Error adding to cart:", error);
     } finally {
       setLoading(false); // Stop loader
     }
   };
+  useEffect(() => {
+    if (addToCartData) {
+      getCartList(cartId);
+    }
+  }, [addToCartData]);
 
   const handleClose = () => setShowCart(false);
 
@@ -282,16 +261,21 @@ const ProductList = () => {
                       </p>
                     ))}
                   </div>
-
-                  <button
-                    onClick={handleSubmitAndCreateCart}
-                    disabled={!selectedSize}
-                  >
-                    Submit
-                  </button>
-                  <button onClick={() => setSelectedProduct(null)}>
-                    Cancel
-                  </button>
+                  <div className={styles.btnDiv}>
+                    <button
+                      onClick={handleSubmitAndCreateCart}
+                      disabled={!selectedSize}
+                      className={styles.subBtn}
+                    >
+                      {loading ? <Loader /> : "Submit"}
+                    </button>
+                    <button
+                      className={styles.cancelBtn}
+                      onClick={() => setSelectedProduct(null)}
+                    >
+                      Cancel
+                    </button>
+                  </div>
                 </div>
               </div>
             </Modal>
@@ -300,10 +284,7 @@ const ProductList = () => {
           <CartOffcanvas
             show={showCart}
             handleClose={handleClose}
-            cartId={cartId}
-            checkoutUrl={checkoutUrl}
-            // cartItems={cartItems}
-            // cartItems={cartItems}
+            addToCartData={addToCartData}
           />
         </div>
       </div>

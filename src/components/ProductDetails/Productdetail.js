@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Modal from "../Modal/Modal";
 import CartOffcanvas from "../AddtoCart/Cart";
-import { addToCart, createCart } from "@/lib/api";
+import { addToCart, createCart, getCartList } from "@/lib/api";
 import Loader from "../Loader/Loader";
 
 const ProductDetails = ({ data, onBack, cartbodyiteem }) => {
@@ -17,7 +17,7 @@ const ProductDetails = ({ data, onBack, cartbodyiteem }) => {
   const [selectedDescription, setSelectedDescription] = useState(""); // New state for storing description
   const [loading, setLoading] = useState(false);
   const [cartId, setCartId] = useState(localStorage.getItem("cartId") || null);
-
+  const [addToCartData, setAddToCartData] = useState();
   const handleClose = () => setShowCart(false);
   const handleShow = () => {
     const existingCartItems =
@@ -144,12 +144,11 @@ const ProductDetails = ({ data, onBack, cartbodyiteem }) => {
 
   //   let cartId = localStorage.getItem("cartId");
 
-
   //   if (!cartId) {
   //     cartId = await createCart();
   //     localStorage.setItem("cartId", cartId?.id); // ✅ New cart ID store karo
   //     setCartId(cartId?.id);
-   
+
   //   }
 
   //   try {
@@ -175,13 +174,11 @@ const ProductDetails = ({ data, onBack, cartbodyiteem }) => {
   //   }
   // };
 
-
-
   const handleCreateCart = async () => {
     setLoading(true); // Start loader
-  
+
     let cartId = localStorage.getItem("cartId");
-  
+
     if (!cartId) {
       const cart = await createCart();
       if (cart) {
@@ -190,10 +187,11 @@ const ProductDetails = ({ data, onBack, cartbodyiteem }) => {
         setCartId(cartId);
       }
     }
-  
+
     // ✅ Get existing cart items from localStorage
-    const existingCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-  
+    const existingCartItems =
+      JSON.parse(localStorage.getItem("cartItems")) || [];
+
     // ✅ API ke liye sirf variantId aur quantity bhejna hai
     let cartbodyitem = [
       ...existingCartItems.map((item) => ({
@@ -205,19 +203,20 @@ const ProductDetails = ({ data, onBack, cartbodyiteem }) => {
         quantity: 1,
       })),
     ];
-  
+
     try {
       const cartItem = await addToCart({
         cartId: cartId,
         products: cartbodyitem, // ✅ Ab sirf variantId aur quantity jayega API me
       });
-  
+
       if (cartItem) {
         const updatedCartItems = [...existingCartItems, ...data];
         localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
         setCartItems(updatedCartItems);
         setCheckoutUrl(cartItem[0]?.checkoutUrl);
         setShowCart(true);
+        setAddToCartData(cartItem);
       }
     } catch (error) {
       console.error("Error adding to cart:", error);
@@ -225,10 +224,11 @@ const ProductDetails = ({ data, onBack, cartbodyiteem }) => {
       setLoading(false); // Stop loader
     }
   };
-  
-
-
-
+  useEffect(() => {
+    if (addToCartData) {
+      getCartList(cartId);
+    }
+  }, [addToCartData]);
   const getremoveitem = () => {
     localStorage.removeItem("reqbody");
     onBack();
@@ -317,10 +317,8 @@ const ProductDetails = ({ data, onBack, cartbodyiteem }) => {
               <CartOffcanvas
                 show={showCart}
                 handleClose={handleClose}
-                // cartId={cartId}
                 checkoutUrl={checkoutUrl}
-                // cartItems={cartItems}
-                // cartItems={cartItems}
+                cartItemsdet={addToCartData}
               />
 
               {/* Modal to show full description */}
