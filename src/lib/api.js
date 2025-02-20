@@ -113,7 +113,7 @@ export const updateCartItem = async (cartId, cartItems) => {
         },
       }),
     });
-    console.log("response-----",response)
+    console.log("response-----", response);
 
     const data = await response.json();
 
