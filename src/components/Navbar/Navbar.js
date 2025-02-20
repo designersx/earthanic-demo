@@ -21,7 +21,11 @@ const Navbar = ({ onSlugChange }) => {
     <section className={styles.navsection}>
       <div className={styles.Navbar}>
         <div className={styles.logo_div}>
-          <img src="images/Earthanic-Logo.png" alt="Logo" />
+          <a href="https://demo.earthanic.com/">
+          <img src="images/Earthanic-Logo.png" alt="Logo"  />
+
+          </a>
+         
         </div>
         <div className={styles.forCart}>
           <div className={styles.CartIcon2} onClick={handleShow}>
