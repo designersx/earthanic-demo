@@ -104,6 +104,7 @@ const CartOffcanvas = ({ show, handleClose, cartItemsdet, addToCartData }) => {
       return prev;
     });
   };
+
   // Update API with latest quantity
   const updateCartQuantity = async (id, quantity) => {
     const cartId = localStorage.getItem("cartId");
@@ -115,7 +116,7 @@ const CartOffcanvas = ({ show, handleClose, cartItemsdet, addToCartData }) => {
     window.location.reload();
 
   };
-  return (
+return (
     <Offcanvas
       className={styles.OffcanvasMain}
       show={show}

@@ -83,9 +83,7 @@ const ProductList = () => {
       setdetailProducts(undefined);
     }
   };
-
- 
-  const handleSubmitAndCreateCart = async (variantId, productId) => {
+const handleSubmitAndCreateCart = async (variantId, productId) => {
     // if (!selectedSize) {
     //   alert("Please select a size before proceeding!");
     //   return;
@@ -146,8 +144,7 @@ const ProductList = () => {
   }, [addToCartData]);
 
   const handleClose = () => setShowCart(false);
-
-  return (
+return (
     <section className={styles.MainScro}>
       <div className={styles.Part1}>
         <div className={styles.Chatbot_div}>
