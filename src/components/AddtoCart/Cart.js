@@ -11,16 +11,14 @@ import {
 import { QrCode } from "lucide-react";
 
 const CartOffcanvas = ({ show, handleClose, cartItemsdet, addToCartData }) => {
-  const [quantity, setQuantity] = useState(1);
-
   const [loading, setLoading] = useState(false); // New loading state
   const [cartItemss, setCartItemss] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
   const [checkoutUrl, setCheckoutUrl] = useState("");
   const [quantities, setQuantities] = useState({});
-  const [loadingStates, setLoadingStates] = useState({});
 
-  console.log("cartItemss-----", cartItemss);
+  // console.log("cartItemss-----", cartItemss);
+  // console.log("checkoutUrl-----", checkoutUrl);
 
   useEffect(() => {
     getCartDetails();
@@ -107,8 +105,6 @@ const CartOffcanvas = ({ show, handleClose, cartItemsdet, addToCartData }) => {
     });
   };
 
-
-
   // Update API with latest quantity
   const updateCartQuantity = async (id, quantity) => {
     const cartId = localStorage.getItem("cartId");
@@ -116,13 +112,11 @@ const CartOffcanvas = ({ show, handleClose, cartItemsdet, addToCartData }) => {
     getCartDetails(); // Refresh cart details
   };
 
- 
   const handlelocalstorageremove = () => {
-    localStorage.removeItem("reqbody");
-    localStorage.removeItem("cartItems");
-    localStorage.removeItem("cartId");
+    window.location.reload();
+
   };
-  return (
+return (
     <Offcanvas
       className={styles.OffcanvasMain}
       show={show}
@@ -163,8 +157,6 @@ const CartOffcanvas = ({ show, handleClose, cartItemsdet, addToCartData }) => {
                         +
                       </button>
                     </div>
-
-                    
                   </div>
                 </div>
               ))
@@ -187,16 +179,17 @@ const CartOffcanvas = ({ show, handleClose, cartItemsdet, addToCartData }) => {
             </p>
           </div>
           <a
-            href={checkoutUrl}
+            href={
+              cartItemss.length === 0 ? "https://demo.earthanic.com/" : checkoutUrl
+            }
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-700 underline"
           >
             <button
               className={styles.checkoutButton}
-              onClick={handlelocalstorageremove}
+              // onClick={handlelocalstorageremove}
             >
-              {" "}
               Proceed to Checkout
             </button>
           </a>

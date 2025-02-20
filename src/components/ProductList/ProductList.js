@@ -18,10 +18,10 @@ const ProductList = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [selectedSize, setSelectedSize] = useState("");
   const [isModalOpen, setModalOpen] = useState(false);
-  const [checkoutUrl, setCheckoutUrl] = useState(null);
   const [cartId, setCartId] = useState(null);
   const [loading, setLoading] = useState(false);
   const [addToCartData, setAddToCartData] = useState();
+  const [loadingStates, setLoadingStates] = useState({});
 
   useEffect(() => {
     getproduct();
@@ -41,7 +41,6 @@ const ProductList = () => {
   };
 
   const handleclick = (external_id) => {
-    console.log("external_id", external_id);
     const filteredProducts = ProductData.filter(
       (product) => product.external_id === external_id
     );
@@ -49,14 +48,21 @@ const ProductList = () => {
   };
 
   const handleProductClick = async (product) => {
+    // console.log(product)
     if (product.size) {
       setSelectedProduct(product); // Modal open karne ke liye product store karo
       setSelectedSize(product?.size[0]);
       setModalOpen(true);
     } else {
-      handleclick(product.external_id); // Agar size nahi hai toh direct call
+      // handleclick(product.external_id);
+      handleSubmitAndCreateCart(product?.variantId, product.external_id);
     }
   };
+
+  //  const handleSub = (variantId) => {
+  //   console.log(variantId)
+
+  //  }
 
   useEffect(() => {
     const filteredProducts =
@@ -77,113 +83,60 @@ const ProductList = () => {
       setdetailProducts(undefined);
     }
   };
+const handleSubmitAndCreateCart = async (variantId, productId) => {
+    // if (!selectedSize) {
+    //   alert("Please select a size before proceeding!");
+    //   return;
+    // }
 
-  // const handleSubmitAndCreateCart = async () => {
-  //   if (!selectedSize) {
-  //     alert("Please select a size before proceeding!");
-  //     return;
-  //   }
-
-  //   setLoading(true);
-
-  //   const cartbodyitem = [
-  //     {
-  //       variantId: selectedProduct.variantId,
-  //       quantity: 1,
-  //     },
-  //   ];
-
-  //   let cartId = localStorage.getItem("cartId");
-  //   if (!cartId) {
-  //     const cart = await createCart();
-  //     if (cart) {
-  //       cartId = cart.id;
-  //       localStorage.setItem("cartId", cartId); // ✅ New cart ID store karo
-  //     }
-  //   }
-
-  //   try {
-  //     const cartItem = await addToCart({
-  //       cartId:cartId || "" ,
-  //       products: cartbodyitem,
-  //     });
-
-  //     if (cartItem) {
-  //       const existingCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-  //       const updatedCartItems = [...existingCartItems, selectedProduct];
-  //       localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
-
-  //       setCheckoutUrl(cartItem[0]?.checkoutUrl);
-
-  //       setShowCart(true);
-  //       setSelectedProduct(null); // Modal close
-  //       setSelectedSize(""); // Reset selected size
-  //     }
-  //   } catch (error) {
-  //     console.error("Error adding to cart:", error);
-  //   } finally {
-  //     setLoading(false); // Stop loader
-  //   }
-  // };
-
-  const handleSubmitAndCreateCart = async () => {
-    if (!selectedSize) {
-      alert("Please select a size before proceeding!");
+    let finalVariantId = variantId;
+    if (selectedProduct) {
+      finalVariantId = selectedProduct.variantId;
+    }
+    if (!finalVariantId) {
+      console.error("Variant ID is undefined!");
       return;
     }
-
+    setLoadingStates((prev) => ({ ...prev, [productId]: true }));
     setLoading(true);
-
-    // ✅ Pehle se store cart items fetch karo
-    const existingCartItems =
-      JSON.parse(localStorage.getItem("cartItems")) || [];
-
-    // ✅ API ke liye sirf variantId aur quantity prepare karo
-    let cartbodyitem = [
-      ...existingCartItems.map((item) => ({
-        variantId: item.variantId,
-        quantity: 1,
-      })),
-      {
-        variantId: selectedProduct.variantId,
-        quantity: 1,
-      },
-    ];
-
     let cartId = localStorage.getItem("cartId");
     if (!cartId) {
       const cart = await createCart();
       if (cart) {
         cartId = cart.id;
-        localStorage.setItem("cartId", cartId); // ✅ New cart ID store karo
+        localStorage.setItem("cartId", cartId);
         setCartId(cartId);
       }
     }
 
+    let cartbodyitem = [
+      {
+        variantId: finalVariantId,
+        quantity: 1,
+      },
+    ];
+
     try {
       const cartItem = await addToCart({
         cartId: cartId || "",
-        products: cartbodyitem, // ✅ API me sirf variantId aur quantity jayega
+        products: cartbodyitem,
       });
 
       if (cartItem) {
-        // ✅ LocalStorage me pura product object store karna hai
-        const updatedCartItems = [...existingCartItems, selectedProduct];
-        localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
-
-        setCheckoutUrl(cartItem[0]?.checkoutUrl);
         setShowCart(true);
         setAddToCartData(cartItem);
-        setSelectedProduct(null); // Modal close
-        setSelectedSize(""); // Reset selected size
+        setSelectedProduct(null);
+        setSelectedSize("");
       }
       console.log({ addToCartData });
     } catch (error) {
       console.error("Error adding to cart:", error);
     } finally {
       setLoading(false); // Stop loader
+      setLoadingStates((prev) => ({ ...prev, [productId]: false }));
     }
   };
+
   useEffect(() => {
     if (addToCartData) {
       getCartList(cartId);
@@ -191,8 +144,7 @@ const ProductList = () => {
   }, [addToCartData]);
 
   const handleClose = () => setShowCart(false);
-
-  return (
+return (
     <section className={styles.MainScro}>
       <div className={styles.Part1}>
         <div className={styles.Chatbot_div}>
@@ -231,7 +183,7 @@ const ProductList = () => {
                             className={styles.price}
                             onClick={() => handleProductClick(product)}
                           >
-                            {`$${product.price}0 `}{" "}
+                           {loadingStates[product.external_id] ? <Loader /> : `$${product.price}0 `}
                           </span>
                         </div>
                       </div>
