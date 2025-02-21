@@ -8,7 +8,8 @@ import {
   removeCartItem,
   updateCartItem,
 } from "@/lib/api";
-import { QrCode } from "lucide-react";
+import Loader from "../Loader/Loader";
+import { debounce } from "lodash";
 
 const CartOffcanvas = ({ show, handleClose, cartItemsdet, addToCartData }) => {
   const [loading, setLoading] = useState(false); // New loading state
@@ -16,9 +17,9 @@ const CartOffcanvas = ({ show, handleClose, cartItemsdet, addToCartData }) => {
   const [totalAmount, setTotalAmount] = useState(0);
   const [checkoutUrl, setCheckoutUrl] = useState("");
   const [quantities, setQuantities] = useState({});
-
-  // console.log("cartItemss-----", cartItemss);
-  // console.log("checkoutUrl-----", checkoutUrl);
+  const [totalTax, setTotalTax] = useState(0);
+  const [isLoading, setIsLoading] = useState(false); // Loader state
+  const [getloading, setgetLoading] = useState(false);
 
   useEffect(() => {
     getCartDetails();
@@ -32,17 +33,13 @@ const CartOffcanvas = ({ show, handleClose, cartItemsdet, addToCartData }) => {
   const getCartDetails = async () => {
     const cartId = localStorage.getItem("cartId");
     if (!cartId) return console.error("No Cart ID found!");
-
     try {
       const cartResponse = await getCartList(cartId);
       const res = JSON.parse(cartResponse?.data);
 
       const checkoutLink = res?.data?.cart?.checkoutUrl || "";
       setCheckoutUrl(checkoutLink);
-      // console.log(
-      //   "res?.data?.cart?.lines---",
-      //   res?.data?.cart?.lines?.edges.map((ite) => ite?.node.id)
-      // );
+      console.log("respose-->", res?.data?.cart);
       const items =
         res?.data?.cart?.lines?.edges?.map((item) => ({
           title: item?.node?.merchandise?.product?.title || "No Title",
@@ -63,8 +60,10 @@ const CartOffcanvas = ({ show, handleClose, cartItemsdet, addToCartData }) => {
 
       const total = res?.data?.cart?.cost?.totalAmount?.amount || "0";
       setTotalAmount(total);
+      setTotalTax(res?.data?.cart?.cost?.totalTaxAmount?.amount || "0");
     } catch (error) {
       console.error("Error fetching cart details:", error);
+    } finally {
     }
   };
 
@@ -86,6 +85,7 @@ const CartOffcanvas = ({ show, handleClose, cartItemsdet, addToCartData }) => {
 
   // Increment Quantity
   const handleIncrement = (id) => {
+    setIsLoading(true);
     setQuantities((prev) => {
       const newQuantity = (prev[id] || 1) + 1;
       updateCartQuantity(id, newQuantity);
@@ -95,6 +95,7 @@ const CartOffcanvas = ({ show, handleClose, cartItemsdet, addToCartData }) => {
 
   // Decrement Quantity
   const handleDecrement = (id) => {
+    setIsLoading(true);
     setQuantities((prev) => {
       if (prev[id] > 1) {
         const newQuantity = prev[id] - 1;
@@ -109,12 +110,8 @@ const CartOffcanvas = ({ show, handleClose, cartItemsdet, addToCartData }) => {
   const updateCartQuantity = async (id, quantity) => {
     const cartId = localStorage.getItem("cartId");
     await updateCartItem(cartId, [{ id, quantity }]); // Call API
-    getCartDetails(); // Refresh cart details
-  };
-
-  const handlelocalstorageremove = () => {
-    window.location.reload();
-
+    await getCartDetails(); // Refresh cart details
+    setIsLoading(false);
   };
 
   return (
@@ -167,10 +164,46 @@ const CartOffcanvas = ({ show, handleClose, cartItemsdet, addToCartData }) => {
           </div>
         )}
 
-        <div className={styles.footer}>
+        {isLoading ? (
+          <div className={styles.loader}></div>
+        ) : (
+          <>
+            <div className={styles.footer}>
+              <div className={styles.summary}>
+                <p>
+                  Taxes: <span>{`$${totalTax} USD`}</span>
+                </p>
+                <p>
+                  Shipping: <span>Calculated at checkout</span>
+                </p>
+                <p>
+                  Total: <span>${totalAmount} USD</span>
+                </p>
+              </div>
+              <a
+                href={
+                  cartItemss.length === 0
+                    ? "https://demo.earthanic.com/"
+                    : checkoutUrl
+                }
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-700 underline"
+              >
+                <button
+                  className={styles.checkoutButton}
+                  // onClick={handlelocalstorageremove}
+                >
+                  Proceed to Checkout
+                </button>
+              </a>
+            </div>
+          </>
+        )}
+        {/* <div className={styles.footer}>
           <div className={styles.summary}>
             <p>
-              Taxes: <span>$0.00 USD</span>
+              Taxes: <span>{`$${totalTax} USD`}</span>
             </p>
             <p>
               Shipping: <span>Calculated at checkout</span>
@@ -181,7 +214,9 @@ const CartOffcanvas = ({ show, handleClose, cartItemsdet, addToCartData }) => {
           </div>
           <a
             href={
-              cartItemss.length === 0 ? "https://demo.earthanic.com/" : checkoutUrl
+              cartItemss.length === 0
+                ? "https://demo.earthanic.com/"
+                : checkoutUrl
             }
             target="_blank"
             rel="noopener noreferrer"
@@ -194,7 +229,7 @@ const CartOffcanvas = ({ show, handleClose, cartItemsdet, addToCartData }) => {
               Proceed to Checkout
             </button>
           </a>
-        </div>
+        </div> */}
       </Offcanvas.Body>
     </Offcanvas>
   );

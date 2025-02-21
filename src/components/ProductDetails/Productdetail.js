@@ -54,72 +54,8 @@ const ProductDetails = ({ data, onBack, cartbodyiteem }) => {
     }
   }, [data, selectedSize]);
 
- 
-  const [cartbodyitem, setcartbodyitem] = useState([]);
 
- 
 
-  // let arr = [];
-  // let allProducts = new Set();
-
-  // const reqbodyitem = () => {
-  //   if (!cartId) {
-  //     // If cartId is not yet set, do not proceed with the rest of the function
-  //     console.log("Cart ID is not available yet.");
-  //     return;
-  //   }
-
-  //   const newProduct = data?.map((variant) => ({
-  //     // cartId: cartId,
-  //     variantId: variant.variantId,
-  //     quantity: 1,
-  //   }));
-
-  //   // Get existing products from localStorage
-  //   const existingProducts = JSON.parse(localStorage.getItem("reqbody")) || [];
-
-  //   // Check if the new product already exists in the list (to avoid duplicates)
-  //   const combinedProducts = [...existingProducts];
-
-  //   // Add new product only if it's not already in the list
-  //   newProduct.forEach((product) => {
-  //     const exists = combinedProducts.some(
-  //       (existingProduct) => existingProduct.variantId === product.variantId
-  //     );
-  //     if (!exists) {
-  //       combinedProducts.push(product);
-  //     }
-  //   });
-
-  //   // Remove duplicates by creating a Set of stringified products
-  //   const uniqueProducts = Array.from(
-  //     new Set(combinedProducts.map((product) => JSON.stringify(product)))
-  //   ).map((product) => JSON.parse(product));
-
-  //   // Save the unique products back to localStorage
-  //   localStorage.setItem("reqbody", JSON.stringify(uniqueProducts));
-
-  //   // Update allProducts set with unique products
-  //   newProduct.forEach((product) => allProducts.add(JSON.stringify(product)));
-
-  //   // Convert allProducts set back to an array of objects
-  //   const allProductsArray = Array.from(allProducts).map((product) =>
-  //     JSON.parse(product)
-  //   );
-
-  //   arr.push(uniqueProducts);
-  //   setcartbodyitem(arr[0]);
-  //   // console.log({ cartbodyitem });
-
-  //   return arr[0];
-  // };
-
-  // // Call reqbodyitem after cartId is set
-  // useEffect(() => {
-  //   if (cartId) {
-  //     reqbodyitem(); // Now call reqbodyitem only after cartId is available
-  //   }
-  // }, [cartId]);
 
   const handleCreateCart = async () => {
     setLoading(true);
