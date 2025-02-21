@@ -92,7 +92,21 @@
     "description": "Elevate your bedroom with this heirloom bed, handcrafted with the finest materials made to stand the test of time.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/0003.jpg?v=1739351502",
     "price": "2039.0",
-    "size": ["Small", "Medium", "Large"]
+    "size": ["Small", "Medium", "Large"],
+    "variantSizeId": [
+      {
+        "id": "gid://shopify/ProductVariant/46571561418922",
+        "title": "Small"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571561451690",
+        "title": "Medium"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571561484458",
+        "title": "Large"
+      }
+    ]
   },
   {
     "id": "gid://shopify/Product/8083581042858",
@@ -103,7 +117,21 @@
     "description": "Handcrafted from solid wood from the Appalachian Forest, this custom bed frame combines heirloom craftsmanship with modern style.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/26.jpg?v=1739351600",
     "price": "2804.0",
-    "size": ["Small", "Medium", "Large"]
+    "size": ["Small", "Medium", "Large"],
+    "variantSizeId": [
+      {
+        "id": "gid://shopify/ProductVariant/46571561320618",
+        "title": "Small"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571561353386",
+        "title": "Medium"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571561386154",
+        "title": "Large"
+      }
+    ]
   },
   {
     "id": "gid://shopify/Product/8083581534378",
@@ -114,7 +142,21 @@
     "description": "Lightweight, yet sturdy. Upholstered with durable fabrics. These custom ottomans will be a true household staple.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/014.jpg?v=1739351674",
     "price": "424.0",
-    "size": ["Small", "Medium", "Large"]
+    "size": ["Small", "Medium", "Large"],
+    "variantSizeId": [
+      {
+        "id": "gid://shopify/ProductVariant/46571559321770",
+        "title": "Small"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571559354538",
+        "title": "Medium"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571559387306",
+        "title": "Large"
+      }
+    ]
   },
   {
     "id": "gid://shopify/Product/8083582025898",
@@ -125,7 +167,21 @@
     "description": "Relax in style with the classic silhouette and plush textures of this understated armchair.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/24.jpg?v=1739351764",
     "price": "1444.0",
-    "size": ["Small", "Medium", "Large"]
+    "size": ["Small", "Medium", "Large"],
+    "variantSizeId": [
+      {
+        "id": "gid://shopify/ProductVariant/46571559190698",
+        "title": "Small"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571559223466",
+        "title": "Medium"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571559256234",
+        "title": "Large"
+      }
+    ]
   },
   {
     "id": "gid://shopify/Product/8083582812330",
@@ -136,7 +192,21 @@
     "description": "Solid maple and walnut. Luxe and detailed upholstery. An heirloom-quality upholstered bed made to last for generations to come.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Ridge_Bed_Caramel_Maple_1_Labeled.jpg?v=1739351921",
     "price": "2804.0",
-    "size": ["Small", "Medium", "Large"]
+    "size": ["Small", "Medium", "Large"],
+    "variantSizeId": [
+      {
+        "id": "gid://shopify/ProductVariant/46571559026858",
+        "title": "Small"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571559059626",
+        "title": "Medium"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571559092394",
+        "title": "Large"
+      }
+    ]
   },
   {
     "id": "gid://shopify/Product/8083583729834",
@@ -147,7 +217,21 @@
     "description": "Upgrade your entryway with the subtle lines and smooth finish of this expertly-crafted bench.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/34.jpg?v=1739352062",
     "price": "2549.0",
-    "size": ["Small", "Medium", "Large"]
+    "size": ["Small", "Medium", "Large"],
+    "variantSizeId": [
+      {
+        "id": "gid://shopify/ProductVariant/46571558273194",
+        "title": "Small"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571558305962",
+        "title": "Medium"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571558338730",
+        "title": "Large"
+      }
+    ]
   },
   {
     "id": "gid://shopify/Product/8083584254122",
@@ -159,7 +243,21 @@
     "description": "Lounge the day away in the rounded frame and cozy cushions of this expertly-crafted armchair.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/33.jpg?v=1739352162",
     "price": "3144.0",
-    "size": ["Small", "Medium", "Large"]
+    "size": ["Small", "Medium", "Large"],
+    "variantSizeId": [
+      {
+        "id": "gid://shopify/ProductVariant/46571556339882",
+        "title": "Small"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571556372650",
+        "title": "Medium"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571556405418",
+        "title": "Large"
+      }
+    ]
   },
   {
     "id": "gid://shopify/Product/8083585695914",
@@ -250,19 +348,19 @@
     "price": "160.65",
     "size": ["Small", "Medium", "Large"],
     "variantSizeId": [
-    {
-      "id": "gid://shopify/ProductVariant/46571446796458",
-      "title": "Small"
-    },
-    {
-      "id": "gid://shopify/ProductVariant/46571446829226",
-      "title": "Medium"
-    },
-    {
-      "id": "gid://shopify/ProductVariant/46571446861994",
-      "title": "Large"
-    }
-  ]
+      {
+        "id": "gid://shopify/ProductVariant/46571446796458",
+        "title": "Small"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571446829226",
+        "title": "Medium"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571446861994",
+        "title": "Large"
+      }
+    ]
   },
   {
     "id": "gid://shopify/Product/8083586973866",
@@ -275,19 +373,19 @@
     "price": "84.15",
     "size": ["Small", "Medium", "Large"],
     "variantSizeId": [
-    {
-      "id": "gid://shopify/ProductVariant/46571446599850",
-      "title": "Small"
-    },
-    {
-      "id": "gid://shopify/ProductVariant/46571446632618",
-      "title": "Medium"
-    },
-    {
-      "id": "gid://shopify/ProductVariant/46571446665386",
-      "title": "Large"
-    }
-  ]
+      {
+        "id": "gid://shopify/ProductVariant/46571446599850",
+        "title": "Small"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571446632618",
+        "title": "Medium"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571446665386",
+        "title": "Large"
+      }
+    ]
   },
   {
     "id": "gid://shopify/Product/8083587825834",
