@@ -83,7 +83,7 @@ const ProductList = () => {
       setdetailProducts(undefined);
     }
   };
-const handleSubmitAndCreateCart = async (variantId, productId) => {
+  const handleSubmitAndCreateCart = async (variantId, productId) => {
     // if (!selectedSize) {
     //   alert("Please select a size before proceeding!");
     //   return;
@@ -183,7 +183,13 @@ return (
                             className={styles.price}
                             onClick={() => handleProductClick(product)}
                           >
-                           {loadingStates[product.external_id] ? <Loader /> : `$${product.price}0 `}
+                            {loadingStates[product.external_id] ? (
+                              <Loader />
+                            ) : (
+                              `$${Number(product.price).toFixed(2)}`
+                            )}
+
+                            {/* {loadingStates[product.external_id] ? <Loader /> : `$${product.price} `} */}
                           </span>
                         </div>
                       </div>
