@@ -9,7 +9,7 @@ import { addToCart, createCart, getCartList } from "@/lib/api";
 import Loader from "../Loader/Loader";
 
 const ProductDetails = ({ data, onBack, cartbodyiteem }) => {
-  // console.log("cartbodyiteem------->>", cartbodyiteem)
+
   const [isModalOpen, setModalOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [showCart, setShowCart] = useState(false);
@@ -69,11 +69,37 @@ const ProductDetails = ({ data, onBack, cartbodyiteem }) => {
         setCartId(cartId);
       }
     }
+    
 
-    let bodyContent = data.map((item) => ({
-      variantId: item.variantId,
-      quantity: 1,
-    }));
+    // let bodyContent = data.map((item) => ({
+    //   variantId: item.variantId,
+    //   quantity: 1,
+    // }));
+
+
+    let bodyContent = data.map((item) => {
+      let finalVariantId = item.variantId; // Default variant ID
+  
+      // Check if selectedSize exists and matches any variant ID
+      if (selectedSize && item.variantSizeId) {
+        const matchedVariant = item.variantSizeId.find(
+          (variant) => variant.title.toLowerCase() === selectedSize.toLowerCase() 
+        );
+  
+        if (matchedVariant) {
+          finalVariantId = matchedVariant.id;
+        }
+      }
+  
+      return {
+        variantId: finalVariantId,
+        quantity: 1,
+      };
+    });
+
+
+
+
 
     try {
       const cartItem = await addToCart({
@@ -91,6 +117,7 @@ const ProductDetails = ({ data, onBack, cartbodyiteem }) => {
       setLoading(false); 
     }
   };
+
   useEffect(() => {
     if (addToCartData) {
       getCartList(cartId);
@@ -101,7 +128,7 @@ const ProductDetails = ({ data, onBack, cartbodyiteem }) => {
     onBack();
   };
 
-  console.log("data----", data);
+  // console.log("data----", data);
   return (
     <section>
       <div className={styles.backButton} onClick={getremoveitem}>
@@ -109,6 +136,8 @@ const ProductDetails = ({ data, onBack, cartbodyiteem }) => {
       </div>
       <div className={styles.ProductDetails}>
         {data.map((item) => {
+
+  
           const descriptionWords = item?.description.split(" ");
           const isLongDescription = descriptionWords.length > 10;
           const truncatedDescription = descriptionWords.slice(0, 10).join(" ");
@@ -127,21 +156,21 @@ const ProductDetails = ({ data, onBack, cartbodyiteem }) => {
                   <p>{`$${item?.price}0 USD`}</p>
                 </div>
                 <hr className={styles.hr} />
-                {item?.size?.length > 0 && (
+                {item?.variantSizeId?.length > 0 && (
                   <>
                     <div className={styles.SizeDiv}>
                       <p>Size</p>
                     </div>
                     <div className={styles.Sizes}>
-                      {item.size.map((size, index) => (
+                      {item?.variantSizeId?.map((size, index) => (
                         <p
                           key={index}
                           className={`${styles.sizeOption} ${
-                            selectedSize === size ? styles.selected : ""
+                            selectedSize === size.title ? styles.selected : ""
                           }`}
-                          onClick={() => setSelectedSize(size)}
+                          onClick={() => setSelectedSize(size?.title)}
                         >
-                          {size}
+                          {size.title}
                         </p>
                       ))}
                     </div>

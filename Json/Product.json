@@ -171,7 +171,21 @@
     "description": "Hand-braided palm with leather details. These square storage baskets are as beautiful as they are functional.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Mercado_Storage_Basket_Set_of_3_1.jpg?v=1739352389",
     "price": "118.15",
-    "size": ["Small", "Medium", "Large"]
+    "size": ["Small", "Medium", "Large"],
+    "variantSizeId": [
+      {
+        "id": "gid://shopify/ProductVariant/46571532189866",
+        "title": "Small"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571532222634",
+        "title": "Medium"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571532255402",
+        "title": "Large"
+      }
+    ]
   },
   {
     "id": "gid://shopify/Product/8083585761450",
@@ -183,7 +197,21 @@
     "description": "Luxe, ethically sourced leather, hand-stitched to perfection. Storage bins never looked this good.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Citizenry_BoltMarch15_24934_Final.jpg?v=1739352550",
     "price": "211.65",
-    "size": ["Small", "Medium", "Large"]
+    "size": ["Small", "Medium", "Large"],
+    "variantSizeId": [
+      {
+        "id": "gid://shopify/ProductVariant/46571531927722",
+        "title": "Small"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571531960490",
+        "title": "Medium"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571531993258",
+        "title": "Large"
+      }
+    ]
   },
   {
     "id": "gid://shopify/Product/8083585958058",
@@ -195,7 +223,21 @@
     "description": "Warm up any space with the breezy, laidback look of these wicker storage baskets.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Kawi_Wicker_Storage_Basket_Large_34.jpg?v=1739352653",
     "price": "169.15",
-    "size": ["Small", "Medium", "Large"]
+    "size": ["Small", "Medium", "Large"],
+    "variantSizeId": [
+      {
+        "id": "gid://shopify/ProductVariant/46571531796650",
+        "title": "Small"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571531829418",
+        "title": "Medium"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571531862186",
+        "title": "Large"
+      }
+    ]
   },
   {
     "id": "gid://shopify/Product/8083586220202",
@@ -206,19 +248,46 @@
     "description": "Crafted by hand from mulaza palm leaves, these woven storage baskets with lids are both beautiful and functional.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Rivi_Storage_Basket_Large_3.jpg?v=1739352726",
     "price": "160.65",
-    "size": ["Small", "Medium", "Large"]
+    "size": ["Small", "Medium", "Large"],
+    "variantSizeId": [
+    {
+      "id": "gid://shopify/ProductVariant/46571446796458",
+      "title": "Small"
+    },
+    {
+      "id": "gid://shopify/ProductVariant/46571446829226",
+      "title": "Medium"
+    },
+    {
+      "id": "gid://shopify/ProductVariant/46571446861994",
+      "title": "Large"
+    }
+  ]
   },
   {
     "id": "gid://shopify/Product/8083586973866",
     "variantId": "gid://shopify/ProductVariant/46569121415338",
-
     "external_id": "8083586973866",
     "title": "Padma Square Storage Baskets",
     "slug": "Baskets",
     "description": "Add a natural element to your space with square storage baskets woven from durable hogla leaves native to Bangladesh.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Padma_Square_Storage_Baskets_Medium_4.jpg?v=1739352860",
     "price": "84.15",
-    "size": ["Small", "Medium", "Large"]
+    "size": ["Small", "Medium", "Large"],
+    "variantSizeId": [
+    {
+      "id": "gid://shopify/ProductVariant/46571446599850",
+      "title": "Small"
+    },
+    {
+      "id": "gid://shopify/ProductVariant/46571446632618",
+      "title": "Medium"
+    },
+    {
+      "id": "gid://shopify/ProductVariant/46571446665386",
+      "title": "Large"
+    }
+  ]
   },
   {
     "id": "gid://shopify/Product/8083587825834",
