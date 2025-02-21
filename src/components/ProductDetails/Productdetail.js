@@ -19,14 +19,7 @@ const ProductDetails = ({ data, onBack, cartbodyiteem }) => {
   const [cartId, setCartId] = useState(localStorage.getItem("cartId") || null);
   const [addToCartData, setAddToCartData] = useState();
   const handleClose = () => setShowCart(false);
-  const handleShow = () => {
-    const existingCartItems =
-      JSON.parse(localStorage.getItem("cartItems")) || [];
-    const updatedCartItems = [...existingCartItems, data];
-    localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
-    setCartItems(updatedCartItems);
-    setShowCart(true);
-  };
+
 
   // Disable scrolling when modal is open
   useEffect(() => {
@@ -127,6 +120,9 @@ const ProductDetails = ({ data, onBack, cartbodyiteem }) => {
     localStorage.removeItem("reqbody");
     onBack();
   };
+
+  // console.log("data----", data);
+  return (
     <section>
       <div className={styles.backButton} onClick={getremoveitem}>
         X
@@ -137,8 +133,8 @@ const ProductDetails = ({ data, onBack, cartbodyiteem }) => {
   
           const descriptionWords = item?.description.split(" ");
           const isLongDescription = descriptionWords.length > 10;
-          const truncatedDescription = descriptionWords.slice(0, 10).join(" ");
-          ("...");
+          const truncatedDescription = descriptionWords.slice(0, 10).join(" ") + "...";
+        
 
           return (
             <>
@@ -210,15 +206,15 @@ const ProductDetails = ({ data, onBack, cartbodyiteem }) => {
               <CartOffcanvas
                 show={showCart}
                 handleClose={handleClose}
-                // checkoutUrl={checkoutUrl}
+         
                 cartItemsdet={addToCartData}
               />
 
-              {/* Modal to show full description */}
+           
               <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
                 <h2 className={styles.Pcontent}>Item Details</h2>
-                <p>{selectedDescription}</p>{" "}
-                {/* Display selected description */}
+                <p>{selectedDescription}</p>
+               
               </Modal>
             </>
           );
