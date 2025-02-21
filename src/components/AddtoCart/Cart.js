@@ -21,6 +21,8 @@ const CartOffcanvas = ({ show, handleClose, cartItemsdet, addToCartData }) => {
   const [isLoading, setIsLoading] = useState(false); // Loader state
   const [getloading, setgetLoading] = useState(false);
 
+
+
   useEffect(() => {
     getCartDetails();
   }, [cartItemsdet, addToCartData]);
@@ -39,18 +41,36 @@ const CartOffcanvas = ({ show, handleClose, cartItemsdet, addToCartData }) => {
 
       const checkoutLink = res?.data?.cart?.checkoutUrl || "";
       setCheckoutUrl(checkoutLink);
-      console.log("respose-->", res?.data?.cart);
+
+
+      // const items =
+      //   res?.data?.cart?.lines?.edges?.map((item) => ({
+      //     title: item?.node?.merchandise?.product?.title || "No Title",
+      //     imageUrl: item?.node?.merchandise?.image?.url || "",
+      //     amount: item?.node?.merchandise?.price?.amount || "0",
+      //     quantity: item?.node?.quantity || 1,
+      //     id: item?.node?.id,
+      //   })) || [];
+
       const items =
-        res?.data?.cart?.lines?.edges?.map((item) => ({
+      res?.data?.cart?.lines?.edges?.map((item) => {
+        const selectedSize =
+          item?.node?.merchandise?.selectedOptions?.find(
+            (option) => option.name === "Size"
+          )?.value || "No Size";
+    
+        return {
           title: item?.node?.merchandise?.product?.title || "No Title",
           imageUrl: item?.node?.merchandise?.image?.url || "",
           amount: item?.node?.merchandise?.price?.amount || "0",
           quantity: item?.node?.quantity || 1,
           id: item?.node?.id,
-        })) || [];
-
+          size: selectedSize, // Size ko add kar diya object me
+        };
+      }) || [];
+ 
       setCartItemss(items);
-
+    
       // Initialize individual quantities
       const initialQuantities = {};
       items.forEach((item) => {
@@ -74,7 +94,7 @@ const CartOffcanvas = ({ show, handleClose, cartItemsdet, addToCartData }) => {
     setLoading(true);
     try {
       const response = await removeCartItem(cartId, lineId);
-      console.log(" remove response--->", response);
+    
       await getCartDetails();
     } catch (error) {
       console.error("Error fetching cart details:", error);
@@ -145,6 +165,7 @@ return (
                   <div className={styles.details}>
                     <p>{item?.title}</p>
                     <p className={styles.price}>{`$${item?.amount} USD`}</p>
+                    <p className={styles.price}>{`${item?.size}`}</p>
                     <div className={styles.quantity}>
                       <button onClick={() => handleDecrement(item.id)}>
                         -

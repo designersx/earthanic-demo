@@ -23,6 +23,8 @@ const ProductList = () => {
   const [addToCartData, setAddToCartData] = useState();
   const [loadingStates, setLoadingStates] = useState({});
 
+
+
   useEffect(() => {
     getproduct();
   }, []);
@@ -48,21 +50,16 @@ const ProductList = () => {
   };
 
   const handleProductClick = async (product) => {
-    // console.log(product)
-    if (product.size) {
+
+    if (product.variantSizeId) {
       setSelectedProduct(product); // Modal open karne ke liye product store karo
-      setSelectedSize(product?.size[0]);
+      setSelectedSize(product?.variantSizeId[0]?.title);
       setModalOpen(true);
     } else {
       // handleclick(product.external_id);
       handleSubmitAndCreateCart(product?.variantId, product.external_id);
     }
   };
-
-  //  const handleSub = (variantId) => {
-  //   console.log(variantId)
-
-  //  }
 
   useEffect(() => {
     const filteredProducts =
@@ -89,14 +86,33 @@ const ProductList = () => {
     //   return;
     // }
 
+    // let finalVariantId = variantId;
+    // if (selectedProduct) {
+    //   finalVariantId = selectedSize;
+    // }
+    // if (!finalVariantId) {
+    //   console.error("Variant ID is undefined!");
+    //   return;
+    // }
+
     let finalVariantId = variantId;
-    if (selectedProduct) {
-      finalVariantId = selectedProduct.variantId;
+   
+    if (selectedProduct && selectedProduct.variantSizeId) {
+      const matchedVariant = selectedProduct.variantSizeId.find(
+        (variant) =>
+          variant.title.toLowerCase() === selectedSize.toLowerCase() 
+      );
+
+      if (matchedVariant) {
+        finalVariantId = matchedVariant.id;
+      }
     }
+
     if (!finalVariantId) {
       console.error("Variant ID is undefined!");
       return;
     }
+
     setLoadingStates((prev) => ({ ...prev, [productId]: true }));
     setLoading(true);
     let cartId = localStorage.getItem("cartId");
@@ -128,7 +144,7 @@ const ProductList = () => {
         setSelectedProduct(null);
         setSelectedSize("");
       }
-      console.log({ addToCartData });
+
     } catch (error) {
       console.error("Error adding to cart:", error);
     } finally {
@@ -207,15 +223,15 @@ return (
                 <div className={styles.modalContent}>
                   <h3>Select Size for {selectedProduct.title}</h3>
                   <div className={styles.Sizes}>
-                    {selectedProduct.size?.map((size, index) => (
+                    {selectedProduct?.variantSizeId?.map((size, index) => (
                       <p
                         key={index}
                         className={`${styles.sizeOption} ${
-                          selectedSize === size ? styles.selected : ""
+                          selectedSize === size?.title ? styles.selected : ""
                         }`}
-                        onClick={() => setSelectedSize(size)}
+                        onClick={() => setSelectedSize(size?.title)}
                       >
-                        {size}
+                        {size.title}
                       </p>
                     ))}
                   </div>
