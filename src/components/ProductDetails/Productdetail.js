@@ -102,7 +102,7 @@ const ProductDetails = ({ data, onBack, cartbodyiteem }) => {
   };
 
   console.log("data----", data);
-  return (
+return (
     <section>
       <div className={styles.backButton} onClick={getremoveitem}>
         X
