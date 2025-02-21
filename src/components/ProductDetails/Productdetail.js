@@ -127,9 +127,6 @@ const ProductDetails = ({ data, onBack, cartbodyiteem }) => {
     localStorage.removeItem("reqbody");
     onBack();
   };
-
-  // console.log("data----", data);
-  return (
     <section>
       <div className={styles.backButton} onClick={getremoveitem}>
         X

@@ -133,8 +133,7 @@ const CartOffcanvas = ({ show, handleClose, cartItemsdet, addToCartData }) => {
     await getCartDetails(); // Refresh cart details
     setIsLoading(false);
   };
-
-  return (
+return (
     <Offcanvas
       className={styles.OffcanvasMain}
       show={show}
