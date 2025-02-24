@@ -2,6 +2,10 @@
     /* position: fixed; */
     /* z-index: 1; */
 }
+
+
+  
+
 .Navbar {
     display: flex;
     align-items: center;
@@ -71,6 +75,7 @@ section.navsection {
 }
 .CartIcon1{
     width: 24px;
+    cursor: pointer;
 }
 .CartIcon1 img{
     width: 100%;
