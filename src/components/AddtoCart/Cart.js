@@ -8,8 +8,8 @@ import {
   removeCartItem,
   updateCartItem,
 } from "@/lib/api";
-import Loader from "../Loader/Loader";
-import { debounce } from "lodash";
+// import Loader from "../Loader/Loader";
+// import { debounce } from "lodash";
 
 const CartOffcanvas = ({ show, handleClose, cartItemsdet, addToCartData }) => {
   const [loading, setLoading] = useState(false); // New loading state
