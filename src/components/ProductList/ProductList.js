@@ -165,7 +165,7 @@ const ProductList = () => {
                     ))}
                   </div>
 
-                  <div className={styles.btnDiv}>
+                  <div className={styles.btnDiv}>    
                     <button className={styles.subBtn} onClick={handleSubmit} disabled={!selectedSize}>
                       Submit
                     </button>
