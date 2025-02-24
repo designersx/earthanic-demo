@@ -54,7 +54,6 @@ export const addToCart = async ({ cartId, products }) => {
 
 // get cartlist
 export const getCartList = async (cartId) => {
-  console.log(cartId);
   try {
     const response = await fetch(`${url}get-cartlist`, {
       method: "POST",
