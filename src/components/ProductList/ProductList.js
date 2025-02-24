@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import styles from "../ProductList/ProductList.module.css";
 import Chatbot from "../Chatbot/Chatbot";
 import Navbar from "../Navbar/Navbar";
-import { getAllProduct } from "@/lib/api";
+import { addToCart, createCart, getAllProduct, getCartList } from "@/lib/api";
 import ProductDetails from "../ProductDetails/Productdetail";
 import ProductData from "../../../Json/Product.json";
 import CartOffcanvas from "../AddtoCart/Cart";
 import Modal from "../Modal/Modal";
+import Loader from "../Loader/Loader";
 
 const ProductList = () => {
   const [Products, setProducts] = useState();
@@ -17,6 +18,12 @@ const ProductList = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [selectedSize, setSelectedSize] = useState("");
   const [isModalOpen, setModalOpen] = useState(false);
+  const [cartId, setCartId] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [addToCartData, setAddToCartData] = useState();
+  const [loadingStates, setLoadingStates] = useState({});
+
+
 
   useEffect(() => {
     getproduct();
@@ -36,20 +43,21 @@ const ProductList = () => {
   };
 
   const handleclick = (external_id) => {
-    console.log("external_id", external_id);
     const filteredProducts = ProductData.filter(
       (product) => product.external_id === external_id
     );
     setdetailProducts(filteredProducts);
   };
 
-  const handleProductClick = (product) => {
-    if (product.size) {
+  const handleProductClick = async (product) => {
+
+    if (product.variantSizeId) {
       setSelectedProduct(product); // Modal open karne ke liye product store karo
+      setSelectedSize(product?.variantSizeId[0]?.title);
       setModalOpen(true);
-      setSelectedSize(product.size[0]);
     } else {
-      handleclick(product.external_id); // Agar size nahi hai toh direct call
+      // handleclick(product.external_id);
+      handleSubmitAndCreateCart(product?.variantId, product.external_id);
     }
   };
 
@@ -72,29 +80,87 @@ const ProductList = () => {
       setdetailProducts(undefined);
     }
   };
-  const handleClose = () => setShowCart(false);
-  const handleShow = () => setShowCart(true);
 
-  // Lens function start //
-  const [lensPosition, setLensPosition] = useState({ x: 0, y: 0 });
-  const [hoveredImage, setHoveredImage] = useState(null); // Track hovered image
+  const handleSubmitAndCreateCart = async (variantId, productId) => {
+    // if (!selectedSize) {
+    //   alert("Please select a size before proceeding!");
+    //   return;
+    // }
 
-  const handleMouseMove = (e, productId) => {
-    const { left, top } = e.target.getBoundingClientRect();
-    const x = e.clientX - left;
-    const y = e.clientY - top;
+    // let finalVariantId = variantId;
+    // if (selectedProduct) {
+    //   finalVariantId = selectedSize;
+    // }
+    // if (!finalVariantId) {
+    //   console.error("Variant ID is undefined!");
+    //   return;
+    // }
 
-    setHoveredImage(productId); // Set hovered image ID
-    setLensPosition({ x, y });
-  };
+    let finalVariantId = variantId;
+   
+    if (selectedProduct && selectedProduct.variantSizeId) {
+      const matchedVariant = selectedProduct.variantSizeId.find(
+        (variant) =>
+          variant.title.toLowerCase() === selectedSize.toLowerCase() 
+      );
 
-  const handleSubmit = () => {
-    if (selectedSize) {
-      handleclick(selectedProduct.external_id);
-      setSelectedProduct(null); // Modal close
-      setSelectedSize(""); // Size reset
+      if (matchedVariant) {
+        finalVariantId = matchedVariant.id;
+      }
+    }
+
+    if (!finalVariantId) {
+      console.error("Variant ID is undefined!");
+      return;
+    }
+
+    setLoadingStates((prev) => ({ ...prev, [productId]: true }));
+    setLoading(true);
+    let cartId = localStorage.getItem("cartId");
+    if (!cartId) {
+      const cart = await createCart();
+      if (cart) {
+        cartId = cart.id;
+        localStorage.setItem("cartId", cartId);
+        setCartId(cartId);
+      }
+    }
+
+    let cartbodyitem = [
+      {
+        variantId: finalVariantId,
+        quantity: 1,
+      },
+    ];
+
+    try {
+      const cartItem = await addToCart({
+        cartId: cartId || "",
+        products: cartbodyitem,
+      });
+
+      if (cartItem) {
+        setShowCart(true);
+        setAddToCartData(cartItem);
+        setSelectedProduct(null);
+        setSelectedSize("");
+      }
+
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+    } finally {
+      setLoading(false); // Stop loader
+      setLoadingStates((prev) => ({ ...prev, [productId]: false }));
     }
   };
+
+  useEffect(() => {
+    if (addToCartData) {
+      getCartList(cartId);
+    }
+  }, [addToCartData]);
+
+  const handleClose = () => setShowCart(false);
 
   return (
     <section className={styles.MainScro}>
@@ -135,7 +201,13 @@ const ProductList = () => {
                             className={styles.price}
                             onClick={() => handleProductClick(product)}
                           >
-                            {`$${product.price}0 `}{" "}
+                            {loadingStates[product.external_id] ? (
+                              <Loader />
+                            ) : (
+                              `$${Number(product.price).toFixed(2)}`
+                            )}
+
+                            {/* {loadingStates[product.external_id] ? <Loader /> : `$${product.price} `} */}
                           </span>
                         </div>
                       </div>
@@ -151,25 +223,32 @@ const ProductList = () => {
             <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
               <div className={styles.modal}>
                 <div className={styles.modalContent}>
-                  <h2>Select Size for {selectedProduct.title}</h2>
+                  <h3>Select Size for {selectedProduct.title}</h3>
                   <div className={styles.Sizes}>
-                    {selectedProduct.size?.map((size, index) => (
+                    {selectedProduct?.variantSizeId?.map((size, index) => (
                       <p
                         key={index}
-                        className={`${styles.sizeOption} ${selectedSize === size ? styles.selected : ""
-                          }`}
-                        onClick={() => setSelectedSize(size)}
+                        className={`${styles.sizeOption} ${
+                          selectedSize === size?.title ? styles.selected : ""
+                        }`}
+                        onClick={() => setSelectedSize(size?.title)}
                       >
-                        {size}
+                        {size.title}
                       </p>
                     ))}
                   </div>
-
-                  <div className={styles.btnDiv}>    
-                    <button className={styles.subBtn} onClick={handleSubmit} disabled={!selectedSize}>
-                      Submit
+                  <div className={styles.btnDiv}>
+                    <button
+                      onClick={handleSubmitAndCreateCart}
+                      disabled={!selectedSize}
+                      className={styles.subBtn}
+                    >
+                      {loading ? <Loader /> : "Submit"}
                     </button>
-                    <button className={styles.cancelBtn} onClick={() => setSelectedProduct(null)}>
+                    <button
+                      className={styles.cancelBtn}
+                      onClick={() => setSelectedProduct(null)}
+                    >
                       Cancel
                     </button>
                   </div>
@@ -177,6 +256,12 @@ const ProductList = () => {
               </div>
             </Modal>
           )}
+
+          <CartOffcanvas
+            show={showCart}
+            handleClose={handleClose}
+            addToCartData={addToCartData}
+          />
         </div>
       </div>
     </section>

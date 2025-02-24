@@ -1,7 +1,7 @@
 [
   {
     "id": "gid://shopify/Product/8083511476394",
-    "variantId":"gid://shopify/ProductVariant/46548933705898",
+    "variantId": "gid://shopify/ProductVariant/46548933705898",
     "external_id": "8083511476394",
     "title": "Riya Marble Bath Accessory Set",
     "slug": "Bath Accessory",
@@ -11,7 +11,7 @@
   },
   {
     "id": "gid://shopify/Product/8083513245866",
-    "variantId":"gid://shopify/ProductVariant/46548942323882",
+    "variantId": "gid://shopify/ProductVariant/46548942323882",
     "external_id": "8083513245866",
     "title": "Riya Marble Tissue Box",
     "slug": "Bath Accessory",
@@ -21,7 +21,7 @@
   },
   {
     "id": "gid://shopify/Product/8083514556586",
-    "variantId":"gid://shopify/ProductVariant/46548952088746",
+    "variantId": "gid://shopify/ProductVariant/46548952088746",
     "external_id": "8083514556586",
     "title": "Beeswax Taper Candles",
     "slug": "Bath Accessory",
@@ -40,7 +40,7 @@
   },
   {
     "id": "gid://shopify/Product/8083517898922",
-    "variantId":"gid://shopify/ProductVariant/46548999536810",
+    "variantId": "gid://shopify/ProductVariant/46548999536810",
 
     "external_id": "8083517898922",
     "title": "Riya Marble Soap Dish",
@@ -51,7 +51,7 @@
   },
   {
     "id": "gid://shopify/Product/8083560661162",
-    "variantId":"gid://shopify/ProductVariant/46549318729898",
+    "variantId": "gid://shopify/ProductVariant/46549318729898",
 
     "external_id": "8083560661162",
     "title": "Riya Marble Wastebasket",
@@ -62,7 +62,7 @@
   },
   {
     "id": "gid://shopify/Product/8083561349290",
-    "variantId":"gid://shopify/ProductVariant/46549323055274",
+    "variantId": "gid://shopify/ProductVariant/46549323055274",
 
     "external_id": "8083561349290",
     "title": "Riya Marble Toothbrush Holder",
@@ -73,7 +73,7 @@
   },
   {
     "id": "gid://shopify/Product/8083562496170",
-    "variantId":"gid://shopify/ProductVariant/46549338325162",
+    "variantId": "gid://shopify/ProductVariant/46549338325162",
 
     "external_id": "8083562496170",
     "title": "Riya Marble Soap Dispenser",
@@ -84,7 +84,7 @@
   },
   {
     "id": "gid://shopify/Product/8083580551338",
-    "variantId":"gid://shopify/ProductVariant/46549451014314",
+    "variantId": "gid://shopify/ProductVariant/46569117188266",
 
     "external_id": "8083580551338",
     "title": "Laurel Bed with Low Footboard",
@@ -92,67 +92,150 @@
     "description": "Elevate your bedroom with this heirloom bed, handcrafted with the finest materials made to stand the test of time.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/0003.jpg?v=1739351502",
     "price": "2039.0",
-    "size": ["Small", "Medium", "Large"]
+    "size": ["Small", "Medium", "Large"],
+    "variantSizeId": [
+      {
+        "id": "gid://shopify/ProductVariant/46571561418922",
+        "title": "Small"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571561451690",
+        "title": "Medium"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571561484458",
+        "title": "Large"
+      }
+    ]
   },
   {
     "id": "gid://shopify/Product/8083581042858",
-    "variantId":"gid://shopify/ProductVariant/46549454127274",
-
+    "variantId": "gid://shopify/ProductVariant/46569116598442",
     "external_id": "8083581042858",
     "title": "Potomac Two Poster Bed",
     "slug": "Furniture",
     "description": "Handcrafted from solid wood from the Appalachian Forest, this custom bed frame combines heirloom craftsmanship with modern style.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/26.jpg?v=1739351600",
     "price": "2804.0",
-    "size": ["Small", "Medium", "Large"]
+    "size": ["Small", "Medium", "Large"],
+    "variantSizeId": [
+      {
+        "id": "gid://shopify/ProductVariant/46571561320618",
+        "title": "Small"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571561353386",
+        "title": "Medium"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571561386154",
+        "title": "Large"
+      }
+    ]
   },
   {
     "id": "gid://shopify/Product/8083581534378",
-    "variantId":"gid://shopify/ProductVariant/46549456126122",
+    "variantId": "gid://shopify/ProductVariant/46569115844778",
     "external_id": "8083581534378",
     "title": "Bower Ottoman - Medium & Large",
     "slug": "Furniture",
     "description": "Lightweight, yet sturdy. Upholstered with durable fabrics. These custom ottomans will be a true household staple.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/014.jpg?v=1739351674",
     "price": "424.0",
-    "size": ["Small", "Medium"]
+    "size": ["Small", "Medium", "Large"],
+    "variantSizeId": [
+      {
+        "id": "gid://shopify/ProductVariant/46571559321770",
+        "title": "Small"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571559354538",
+        "title": "Medium"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571559387306",
+        "title": "Large"
+      }
+    ]
   },
   {
     "id": "gid://shopify/Product/8083582025898",
-    "variantId":"gid://shopify/ProductVariant/46549458321578",
+    "variantId": "gid://shopify/ProductVariant/46569114960042",
     "external_id": "8083582025898",
     "title": "Grove Chair",
     "slug": "Furniture",
     "description": "Relax in style with the classic silhouette and plush textures of this understated armchair.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/24.jpg?v=1739351764",
     "price": "1444.0",
-    "size": ["Standard"]
+    "size": ["Small", "Medium", "Large"],
+    "variantSizeId": [
+      {
+        "id": "gid://shopify/ProductVariant/46571559190698",
+        "title": "Small"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571559223466",
+        "title": "Medium"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571559256234",
+        "title": "Large"
+      }
+    ]
   },
   {
     "id": "gid://shopify/Product/8083582812330",
-    "variantId":"gid://shopify/ProductVariant/46549463498922",
+    "variantId": "gid://shopify/ProductVariant/46569113223338",
     "external_id": "8083582812330",
     "title": "Ridge Bed",
     "slug": "Furniture",
     "description": "Solid maple and walnut. Luxe and detailed upholstery. An heirloom-quality upholstered bed made to last for generations to come.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Ridge_Bed_Caramel_Maple_1_Labeled.jpg?v=1739351921",
     "price": "2804.0",
-    "size": ["Small", "Medium", "Large"]
+    "size": ["Small", "Medium", "Large"],
+    "variantSizeId": [
+      {
+        "id": "gid://shopify/ProductVariant/46571559026858",
+        "title": "Small"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571559059626",
+        "title": "Medium"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571559092394",
+        "title": "Large"
+      }
+    ]
   },
   {
     "id": "gid://shopify/Product/8083583729834",
-    "variantId":"gid://shopify/ProductVariant/46549469724842",
+    "variantId": "gid://shopify/ProductVariant/46569112338602",
     "external_id": "8083583729834",
     "title": "Augusta Bench",
     "slug": "Furniture",
     "description": "Upgrade your entryway with the subtle lines and smooth finish of this expertly-crafted bench.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/34.jpg?v=1739352062",
     "price": "2549.0",
-    "size": ["Small", "Medium", "Large"]
+    "size": ["Small", "Medium", "Large"],
+    "variantSizeId": [
+      {
+        "id": "gid://shopify/ProductVariant/46571558273194",
+        "title": "Small"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571558305962",
+        "title": "Medium"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571558338730",
+        "title": "Large"
+      }
+    ]
   },
   {
     "id": "gid://shopify/Product/8083584254122",
-    "variantId":"gid://shopify/ProductVariant/46549472542890",
+    "variantId": "gid://shopify/ProductVariant/46569111290026",
 
     "external_id": "8083584254122",
     "title": "Augusta Armchair",
@@ -160,11 +243,25 @@
     "description": "Lounge the day away in the rounded frame and cozy cushions of this expertly-crafted armchair.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/33.jpg?v=1739352162",
     "price": "3144.0",
-    "size": [ "Large"]
+    "size": ["Small", "Medium", "Large"],
+    "variantSizeId": [
+      {
+        "id": "gid://shopify/ProductVariant/46571556339882",
+        "title": "Small"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571556372650",
+        "title": "Medium"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571556405418",
+        "title": "Large"
+      }
+    ]
   },
   {
     "id": "gid://shopify/Product/8083585695914",
-    "variantId":"gid://shopify/ProductVariant/46549478342826",
+    "variantId": "gid://shopify/ProductVariant/46569128755370",
 
     "external_id": "8083585695914",
     "title": "Mercado Storage Baskets - Square",
@@ -172,11 +269,25 @@
     "description": "Hand-braided palm with leather details. These square storage baskets are as beautiful as they are functional.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Mercado_Storage_Basket_Set_of_3_1.jpg?v=1739352389",
     "price": "118.15",
-    "size": ["Small", "Medium", "Large"]
+    "size": ["Small", "Medium", "Large"],
+    "variantSizeId": [
+      {
+        "id": "gid://shopify/ProductVariant/46571532189866",
+        "title": "Small"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571532222634",
+        "title": "Medium"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571532255402",
+        "title": "Large"
+      }
+    ]
   },
   {
     "id": "gid://shopify/Product/8083585761450",
-    "variantId":"gid://shopify/ProductVariant/46549478539434",
+    "variantId": "gid://shopify/ProductVariant/46569128165546",
 
     "external_id": "8083585761450",
     "title": "Azad Tall Leather Storage Bins",
@@ -184,11 +295,25 @@
     "description": "Luxe, ethically sourced leather, hand-stitched to perfection. Storage bins never looked this good.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Citizenry_BoltMarch15_24934_Final.jpg?v=1739352550",
     "price": "211.65",
-    "size": ["Small", "Medium", "Large"]
+    "size": ["Small", "Medium", "Large"],
+    "variantSizeId": [
+      {
+        "id": "gid://shopify/ProductVariant/46571531927722",
+        "title": "Small"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571531960490",
+        "title": "Medium"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571531993258",
+        "title": "Large"
+      }
+    ]
   },
   {
     "id": "gid://shopify/Product/8083585958058",
-    "variantId":"gid://shopify/ProductVariant/46549479162026",
+    "variantId": "gid://shopify/ProductVariant/46569127575722",
 
     "external_id": "8083585958058",
     "title": "Kawi Wicker Storage Basket",
@@ -196,35 +321,75 @@
     "description": "Warm up any space with the breezy, laidback look of these wicker storage baskets.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Kawi_Wicker_Storage_Basket_Large_34.jpg?v=1739352653",
     "price": "169.15",
-    "size": ["Standard"]
+    "size": ["Small", "Medium", "Large"],
+    "variantSizeId": [
+      {
+        "id": "gid://shopify/ProductVariant/46571531796650",
+        "title": "Small"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571531829418",
+        "title": "Medium"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571531862186",
+        "title": "Large"
+      }
+    ]
   },
   {
     "id": "gid://shopify/Product/8083586220202",
-    "variantId":"gid://shopify/ProductVariant/46549479784618",
-
+    "variantId": "gid://shopify/ProductVariant/46569125347498",
     "external_id": "8083586220202",
     "title": "Rivi Storage Basket",
     "slug": "Baskets",
     "description": "Crafted by hand from mulaza palm leaves, these woven storage baskets with lids are both beautiful and functional.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Rivi_Storage_Basket_Large_3.jpg?v=1739352726",
     "price": "160.65",
-    "size": ["Small", "Medium"]
+    "size": ["Small", "Medium", "Large"],
+    "variantSizeId": [
+      {
+        "id": "gid://shopify/ProductVariant/46571446796458",
+        "title": "Small"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571446829226",
+        "title": "Medium"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571446861994",
+        "title": "Large"
+      }
+    ]
   },
   {
     "id": "gid://shopify/Product/8083586973866",
-    "variantId":"gid://shopify/ProductVariant/46549484535978",
-
+    "variantId": "gid://shopify/ProductVariant/46569121415338",
     "external_id": "8083586973866",
     "title": "Padma Square Storage Baskets",
     "slug": "Baskets",
     "description": "Add a natural element to your space with square storage baskets woven from durable hogla leaves native to Bangladesh.",
     "image": "https://cdn.shopify.com/s/files/1/0638/8013/4826/files/Padma_Square_Storage_Baskets_Medium_4.jpg?v=1739352860",
     "price": "84.15",
-    "size": ["Standard"]
+    "size": ["Small", "Medium", "Large"],
+    "variantSizeId": [
+      {
+        "id": "gid://shopify/ProductVariant/46571446599850",
+        "title": "Small"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571446632618",
+        "title": "Medium"
+      },
+      {
+        "id": "gid://shopify/ProductVariant/46571446665386",
+        "title": "Large"
+      }
+    ]
   },
   {
     "id": "gid://shopify/Product/8083587825834",
-    "variantId":"gid://shopify/ProductVariant/46549487616170",
+    "variantId": "gid://shopify/ProductVariant/46549487616170",
 
     "external_id": "8083587825834",
     "title": "Lomas Wall Hanging",
@@ -235,7 +400,7 @@
   },
   {
     "id": "gid://shopify/Product/8083587989674",
-    "variantId":"gid://shopify/ProductVariant/46549488205994",
+    "variantId": "gid://shopify/ProductVariant/46549488205994",
 
     "external_id": "8083587989674",
     "title": "Yakko Wall Hanging - Clay",
@@ -246,7 +411,7 @@
   },
   {
     "id": "gid://shopify/Product/8083588317354",
-    "variantId":"gid://shopify/ProductVariant/46549489713322",
+    "variantId": "gid://shopify/ProductVariant/46549489713322",
 
     "external_id": "8083588317354",
     "title": "Bolga Fans - Black & Natural",
@@ -268,7 +433,7 @@
   },
   {
     "id": "gid://shopify/Product/8083588743338",
-    "variantId":"gid://shopify/ProductVariant/46549490434218",
+    "variantId": "gid://shopify/ProductVariant/46549490434218",
 
     "external_id": "8083588743338",
     "title": "Elena Wall Hanging",
@@ -279,7 +444,7 @@
   },
   {
     "id": "gid://shopify/Product/8083589300394",
-    "variantId":"gid://shopify/ProductVariant/46549492170922",
+    "variantId": "gid://shopify/ProductVariant/46549492170922",
 
     "external_id": "8083589300394",
     "title": "Tikal Wood Serving Bowl",
@@ -290,7 +455,7 @@
   },
   {
     "id": "gid://shopify/Product/8083591135402",
-    "variantId":"gid://shopify/ProductVariant/46549499478186",
+    "variantId": "gid://shopify/ProductVariant/46549499478186",
 
     "external_id": "8083591135402",
     "title": "Tikal Wood Serving Board - Round",
@@ -301,7 +466,7 @@
   },
   {
     "id": "gid://shopify/Product/8083591921834",
-    "variantId":"gid://shopify/ProductVariant/46549504622762",
+    "variantId": "gid://shopify/ProductVariant/46549504622762",
 
     "external_id": "8083591921834",
     "title": "Kareem Salad Servers - Set of 2",
@@ -312,7 +477,7 @@
   },
   {
     "id": "gid://shopify/Product/8083592937642",
-    "variantId":"gid://shopify/ProductVariant/46549509177514",
+    "variantId": "gid://shopify/ProductVariant/46549509177514",
 
     "external_id": "8083592937642",
     "title": "Tikal Wood Serving Board - Arch",
@@ -323,7 +488,7 @@
   },
   {
     "id": "gid://shopify/Product/8083593724074",
-    "variantId":"gid://shopify/ProductVariant/46549512552618",
+    "variantId": "gid://shopify/ProductVariant/46549512552618",
 
     "external_id": "8083593724074",
     "title": "Tikal Wood Serving Board - With Handle",
